@@ -10,7 +10,7 @@
   <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ショップ名" %><br>
   <%= f.label "ショップ説明" %>
   <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "ここにショップ説明を入力してください。" %><br>
-  <%= f.hidden_field :is_active, :value => true %>←いらんかも
-  <%= f.hidden_field :customer_id, :value => @shop.customer_id %>
+  <%= f.hidden_field :is_active, :value => true %>
+  <%= f.hidden_field :customer_id, :value => @customer_id %>
   <%= f.submit "新規登録" %>
 <% end %>

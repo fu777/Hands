@@ -12,6 +12,38 @@
   </head>
 
   <body>
+    <%= link_to "Hands", root_path %>
+    <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %>
+    <% if customer_signed_in? %>
+      <%= link_to "マイページ", my_page_path(current_customer) %>
+      <%= link_to "作品一覧", items_path %>
+      <%= link_to "ショップ一覧", shops_path %>
+      <%= link_to "ブログ一覧", blogs_path %>
+      <%= link_to "カート", carts_path %>
+      <%= link_to "ユーザー一覧", index_path %>
+      <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+    <% elsif admin_signed_in? %>
+        <%= link_to "商品一覧", admin_items_path %>
+        <%= link_to "ユーザー一覧", admin_customers_path %>
+        <%= link_to "ブログ一覧", admin_blogs_path %>
+        <%= link_to "注文履歴一覧", admin_root_path %>
+        <%= link_to "ジャンル一覧", admin_genres_path %>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+    <% else %>
+        <li>
+          <%= link_to "About", about_path %>
+        </li>
+        <li>
+          <%= link_to "商品一覧", items_path %>
+        </li>
+        <li>
+          <%= link_to "新規登録", new_customer_registration_path %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_customer_session_path %>
+        </li>
+    <% end %>
+    
     <%= form_tag item_search_path, method: :get do %>
       <%= text_field_tag :search, params[:search], placeholder: "作品検索" %>
       <%= button_tag :type => "submit", :name => nil do %>

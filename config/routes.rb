@@ -7,12 +7,6 @@ Rails.application.routes.draw do
     resources :blogs, only: [:index, :show, :destroy] do
       resources :blog_comments, only: [:destroy]
     end
-    resources :carts, only: [:index, :destroy, :create] do
-      collection do
-        delete 'destroy_all'
-      end
-      resources :cart_items, only: [:update, :destroy]
-    end
     resources :orders, only: [:show, :index, :update]
   end
   
@@ -36,6 +30,9 @@ Rails.application.routes.draw do
     resources :shop_orders, only: [:index, :show, :update]
     resources :items, only: [:new, :create, :index, :show, :edit, :update] do
       resource :favourite_items, only: [:create, :destroy]
+      collection do
+        get "get_category_children", defaults: { format: "json" }
+      end
     end
     resources :blogs do
       resources :blog_comments, only: [:create, :destroy]
@@ -43,11 +40,21 @@ Rails.application.routes.draw do
     end
     post 'orders/confirm' => 'orders#confirm', as: 'confirm'
     get 'orders/complete' => 'orders#complete', as: 'complete'
+    resources :carts, only: [:index, :destroy, :create] do
+      collection do
+        delete 'destroy_all'
+      end
+      resources :cart_items, only: [:update, :destroy]
+    end
     resources :orders, only: [:new, :create, :index, :show, :update]
   end
 
   get '/item_search' => 'searches#item_search', as: 'item_search'
   get '/shop_search' => 'searches#shop_search', as: 'shop_search'
+
+  devise_scope :customers do
+    post 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
+  end
 
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",

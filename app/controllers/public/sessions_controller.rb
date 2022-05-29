@@ -30,6 +30,12 @@ class Public::SessionsController < Devise::SessionsController
   end
   
   before_action :customer_state, only: [:create]
+  
+  def new_guest
+    customer = Customer.guest
+    sign_in customer
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
 
   protected
   

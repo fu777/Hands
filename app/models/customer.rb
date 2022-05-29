@@ -37,5 +37,19 @@ class Customer < ApplicationRecord
   def address_display
     '〒' + postal_code + ' ' + address + ' ' + last_name + first_name
   end
+
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.user_name = "ゲスト"
+      customer.last_name = "令和"
+      customer.first_name = "道子"
+      customer.last_name_kana = "レイワ"
+      customer.first_name_kana = "ミチコ"
+      customer.postal_code = "9999999"
+      customer.address = "東京都港区"
+      customer.telephone_number = "9999999999"
+    end
+  end
   
 end

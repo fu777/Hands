@@ -1,5 +1,5 @@
 class Public::CustomersController < ApplicationController
-  
+
   before_action :authenticate_customer!, only: [:show]
 
   def index
@@ -8,7 +8,9 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @shop = @customer.shop
+    unless current_customer.shop.id.blank?
+      @shop = @customer.shop
+    end
   end
 
   def edit
@@ -54,7 +56,7 @@ class Public::CustomersController < ApplicationController
   def unsubscribe
     @customer = Customer.find_by(email: params[:email])
   end
-  
+
   def withdraw
     @customer = current_customer
     @shop = current_customer.shop
@@ -66,7 +68,7 @@ class Public::CustomersController < ApplicationController
     reset_session
     redirect_to root_path
   end
-  
+
   private
 
   def customer_params
@@ -83,5 +85,5 @@ class Public::CustomersController < ApplicationController
                                      :telephone_number,
                                      :is_deleted)
   end
-  
+
 end

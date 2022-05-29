@@ -2,7 +2,7 @@ class Public::ShopsController < ApplicationController
   
   def new
     @shop = Shop.new
-    @shop.customer_id = current_customer.id
+    @customer_id = current_customer.id
   end
 
   def create

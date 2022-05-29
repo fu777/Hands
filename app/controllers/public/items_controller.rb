@@ -1,5 +1,7 @@
 class Public::ItemsController < ApplicationController
   
+  before_action :set_parents
+  
   def new
     @item = Item.new
     @item.shop_id = current_customer.shop.id
@@ -46,10 +48,18 @@ class Public::ItemsController < ApplicationController
     end
   end
 
+  def get_category_children
+    @category_children = Category.find(params[:parent_id].to_s).children
+  end
+
   private
 
   def item_params
     params.require(:item).permit(:shop_id, :name, :introduction, :size, :shipping_date, :price, :category_id, :is_active, item_images: [])
+  end
+  
+  def set_parents
+    @set_parents = Category.where(ancestry: nil)
   end
   
 end
