@@ -54,11 +54,11 @@ class Public::CustomersController < ApplicationController
   end
   
   def followers
-    @relationships = Relationship.where(customer_id: params[:customer_id])
+    @relationships = Relationship.where(follow_id: params[:follow_id])
   end
   
   def followings
-    @relationships = Relationship.where(follow_id: params[:follow_id])
+    @relationships = Relationship.where(customer_id: params[:customer_id])
   end
 
   def unsubscribe

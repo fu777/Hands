@@ -3,14 +3,14 @@
   <%= image_tag @customer.get_image(200,200) %><br>
   <%= @customer.user_name %><br>
   <%= @customer.introduction %><br>
-  <% unless current_customer.shop.blank? %>
+  <% unless @customer.shop.blank? %>
     <%= @customer.user_name %>さんのショップ:
     <%= link_to shop_path(@shop) do %>
       <%= @shop.name %>
     <% end %>
   <% end %>
   <br>
-
+  
   <% if @customer == current_customer %>
     <%= link_to "プロフィール情報を編集する", profile_edit_path %><br>
 
@@ -20,11 +20,11 @@
     <%= link_to "注文履歴一覧", orders_path %><br>
     <!--link_to "レビュ一覧", reviews_path %><br>-->
     <%= form_with model: @relationships, url: followers_path, method: :get do |f| %>
-      <%= f.hidden_field :customer_id, :value => @customer.id %>
+      <%= f.hidden_field :follow_id, :value => @customer.id %>
       <%= f.submit "フォロー" %>
     <% end %>
     <%= form_with model: @relationships, url: followings_path, method: :get do |f| %>
-      <%= f.hidden_field :follow_id, :value => @customer.id %>
+      <%= f.hidden_field :customer_id, :value => @customer.id %>
       <%= f.submit "フォロワー" %>
     <% end %>
 <br>
