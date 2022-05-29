@@ -1,0 +1,25 @@
+<h1>プロフィール情報編集</h1>
+
+<%= form_with model: @customer, url: profile_update_path(@customer_params), method: :patch do |f| %>
+
+<%= render 'customer_error', customer: @customer %>
+
+  <div class="field">
+    <%= f.label "アイコン写真" %>
+    <%= f.file_field :customer_image, accept: "image/*" %><br>
+  </div>
+  
+  <div class="field">
+    <%= f.label "ユーザー名" %>
+    <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", placeholder: "ニックネーム" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "自己紹介" %>
+    <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "よろしくお願いします。" %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit "編集内容を保存" %>
+  </div>
+<% end %>

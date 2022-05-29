@@ -1,0 +1,48 @@
+<% @item.get_item_images.each do |item_image| %>
+  <%= image_tag item_image, size: "300x300" %>
+<% end %><br>
+
+<%= image_tag @item.shop.get_shop_icon_image(100,100) %><br>
+<%= link_to shop_path(@item.shop.id) do %>
+  <%= @item.shop.name %><br>
+<% end %>
+
+<%= @item.name %><br>
+¥<%= @item.price.to_s(:delimited) %>円<br>
+
+  <% if Item.find_by(params[:shop_id]) && (@item.shop_id == current_customer.shop.id) %>
+  <% elsif Item.find_by(params[:is_active]) && (@item.is_active == 'true') %>
+    <%= form_with model: [@cart, @cart_item], method: :post, local: true do |f| %>
+      <%= f.select :amount, *[1..10], { include_blank: '個数選択' }, autofocus: true, autocomplete: "amount" %>
+      <%= f.hidden_field :item_id, :value => @item.id, :name => 'item' %>
+      <%= f.hidden_field :shop_id, :value => @item.shop.id %>
+      <%= f.hidden_field :customer_id, :value => current_customer.id %>
+      <%= f.submit "カートに入れる" %>
+    <% end %>
+  <% else %>
+    <%= "販売停止中" %>
+  <% end %>
+  
+<br>
+
+作品説明<br><%= @item.introduction %><br>
+サイズ<br><%= @item.size %><br>
+発送日まで<br><%= @item.shipping_date %>日<br>
+
+  <div>
+    <% if @item.favourited_item_by?(current_customer) %>
+      <p>
+        <%= link_to item_favourite_items_path(@item), method: :delete do %>
+          ♥<%= @item.favourite_items.count %>
+        <% end %>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to item_favourite_items_path(@item), method: :post do %>
+          ♡<%= @item.favourite_items.count %>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+
+<%= link_to "作品を編集する", edit_item_path(@item.id) %>

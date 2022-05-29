@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <%= form_tag item_search_path, method: :get do %>
+      <%= text_field_tag :search, params[:search], placeholder: "作品検索" %>
+      <%= button_tag :type => "submit", :name => nil do %>
+        <i class="fas fa-search"></i>
+      <% end %>
+    <% end %>
+
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,22 @@
+<% @item.get_item_images.each do |item_image| %>
+  <%= image_tag item_image, size: "300x300" %>
+<% end %><br>
+
+<%= image_tag @item.shop.get_shop_icon_image(100,100) %><br>
+<%= link_to shop_path(@item.shop.id) do %>
+  <%= @item.shop.name %><br>
+<% end %>
+
+<%= @item.name %><br>
+¥<%= @item.price.to_s(:delimited) %>円<br>
+
+販売ステータス
+<%= @item.is_active_i18n %>
+
+<br>
+
+作品説明<br><%= @item.introduction %><br>
+サイズ<br><%= @item.size %><br>
+発送日まで<br><%= @item.shipping_date %>日<br>
+
+♥<%= @item.favourite_items.count %>

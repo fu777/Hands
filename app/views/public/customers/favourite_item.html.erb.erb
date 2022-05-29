@@ -1,0 +1,9 @@
+<h1>お気に入りの作品一覧(<%= @favourite_items.count %>件)</h1>
+
+  <% @favourite_items.each do |favourite_item| %>
+    <%= image_tag favourite_item.item.get_item_images.first.variant(resize: "150x150").processed %><br>
+    <%= link_to item_path(favourite_item.item.id) do %>
+        <%= favourite_item.item.name %>
+    <% end %>
+  <% end %>
+  

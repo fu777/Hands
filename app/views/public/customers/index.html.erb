@@ -1,0 +1,9 @@
+<h1>ユーザー一覧</h1>
+
+  <% @customers.each do |customer| %>
+    <%= image_tag customer.get_image(100,100) %><br>
+    <%= link_to my_page_path(customer) do %>
+    <%= customer.user_name %>
+    <% end %><br>
+  <% end %>
+  

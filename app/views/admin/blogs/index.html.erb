@@ -1,0 +1,10 @@
+<h1>ブログ一覧</h1>
+
+<% @blogs.each do |blog| %>
+  <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
+  <%= link_to admin_blog_path(blog.id) do %>
+  <%= blog.title %>
+  <% end %><br>
+  <%= link_to "#{blog.blog_comments.count} コメント", admin_blog_path(blog.id) %>
+  <%= link_to "削除する", admin_blog_path(blog.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
+<% end %>

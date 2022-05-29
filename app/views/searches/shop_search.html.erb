@@ -1,0 +1,7 @@
+  <% @shops.each do |shop| %>
+    <%= image_tag shop.get_shop_icon_image(100,100) %><br>
+    <%= link_to shop_path(shop.id) do %>
+    <%= shop.name %><br>
+    <% end %><br>
+  <% end %>
+  

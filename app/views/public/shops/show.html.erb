@@ -1,0 +1,50 @@
+<div><%= image_tag @shop.get_shop_image(200,200) %></div>
+
+  <%= image_tag @shop.get_shop_icon_image(200,200) %><br>
+  <%= @shop.name %><br>
+  <%= @shop.introduction %><br>
+  
+  <% if @customer == current_customer %>
+    <%= link_to "ショップ情報を編集する", edit_shop_path %><br>
+  
+    <%= form_with model: @item, url: new_item_path, method: :get do |f| %>
+      <%= f.hidden_field :shop_id, :value => @shop.id %>
+      <%= f.submit "作品を登録する" %>
+    <% end %>
+    
+    <%= form_with model: @order, url: shop_orders_path, method: :get do |f| %>
+      <%= f.hidden_field :shop_id, :value => @shop.id %>
+      <%= f.submit "注文履歴一覧を見る" %>
+    <% end %>
+
+  <% end %>
+  
+  <div>
+    <% if @shop.favourited_shop_by?(current_customer) %>
+      <p>
+        <%= link_to shop_favourite_shops_path(@shop), method: :delete do %>
+          ♥<%= @shop.favourite_shops.count %>
+        <% end %>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to shop_favourite_shops_path(@shop), method: :post do %>
+          ♡<%= @shop.favourite_shops.count %>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+
+<% if Shop.find_by(params[:is_active]) && (@shop.is_active == 'true') %>
+  <h1>作品一覧</h1>
+    <% @items.each do |item| %>
+      <%= image_tag item.get_item_images.first.variant(resize: "150x150").processed %>
+      <br>
+      <%= link_to item_path(item.id) do %>
+      <%= item.name %>
+      <% end %><br>
+      ¥<%= item.price.to_s(:delimited) %><br>
+    <% end %>
+<% else %>
+  閉店中です。
+<% end %>

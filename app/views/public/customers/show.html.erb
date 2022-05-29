@@ -1,0 +1,54 @@
+<h1>マイページ</h1>
+
+  <%= image_tag @customer.get_image(200,200) %><br>
+  <%= @customer.user_name %><br>
+  <%= @customer.introduction %><br>
+  <%= @customer.user_name %>さんのショップ: 
+  <%= link_to shop_path(@shop) do %>
+    <%= @shop.name %>
+  <% end %>
+  <br>
+  
+  <% if @customer == current_customer %>
+    <%= link_to "プロフィール情報を編集する", profile_edit_path %><br>
+  
+    <%= link_to "お気に入りのショップ一覧", favourite_shop_path %><br>
+    <%= link_to "お気に入りの作品一覧", favourite_item_path %><br>
+    <%= link_to "いいねしたブログ一覧", good_path %><br>
+    <%= link_to "注文履歴一覧", orders_path %><br>
+    <%= link_to "レビュ一覧", reviews_path %><br>
+    
+    <label>会員登録情報</label>
+    
+      <table>
+        <tbody>
+          <tr>
+            <th>氏名</th>
+            <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+          </tr>
+          <tr>
+            <th>カナ</th>
+            <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+          </tr>
+          <tr>
+            <th>郵便番号</th>
+            <td><%= @customer.postal_code %></td>
+          </tr>
+          <tr>
+            <th>住所</th>
+            <td><%= @customer.address %></td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td><%= @customer.telephone_number %></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @customer.email %></td>
+          </tr>
+        </tbody>
+      </table>
+  
+    <%= link_to "会員情報を編集する", edit_path(current_customer) %>
+  <% end %>
+  

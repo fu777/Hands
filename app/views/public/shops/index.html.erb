@@ -1,0 +1,16 @@
+<h1>ショップ一覧</h1>
+
+  <%= form_tag shop_search_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], placeholder: "ショップ検索" %>
+    <%= button_tag :type => "submit", :name => nil do %>
+      <i class="fas fa-search"></i>
+    <% end %>
+  <% end %>
+
+  <% @shops.each do |shop| %>
+    <%= image_tag shop.get_shop_icon_image(100,100) %><br>
+    <%= link_to shop_path(shop.id) do %>
+    <%= shop.name %>
+    <% end %><br>
+  <% end %>
+  

@@ -1,0 +1,34 @@
+<h1>作品新規登録</h1>
+
+<%= form_with model: @item, url: items_path, method: :post do |f| %>
+
+<%= render 'item_error', item: @item %>
+
+  <%= f.label "作品画像" %>
+  <%= f.file_field :item_images, accept: "image/*", multiple: true %><br>
+  <%= f.label "作品名" %>
+  <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "作品名" %><br>
+  <%= f.label "作品説明" %>
+  <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "ここに作品説明を入力してください。" %><br>
+
+  <%= f.label "カテゴリ" %>
+  <%= f.collection_select :category_id, @set_parents, :id, :name,{ include_blank: "選択してください"},class:"select_field", id:"post_category_id" %>
+  <br>
+
+  <%= f.label "サイズ" %>
+  <%= f.text_field :size, autofocus: true, autocomplete: "size", placeholder: "10cm x 10cm" %><br>
+  <%= f.label "発送日までの日数" %>
+  <%= f.text_field :shipping_date, autofocus: true, autocomplete: "shipping_date", placeholder: "3" %>日<br>
+  <%= f.label "値段" %>
+  <%= f.text_field :price, autofocus: true, autocomplete: "price", placeholder: "1000" %>円<br>
+
+  <%= f.label "販売ステータス" %>
+  <%= f.radio_button :is_active, "true" %>
+  <%= f.label :is_active, "販売中" %>
+  <%= f.radio_button :is_active, "false" %>
+  <%= f.label :is_active, "販売停止中" %><br>
+
+  <%= f.hidden_field :shop_id, :value => @item.shop_id %>
+
+  <%= f.submit "新規登録" %>
+<% end %>

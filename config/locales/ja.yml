@@ -1,0 +1,62 @@
+ja:
+  enums:
+    customer:
+      is_deleted:
+        true: "無効"
+        false: "有効"
+    shop:
+      is_active:
+        true: "開店中"
+        false: "閉店中"
+    item:
+      is_active:
+        true: "販売中"
+        false: "販売停止中"
+    order:
+      payment_method:
+        credit_card: "クレジットカード"
+        transfer: "銀行振込"
+      status:
+        waiting_for_delivery: "配送待ち"
+        receipt_confirmation: "受取確認"
+        transaction_completed: "取引完了"
+  activerecord:
+    models:
+      customer: "会員"
+      shop: "ショップ"
+      item: "作品"
+      blog: "ブログ"
+      review: "レビュー"
+    attributes:
+      customer:
+        user_name: "ユーザーネーム"
+        introduction: "自己紹介"
+        last_name: "姓"
+        first_name: "名"
+        last_name_kana: "姓カナ"
+        first_name_kana: "名カナ"
+        email: "メールアドレス"
+        encrypted_password: "パスワード"
+        postal_code: "郵便番号"
+        address: "住所"
+        telephone_number: "電話番号"
+        is_deleted: "退会ステータス"
+      shop:
+        name: "ショップ名"
+        introduction: "ショップ紹介"
+        is_active: "ショップステータス"
+      item:
+        name: "作品名"
+        introduction: "作品紹介"
+        size: "サイズ"
+        shipping_date: "発送日までの日数"
+        price: "値段"
+        is_active: "販売ステータス"
+      blog:
+        title: "タイトル"
+        body: "本文"
+      review:
+        review_comment: "レビューコメント"
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
