@@ -8,7 +8,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    unless current_customer.shop.id.blank?
+    unless current_customer.shop.blank?
       @shop = @customer.shop
     end
   end
@@ -51,6 +51,14 @@ class Public::CustomersController < ApplicationController
 
   def favourite_shop
     @favourite_shops = current_customer.favourite_shops.all
+  end
+  
+  def followers
+    @relationships = Relationship.where(customer_id: params[:customer_id])
+  end
+  
+  def followings
+    @relationships = Relationship.where(follow_id: params[:follow_id])
   end
 
   def unsubscribe

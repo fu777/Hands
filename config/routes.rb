@@ -47,6 +47,9 @@ Rails.application.routes.draw do
       resources :cart_items, only: [:update, :destroy]
     end
     resources :orders, only: [:new, :create, :index, :show, :update]
+    resources :relationships, only: [:create, :destroy]
+    get 'customers/followers' => 'customers#followers', as: 'followers'
+    get 'customers/followings' => 'customers#followings', as: 'followings'
   end
 
   get '/item_search' => 'searches#item_search', as: 'item_search'

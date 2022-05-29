@@ -1,0 +1,9 @@
+<h1>フォロワー一覧(<%= @relationships.count %>件)</h1>
+
+  <% @relationships.each do |relationship| %>
+    <%= image_tag relationship.customer.get_image(200,200) %><br>
+    <%= link_to my_page_path(relationship.customer.id) do %>
+        <%= relationship.customer.user_name %>
+    <% end %>
+  <% end %>
+  
