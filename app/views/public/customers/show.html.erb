@@ -20,7 +20,7 @@
     <%= link_to "注文履歴一覧", orders_path %><br>
     <!--link_to "レビュ一覧", reviews_path %><br>-->
     <%= form_with model: @relationships, url: followers_path, method: :get do |f| %>
-      <%= f.hidden_field :follow_id, :value => @customer.id %>
+      <%= f.hidden_field :customer_id, :value => @customer.id %>
       <%= f.submit "フォロー" %>
     <% end %>
     <%= form_with model: @relationships, url: followings_path, method: :get do |f| %>

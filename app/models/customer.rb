@@ -22,8 +22,8 @@ class Customer < ApplicationRecord
   has_many :favourite_items, dependent: :destroy
   has_many :favourite_shops, dependent: :destroy
   has_many :relationships
-  has_many :followings, through: :relationships, source: :follow
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
+  has_many :followings, through: :relationships, source: :follow
   has_many :followers, through: :reverse_of_relationships, source: :customer
 
   enum is_deleted: {true: true, false: false}
