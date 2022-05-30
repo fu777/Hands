@@ -1,0 +1,8 @@
+<% if review.errors.any? %>
+  <h3><%= review.errors.count %>件のエラーが発生しました</h3>
+  <ul>
+    <% review.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>

@@ -15,6 +15,7 @@ class Item < ApplicationRecord
   has_many :cart_items
   has_many :order_details, dependent: :destroy
   has_many :favourite_items, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   
   has_many_attached :item_images
   

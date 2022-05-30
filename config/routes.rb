@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create, :destroy]
     get 'customers/followers' => 'customers#followers', as: 'followers'
     get 'customers/followings' => 'customers#followings', as: 'followings'
+    resources :reviews, only: [:index, :create]
   end
 
   get '/item_search' => 'searches#item_search', as: 'item_search'
