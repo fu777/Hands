@@ -16,6 +16,7 @@
       <h1>Hands</h1>
     <% end %>
     <%= link_to 'ゲストログイン（閲覧用）', public_guest_sign_in_path, method: :post %>
+    <%= link_to '管理者ゲストログイン（閲覧用）', admin_guest_sign_in_path, method: :post %>
     <% if customer_signed_in? %>
       <%= link_to "マイページ", my_page_path(current_customer) %>
       <%= link_to "作品一覧", items_path %>
@@ -25,11 +26,10 @@
       <%= link_to "ユーザー一覧", index_path %>
       <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
     <% elsif admin_signed_in? %>
-        <%= link_to "商品一覧", admin_items_path %>
+        <%= link_to "作品一覧", admin_items_path %>
         <%= link_to "ユーザー一覧", admin_customers_path %>
         <%= link_to "ブログ一覧", admin_blogs_path %>
         <%= link_to "注文履歴一覧", admin_root_path %>
-        <%= link_to "ジャンル一覧", admin_genres_path %>
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
     <% else %>
         <li>

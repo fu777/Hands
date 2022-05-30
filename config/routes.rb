@@ -59,6 +59,10 @@ Rails.application.routes.draw do
   devise_scope :customer do
     post 'public/guest_sign_in', to: 'public/sessions#new_guest'
   end
+  
+  devise_scope :admin do
+    post 'admin/guest_sign_in', to: 'admin/sessions#new_guest'
+  end
 
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
