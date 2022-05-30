@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
   get '/item_search' => 'searches#item_search', as: 'item_search'
   get '/shop_search' => 'searches#shop_search', as: 'shop_search'
+  get '/customer_search' => 'searches#customer_search', as: 'customer_search'
 
   devise_scope :customers do
     post 'customers/guest_sign_in', to: 'customers/sessions#new_guest'

@@ -1,0 +1,13 @@
+<%= render 'customer_search', customer: @customer %>
+
+<% if @customers.present? %>
+  <% @customers.each do |customer| %>
+    <%= image_tag customer.get_image(100,100) %><br>
+    <%= link_to my_page_path(customer) do %>
+    <%= customer.user_name %>
+    <% end %><br>
+  <% end %>
+<% else %>
+  <p>ユーザーの検索結果はありませんでした。</p>
+  <p>キーワードを変更してもう一度検索してください。</p>
+<% end %>

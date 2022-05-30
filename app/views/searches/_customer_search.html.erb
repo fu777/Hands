@@ -1,0 +1,8 @@
+<h1>ユーザー一覧</h1>
+
+  <%= form_tag customer_search_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], placeholder: "ユーザー検索" %>
+    <%= button_tag :type => "submit", :user_name => nil do %>
+      <i class="fas fa-search"></i>
+    <% end %>
+  <% end %>

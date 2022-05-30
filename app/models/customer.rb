@@ -42,6 +42,12 @@ class Customer < ApplicationRecord
     '〒' + postal_code + ' ' + address + ' ' + last_name + first_name
   end
   
+  def self.search(search)
+    if search
+      Customer.where(["user_name LIKE?", "%#{search}%"])
+    end
+  end
+  
   def follow(other_customer)
     unless self == other_customer
       self.relationships.find_or_create_by(follow_id: other_customer.id)
