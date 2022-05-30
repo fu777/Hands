@@ -19,7 +19,7 @@ class Public::CartsController < ApplicationController
 
   def create
     @cart = current_customer.carts.build(cart_params)
-    if current_customer.carts.find_by(shop_id: params[:cart][:shop_id]).cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
+    if current_customer.carts.find_by(shop_id: params[:cart][:shop_id]).present? && current_customer.carts.find_by(shop_id: params[:cart][:shop_id]).cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
       @cart = current_customer.carts.find_by(shop_id: params[:cart][:shop_id])
       @cart_item = @cart.cart_items.find_by(item_id: params[:cart_item][:item_id])
       @cart_item.amount += params[:cart_item][:amount].to_i
