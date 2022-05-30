@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :blog_comments, only: [:destroy]
     end
     resources :orders, only: [:show, :index, :update]
+    resources :reviews, only: [:index, :destroy]
   end
   
   scope module: :public do

@@ -1,0 +1,8 @@
+  <% @reviews.each do |review| %>
+    <%= link_to admin_item_path(item.id) do %>
+    <%= review.item.name %>
+    <% end %><br>
+    ¥<%= review.item.price.to_s(:delimited) %><br>
+    <%= link_to "削除する", admin_item_review_path(review.id), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
+  <% end %>
+  
