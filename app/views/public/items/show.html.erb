@@ -12,17 +12,17 @@
 
   <% if Item.find_by(params[:shop_id]) && (@item.shop_id == current_customer.shop.id) %>
   <% elsif Item.find_by(params[:is_active]) && (@item.is_active == 'true') %>
-    <%= form_with model: [@cart, @cart_item], method: :post, local: true do |f| %>
+    <%= form_with model: [@cart, @cart_item], url: carts_path, method: :post, local: true do |f| %>
       <%= f.select :amount, *[1..10], { include_blank: '個数選択' }, autofocus: true, autocomplete: "amount" %>
-      <%= f.hidden_field :item_id, :value => @item.id, :name => 'item' %>
-      <%= f.hidden_field :shop_id, :value => @item.shop.id %>
-      <%= f.hidden_field :customer_id, :value => current_customer.id %>
+      <%= f.hidden_field :item_id, :value => @item.id %>
+      <%= hidden_field_tag "cart[shop_id]", @item.shop.id %>
+      <%= hidden_field_tag "cart[customer_id]", current_customer.id %>
       <%= f.submit "カートに入れる" %>
     <% end %>
   <% else %>
     <%= "販売停止中" %>
   <% end %>
-  
+
 <br>
 
 作品説明<br><%= @item.introduction %><br>
@@ -45,4 +45,6 @@
     <% end %>
   </div>
 
-<%= link_to "作品を編集する", edit_item_path(@item.id) %>
+<% if Item.find_by(params[:shop_id]) && (@item.shop_id == current_customer.shop.id) %>
+  <%= link_to "作品を編集する", edit_item_path(@item.id) %>
+<% end %>

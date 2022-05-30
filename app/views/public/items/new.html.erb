@@ -12,7 +12,8 @@
   <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "ここに作品説明を入力してください。" %><br>
 
   <%= f.label "カテゴリ" %>
-  <%= f.collection_select :category_id, @set_parents, :id, :name,{ include_blank: "選択してください"},class:"select_field", id:"post_category_id" %>
+  <!--f.collection_select :category_id, @set_parents, :id, :name,{ include_blank: "選択してください"}, class:"select_field", id:"category_id" %>-->
+  <%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name) %>
   <br>
 
   <%= f.label "サイズ" %>

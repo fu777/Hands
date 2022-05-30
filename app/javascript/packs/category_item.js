@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function() {
   function appendChildrenBox(insertHTML){
     var childSelectHtml = "";
     childSelectHtml = `<div class="category__child" id="children_wrapper">
-                        <select id="child__category" name="post[category_id]" class="select_field">
+                        <select id="child__category" name="[category_id]" class="select_field">
                           <option value="">---</option>
                           //optionタグを埋め込む
                           ${insertHTML}
@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function() {
     $('.append__category').append(childSelectHtml);
   }
   $('#item_category_id').on('change',function(){
-    var parentId = document.getElementById('item_category_id').value;
+    var parentId = document.getElementById('category_id').value;
     if (parentId != ""){
       $.ajax({
         url: '/public/items/get_category_children/',
