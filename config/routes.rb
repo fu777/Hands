@@ -56,8 +56,8 @@ Rails.application.routes.draw do
   get '/shop_search' => 'searches#shop_search', as: 'shop_search'
   get '/customer_search' => 'searches#customer_search', as: 'customer_search'
 
-  devise_scope :customers do
-    post 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
+  devise_scope :customer do
+    post 'public/guest_sign_in', to: 'public/sessions#new_guest'
   end
 
   devise_for :customers, skip: [:passwords], controllers: {

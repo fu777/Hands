@@ -12,8 +12,10 @@
   </head>
 
   <body>
-    <%= link_to "Hands", root_path %>
-    <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %>
+    <%= link_to root_path do %>
+      <h1>Hands</h1>
+    <% end %>
+    <%= link_to 'ゲストログイン（閲覧用）', public_guest_sign_in_path, method: :post %>
     <% if customer_signed_in? %>
       <%= link_to "マイページ", my_page_path(current_customer) %>
       <%= link_to "作品一覧", items_path %>
