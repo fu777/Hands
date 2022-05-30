@@ -5,7 +5,9 @@
 <br>
 
 <% @carts.each do |cart| %>
-  <%= cart.shop.name %>
+  <%= link_to shop_path(cart.shop.id) do %>
+    <%= cart.shop.name %>
+    <% end %>
   <%= link_to "ショップのカートを空にする", cart_path(cart), method: :delete %>
     <table>
       <thead>
