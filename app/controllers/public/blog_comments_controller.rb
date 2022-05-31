@@ -7,6 +7,7 @@ class Public::BlogCommentsController < ApplicationController
     comment = current_customer.blog_comments.new(blog_comment_params)
     comment.blog_id = blog.id
     comment.save
+    @blog.create_notice_blog_comment!(current_customer, @blog_comment.id)
     redirect_to blog_path(blog)
   end
 

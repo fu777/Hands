@@ -22,4 +22,40 @@ class Blog < ApplicationRecord
     goods.exists?(customer_id: customer.id)
   end
   
+  def create_notice_good!(current_customer)
+    temp = Notice.where(["visitor_id = ? and visited_id = ? and blog_id = ? and action = ? ", current_customer.id, customer_id, id, 'good'])
+    if temp.blank?
+      notice = current_customer.active_notices.new(
+        blog_id: id,
+        visited_id: customer_id,
+        action: 'good'
+      )
+      if notice.visitor_id == notice.visited_id
+        notice.checked = true
+      end
+      notice.save if notice.valid?
+    end
+  end
+  
+  def create_notice_blog_comment!(current_customer, blog_comment_id)
+    temp_ids = BlogComment.select(:customer_id).where(blog_id: id).where.not(customer_id: current_customer.id).distinct
+    temp_ids.each do |temp_id|
+      save_notice_blog_comment!(current_customer, blog_comment_id, temp_id['customer_id'])
+    end
+    save_notice_blog_comment!(current_customer, blog_comment_id, customer_id) if temp_ids.blank?
+  end
+
+  def save_notice_blog_comment!(current_customer, blog_comment_id, visited_id)
+    notice = current_customer.active_notices.new(
+      blog_id: id,
+      blog_comment_id: blog_comment_id,
+      visited_id: visited_id,
+      action: 'blog_comment'
+    )
+    if notice.visitor_id == notice.visited_id
+      notice.checked = true
+    end
+    notice.save if notice.valid?
+  end
+  
 end

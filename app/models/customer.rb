@@ -26,6 +26,8 @@ class Customer < ApplicationRecord
   has_many :followings, through: :relationships, source: :follow
   has_many :followers, through: :reverse_of_relationships, source: :customer
   has_many :reviews, dependent: :destroy
+  has_many :active_notices, class_name: 'Notice', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notices, class_name: 'Notice', foreign_key: 'visited_id', dependent: :destroy
 
   enum is_deleted: {true: true, false: false}
   
@@ -62,6 +64,17 @@ class Customer < ApplicationRecord
 
   def following?(other_customer)
     self.followings.include?(other_customer)
+  end
+  
+  def create_notice_follow!(current_customer)
+    temp = Notice.where(["visitor_id = ? and visited_id = ? and action = ? ",current_customer.id, id, 'follow'])
+    if temp.blank?
+      notice = current_customer.active_notices.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notice.save if notice.valid?
+    end
   end
 
   def self.guest

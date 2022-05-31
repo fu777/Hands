@@ -9,6 +9,8 @@ class Shop < ApplicationRecord
   has_many :carts, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :favourite_shops, dependent: :destroy
+  has_many :shop_active_notices, class_name: 'Notice', foreign_key: 'shop_visitor_id', dependent: :destroy
+  has_many :shop_passive_notices, class_name: 'Notice', foreign_key: 'shop_visited_id', dependent: :destroy
 
   has_one_attached :shop_image
   has_one_attached :shop_icon_image

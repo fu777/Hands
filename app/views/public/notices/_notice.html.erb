@@ -1,0 +1,47 @@
+<% visitor = notice.visitor %>
+<% visited = notice.visited %>
+  
+  <div class="col-md-6 mx-auto">
+    <div class="form-inline">
+      
+      <span>
+        <%= link_to my_page_path(notice.visitor) do %>
+          <%= image_tag notice.visitor.get_image(50,50), class: "icon_mini" %><br>
+        <% end %>
+        <strong>
+          <%= notice.visitor.user_name %>
+        </strong>
+        さんが
+      
+        <% case notice.action %>
+        <% when 'follow' then %>
+          あなたをフォローしました
+        <% when 'good' then %>
+          <%= link_to 'あなたの投稿', notice.blog, style: "font-weight: bold;" %>
+          にいいねしました
+        <% when 'blog_comment' then %>
+          <% if notice.blog.customer_id == notice.visited.id %>
+            <%= link_to "あなたの投稿", notice.blog, style: "font-weight: bold;" %>
+          <% end %>
+        <% else %>
+          <span>
+            <%= link_to blog_path(notice.blog) do %>
+              <%= image_tag notice.blog.customer.get_image(50,50), class: "icon_mini" %>
+            <% end %>
+              <strong>
+                <%= notice.blog.customer.user_name + 'さんの投稿' %>
+              </strong>
+          </span>
+            にコメントしました
+          <p class="text-muted mb-0">
+            <%= BlogComment.find_by(id: notice.blog_comment_id)&.comment %>
+          </p>
+        <% end %>
+      </span>
+    </div>
+    <div class="small text-muted text-right">
+      <%= time_ago_in_words(notice.created_at).upcase %>
+    </div>
+    <hr>
+  </div>
+  

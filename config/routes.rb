@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'shop_notices/index'
+  end
+  namespace :public do
+    get 'notices/index'
+  end
   namespace :admin do
     root to: "homes#top"
     resources :customers, only: [:index, :show, :edit, :update]
@@ -52,6 +58,8 @@ Rails.application.routes.draw do
     get 'customers/followers' => 'customers#followers', as: 'followers'
     get 'customers/followings' => 'customers#followings', as: 'followings'
     resources :reviews, only: [:index, :create]
+    resources :notices, only: [:index]
+    resources :shop_notices, only: [:index]
   end
 
   get '/item_search' => 'searches#item_search', as: 'item_search'

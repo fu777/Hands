@@ -59,6 +59,7 @@ class Public::OrdersController < ApplicationController
     @order.update(order_params)
     if @order.update(order_params)
       flash[:notice] = "取引完了しました"
+      @order.create_notice_order!(@order.customer_id, @order.id, @order.shop_id)
       redirect_to order_path(@order)
     end
   end

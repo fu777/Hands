@@ -17,6 +17,7 @@ class Public::ShopOrdersController < ApplicationController
     @order.update(order_params)
     if @order.update(order_params)
       flash[:notice] = "配送しました"
+      @order.create_notice_shop_order!(@order.shop_id, @order.id, @order.customer_id)
       redirect_to shop_order_path(@order)
     end
   end
