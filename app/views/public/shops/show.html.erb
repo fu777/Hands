@@ -21,6 +21,11 @@
       <%= f.hidden_field :shop_id, :value => @shop.id %>
       <%= f.submit "注文履歴一覧を見る" %>
     <% end %>
+    
+    <%= form_with model: @check, url: shop_checks_path, method: :get do |f| %>
+      <%= f.hidden_field :shop_id, :value => @shop.id %>
+      <%= f.submit "ショップのやること一覧" %>
+    <% end %>
 
   <% end %>
   

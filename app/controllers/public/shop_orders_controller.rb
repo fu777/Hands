@@ -18,7 +18,7 @@ class Public::ShopOrdersController < ApplicationController
     if @order.update(order_params)
       flash[:notice] = "配送しました"
       @order.create_check_shop_order!(@order.shop_id, @order.id, @order.customer_id)
-      checks = shop.shop_passive_checks
+      checks = @order.shop.shop_passive_checks
       checks.where(checked: false).each do |check|
         check.update(checked: true)
         if check.checked == true

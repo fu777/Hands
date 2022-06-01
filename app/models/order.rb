@@ -2,9 +2,7 @@ class Order < ApplicationRecord
   
   validates :postal_code, presence: true
   validates :address, presence: true
-  validates :name
-  validates :shop
-  validates :custome
+  validates :name, presence: true
   
   belongs_to :customer
   belongs_to :shop
@@ -16,7 +14,7 @@ class Order < ApplicationRecord
                 receipt_confirmation: 1,
                 transaction_completed: 2}
 
-  def create_check_first_order!(customer_id, order_id, shop_id)
+  def create_check_first_order!(current_customer)
     check = current_customer.active_checks.new(
       visitor_id: customer_id,
       order_id: id,
@@ -36,7 +34,7 @@ class Order < ApplicationRecord
     check.save if check.valid?
   end
   
-  def create_check_order!(customer_id, order_id, shop_id)
+  def create_check_order!(current_customer)
     check = current_customer.active_checks.new(
       visitor_id: customer_id,
       order_id: id,
