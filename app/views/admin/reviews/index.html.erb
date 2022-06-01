@@ -1,8 +1,15 @@
+<br>
   <% @reviews.each do |review| %>
-    <%= link_to admin_item_path(item.id) do %>
-    <%= review.item.name %>
-    <% end %><br>
+    <%= link_to admin_item_path(review.item.id) do %>
+      <%= review.item.name %><br>
+    <% end %>
+    <%= link_to shop_path(review.item.shop.id) do %>
+      <%= review.item.shop.name %><br>
+    <% end %>
+    <%= link_to admin_customer_path(review.customer.id) do %>
+      <%= review.customer.user_name %><br>
+    <% end %>
     ¥<%= review.item.price.to_s(:delimited) %><br>
-    <%= link_to "削除する", admin_item_review_path(review.id), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
+    <%= review.review_comment %>
+    <%= link_to "削除する", admin_review_path(review.id), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
   <% end %>
-  

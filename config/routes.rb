@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'shop_checks/index'
-  end
   namespace :admin do
     root to: "homes#top"
     resources :customers, only: [:index, :show, :edit, :update]
@@ -37,6 +34,7 @@ Rails.application.routes.draw do
       collection do
         get "get_category_children", defaults: { format: "json" }
       end
+      resources :reviews, only: [:create]
     end
     resources :blogs do
       resources :blog_comments, only: [:create, :destroy]
@@ -54,7 +52,6 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create, :destroy]
     get 'customers/followers' => 'customers#followers', as: 'followers'
     get 'customers/followings' => 'customers#followings', as: 'followings'
-    resources :reviews, only: [:index, :create]
     resources :notices, only: [:index]
     resources :checks, only: [:index]
     resources :shop_checks, only: [:index]

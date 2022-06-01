@@ -30,6 +30,8 @@ class Public::ItemsController < ApplicationController
     @category = Category
     @cart = Cart
     @cart_item = CartItem
+    @review = Review.new
+    @reviews = @item.reviews.all
   end
 
   def edit

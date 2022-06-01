@@ -45,6 +45,61 @@
     <% end %>
   </div>
 
+  <div>
+    <% @reviews.each do |review| %>
+      <div>
+        <%= image_tag review.item.get_item_images.first.variant(resize: "50x50").processed %>
+        <%= link_to item_path(review.item.id) do %>
+          <%= review.item.name %>
+        <% end %>
+        <p>内容:<%= review.review_comment %></p>
+        <p>評価 :<%= review.star%>点</p>
+        <div id="star-rate<%= review.id%>"></div>
+        <script>
+          $('#star-rate<%= review.id%>').raty({
+            size      : 36,
+            starOff   : '<%= asset_path('star-off.png') %>',
+            starOn    : '<%= asset_path('star-on.png') %>',
+            half      : false,
+            readOnly: true,
+            score: <%= review.star %>,
+          });
+        </script>
+        <%= image_tag review.customer.get_image(50,50) %><br>
+        <%= link_to my_page_path(review.customer.id) do %>
+          <%= review.customer.user_name %>
+        <% end %>
+        <%= review.created_at.to_s(:ymd) %>
+      </div>
+    <% end %>
+    <div>
+      <h4>レビューの新規登録</h4>  
+      <%= form_with model: [@item, @review], method: :post do |f| %>
+        <%= render 'review_error', review: @review %>
+        <%= f.label "レビューコメント" %><br>
+        <%= f.text_area :review_comment, autofocus: true, autocomplete: "review_comment", placeholder: "レビューコメント" %><br>
+        <!--f.hidden_field :item_id, :value => @item_id %>-->
+        <div class="form-group row" id="star">
+          <%= f.label :star,'評価 ', class: 'col-md-3 col-form-label' %>
+          <%= f.hidden_field :star, id: :review_star %>
+        </div>
+        <!-- 評価javascript -->
+        <script>
+        $('#star').raty({
+          size     : 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          scoreName: 'review[star]',
+          half: false,
+        });
+        </script>
+        <%= f.submit "新規登録" %>
+      <% end %>
+    </div>
+  </div>
+  
+<br>
+
 <% if Item.find_by(params[:shop_id]) && (@item.shop_id == current_customer.shop.id) %>
   <%= link_to "作品を編集する", edit_item_path(@item.id) %>
 <% end %>

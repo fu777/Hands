@@ -4,7 +4,7 @@ class Blog < ApplicationRecord
   validates :body, presence: true
 
   belongs_to :customer
-  belongs_to :item
+  belongs_to :item, optional: true
   has_many :blog_comments, dependent: :destroy
   has_many :goods, dependent: :destroy
 

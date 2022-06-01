@@ -1,17 +1,14 @@
 class Public::ReviewsController < ApplicationController
 
-  def index
-    @review = Review.new
-  end
-
   def create
+    item = Item.find(params[:item_id])
     @review = current_customer.reviews.new(review_params)
-    @review.item_id = params[:item_id]
+    @review.item_id = item.id
     if @review.save
-      redirect_to reviews_path
+      redirect_to item_path(item)
       flash[:notice] = "レビューしました。"
     else
-      render :index
+      redirect_to item_path(item)
     end
   end
 

@@ -1,9 +1,9 @@
 class Shop < ApplicationRecord
-  
+
   validates :name, presence: true
   validates :introduction, presence: true
   validates :is_active, presence: true
-  
+
   belongs_to :customer
   has_many :items
   has_many :carts, dependent: :destroy
@@ -22,7 +22,7 @@ class Shop < ApplicationRecord
     end
     shop_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def get_shop_icon_image(width, height)
     unless shop_icon_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -30,11 +30,11 @@ class Shop < ApplicationRecord
     end
     shop_icon_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def favourited_shop_by?(customer)
     favourite_shops.exists?(customer_id: customer.id)
   end
-  
+
   def self.search(search)
     if search
       Shop.where(["name LIKE?", "%#{search}%"])
@@ -42,5 +42,5 @@ class Shop < ApplicationRecord
   end
 
   enum is_active: {true: true, false: false}
-  
+
 end

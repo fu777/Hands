@@ -8,7 +8,7 @@ class Admin::ReviewsController < ApplicationController
 
   def destroy
     Review.find(params[:id]).destroy
-    redirect_to item_path(params[:item_id])
+    redirect_to admin_reviews_path
   end
   
 end
