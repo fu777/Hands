@@ -1,0 +1,30 @@
+  <div class="col-md-6 mx-auto">
+    <div class="form-inline">
+
+      <span>
+        <% case check.action %>
+        <% when 'order' then %>
+          <%= check.order.customer.last_name %><%= check.order.customer.first_name %>
+          さんが
+          <strong>
+            注文
+          </strong>
+          を完了しました。
+          <%= link_to "配送してください", shop_order_path(check.shop.order.id) %>
+        <% when 'transaction_completed' then %>
+          <%= check.visitor.last_name %><%= check.visitor.first_name %>
+          さんが
+          <strong>
+            受取確認
+          </strong>
+          しました。
+          <%= link_to "取引完了です。", shop_order_path(check.shop.order.id) %>
+        <% end %>
+
+      </span>
+    </div>
+    <div class="small text-muted text-right">
+      <%= time_ago_in_words(check.created_at).upcase %>
+    </div>
+    <hr>
+  </div>

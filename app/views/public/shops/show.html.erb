@@ -4,6 +4,11 @@
   <%= @shop.name %><br>
   <%= @shop.introduction %><br>
   
+  <%= image_tag @shop.customer.get_image(200,200) %><br>
+  <%= link_to my_page_path(@shop.customer.id) do %>
+    <%= @shop.customer.user_name %>
+  <% end %>
+  
   <% if @customer == current_customer %>
     <%= link_to "ショップ情報を編集する", edit_shop_path %><br>
   

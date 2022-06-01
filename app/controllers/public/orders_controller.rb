@@ -5,6 +5,12 @@ class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
     @customer = current_customer
+    if (@order.postal_code == nil) or (@order.address == nil) or (@order.name == nil)
+      if @order.valid?
+      else
+        render :new
+      end
+    end
   end
 
   def confirm
@@ -31,6 +37,7 @@ class Public::OrdersController < ApplicationController
     @customer = current_customer
     @order.status = 0
     @order.save
+    @order.create_check_first_order!(@order.customer_id, @order.id, @order.shop_id)
       @cart.cart_items.each do |cart_item|
         @order_detail = OrderDetail.new
         @order_detail.item_id = cart_item.item_id
@@ -59,7 +66,14 @@ class Public::OrdersController < ApplicationController
     @order.update(order_params)
     if @order.update(order_params)
       flash[:notice] = "取引完了しました"
-      @order.create_notice_order!(@order.customer_id, @order.id, @order.shop_id)
+      @order.create_check_order!(@order.customer_id, @order.id, @order.shop_id)
+      checks = current_customer.passive_checks
+      checks.where(checked: false).each do |check|
+        check.update(checked: true)
+        if check.checked == true
+          check.destroy
+        end
+      end
       redirect_to order_path(@order)
     end
   end

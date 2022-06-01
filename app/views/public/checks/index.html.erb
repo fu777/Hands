@@ -1,0 +1,5 @@
+<% if @checks.exists? %>
+  <%= render partial: 'check', collection: @checks %>
+<% else %>
+  <p>やることはありません。</p>
+<% end %>

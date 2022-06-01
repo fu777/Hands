@@ -1,0 +1,22 @@
+  <div class="col-md-6 mx-auto">
+    <div class="form-inline">
+
+      <span>
+        <%= link_to shop_path(check.shop_visitor) do %>
+          <%= image_tag check.shop_visitor.get_shop_icon_image(50,50), class: "icon_mini" %><br>
+        <% end %>
+        <strong>
+          <%= check.shop_visitor.name %>
+        </strong>
+        ショップが
+
+          作品を配送しました。
+          <%= link_to "受取確認してください。", order_path(check.order.id) %>
+
+      </span>
+    </div>
+    <div class="small text-muted text-right">
+      <%= time_ago_in_words(check.created_at).upcase %>
+    </div>
+    <hr>
+  </div>

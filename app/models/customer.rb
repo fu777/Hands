@@ -28,6 +28,8 @@ class Customer < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :active_notices, class_name: 'Notice', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notices, class_name: 'Notice', foreign_key: 'visited_id', dependent: :destroy
+  has_many :active_checks, class_name: 'Check', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_checks, class_name: 'Check', foreign_key: 'visited_id', dependent: :destroy
 
   enum is_deleted: {true: true, false: false}
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_31_091403) do
+ActiveRecord::Schema.define(version: 2022_06_01_091352) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -91,6 +91,23 @@ ActiveRecord::Schema.define(version: 2022_05_31_091403) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "checks", force: :cascade do |t|
+    t.integer "shop_visitor_id"
+    t.integer "shop_visited_id"
+    t.integer "order_id"
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_checks_on_order_id"
+    t.index ["shop_visited_id"], name: "index_checks_on_shop_visited_id"
+    t.index ["shop_visitor_id"], name: "index_checks_on_shop_visitor_id"
+    t.index ["visited_id"], name: "index_checks_on_visited_id"
+    t.index ["visitor_id"], name: "index_checks_on_visitor_id"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -149,9 +166,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_091403) do
   end
 
   create_table "notices", force: :cascade do |t|
-    t.integer "shop_visitor_id"
-    t.integer "shop_visited_id"
-    t.integer "order_id"
     t.integer "good_id"
     t.integer "blog_comment_id"
     t.integer "visitor_id"
@@ -162,9 +176,6 @@ ActiveRecord::Schema.define(version: 2022_05_31_091403) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["blog_comment_id"], name: "index_notices_on_blog_comment_id"
     t.index ["good_id"], name: "index_notices_on_good_id"
-    t.index ["order_id"], name: "index_notices_on_order_id"
-    t.index ["shop_visited_id"], name: "index_notices_on_shop_visited_id"
-    t.index ["shop_visitor_id"], name: "index_notices_on_shop_visitor_id"
     t.index ["visited_id"], name: "index_notices_on_visited_id"
     t.index ["visitor_id"], name: "index_notices_on_visitor_id"
   end
