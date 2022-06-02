@@ -5,7 +5,7 @@ class Public::BlogsController < ApplicationController
     @blog.customer_id = current_customer.id
     @items = Item.all
   end
-  
+
   def create
     @blog = Blog.new(blog_params)
     @items = Item.all
@@ -18,7 +18,7 @@ class Public::BlogsController < ApplicationController
   end
 
   def index
-    @blogs = Blog.all
+    @blogs = params[:item_id].present? ? Blog.where(item_id: nil) : Blog.all
   end
 
   def show
@@ -31,7 +31,7 @@ class Public::BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
     @items = Item.all
   end
-  
+
   def update
     @blog = Blog.find(params[:id])
     @items = Item.all
@@ -42,7 +42,7 @@ class Public::BlogsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @blog = Blog.find(params[:id])
     @blog.destroy
@@ -50,7 +50,7 @@ class Public::BlogsController < ApplicationController
   end
 
   private
-  
+
   def blog_params
     params.require(:blog).permit(:title, :body, :customer_id, :item_id, blog_images: [])
   end

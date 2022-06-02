@@ -24,6 +24,7 @@ class Public::ShopsController < ApplicationController
     @orders = Order.where(params[:shop_id])
     @customer = @shop.customer
     @items = @shop.items.all
+    @shop_checks = @shop.shop_passive_checks.where(checked: false)
   end
 
   def edit

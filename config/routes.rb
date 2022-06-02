@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get 'customers/good' => 'customers#good', as: 'good'
     get 'customers/favourite_item' => 'customers#favourite_item', as: 'favourite_item'
     get 'customers/favourite_shop' => 'customers#favourite_shop', as: 'favourite_shop'
+    get 'customers/customer_blog/:id' => 'customers#customer_blog', as: 'customer_blog'
     resources :shops, only: [:new, :create, :index, :show, :edit, :update] do
       resource :favourite_shops, only: [:create, :destroy]
     end
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
         get "get_category_children", defaults: { format: "json" }
       end
       resources :reviews, only: [:create]
+      get 'item_blog/:id' => 'items#item_blog', as: 'item_blog'
     end
     resources :blogs do
       resources :blog_comments, only: [:create, :destroy]

@@ -73,7 +73,7 @@
       </div>
     <% end %>
     <div>
-      <h4>レビューの新規登録</h4>  
+      <h4>レビューの新規登録</h4>
       <%= form_with model: [@item, @review], method: :post do |f| %>
         <%= render 'review_error', review: @review %>
         <%= f.label "レビューコメント" %><br>
@@ -97,7 +97,23 @@
       <% end %>
     </div>
   </div>
-  
+
+  <br>
+
+  <%= form_with model: @blogs, url: new_blog_path, method: :get do |f| %>
+      <%= f.hidden_field :item_id, :value => @item.id %>
+      <%= f.submit "#{@item.name}のブログを投稿する" %>
+    <% end %>
+
+  <% if @blogs.present? %>
+    <h4><%= @item.name %>のブログ</h4>
+
+      <% @blogs.each do |blog| %>
+        <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
+        <%= blog.name %><br>
+    <% end %>
+    <%= link_to "全てのブログを見る＞", item_item_blog_path(@item) %>
+  <% end %>
 <br>
 
 <% if Item.find_by(params[:shop_id]) && (@item.shop_id == current_customer.shop.id) %>

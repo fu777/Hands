@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
 
-  before_action :authenticate_customer!, only: [:show]
+  before_action :authenticate_customer!, only: [:index, :show]
 
   def index
     @customers = Customer.all
@@ -11,6 +11,8 @@ class Public::CustomersController < ApplicationController
     unless @customer.shop.blank?
       @shop = @customer.shop
     end
+    @checks = current_customer.passive_checks.where(checked: false)
+    @notices = current_customer.passive_notices.where(checked: false)
   end
 
   def edit
@@ -51,6 +53,11 @@ class Public::CustomersController < ApplicationController
 
   def favourite_shop
     @favourite_shops = current_customer.favourite_shops.all
+  end
+  
+  def customer_blog
+    @customer = Customer.find(params[:id])
+    @blogs = @customer.blogs
   end
   
   def followers

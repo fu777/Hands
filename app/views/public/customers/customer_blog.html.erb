@@ -1,12 +1,4 @@
-<h1>ブログ一覧</h1>
-
-<%= link_to blogs_path do %>
-<label>すべて</label>
-<% end %>
-|
-<%= link_to blogs_path(item_id: nil) do %>
-<label>オリジナル</label>
-<% end %>
+<h1><%= @customer.user_name %>さんのブログ一覧</h1>
 
 <% @blogs.each do |blog| %>
   <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %><br>

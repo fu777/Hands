@@ -10,6 +10,8 @@
     <% end %>
   <% end %>
   <br>
+  <%= link_to "#{@customer.user_name}さんのブログ一覧を見る", customer_blog_path(@customer) %>
+  <br>
   
   <% if @customer == current_customer %>
     <%= link_to "プロフィール情報を編集する", profile_edit_path %><br>
@@ -18,8 +20,8 @@
     <%= link_to "お気に入りの作品一覧", favourite_item_path %><br>
     <%= link_to "いいねしたブログ一覧", good_path %><br>
     <%= link_to "注文履歴一覧", orders_path %><br>
-    <%= link_to "やること一覧", checks_path %><br>
-    <%= link_to "通知一覧", notices_path %><br>
+    <%= link_to "やること一覧", checks_path %><%= @checks.count %><br>
+    <%= link_to "通知一覧", notices_path %><%= @notices.count %><br>
     <%= form_with model: @relationships, url: followers_path, method: :get do |f| %>
       <%= f.hidden_field :customer_id, :value => @customer.id %>
       <%= f.submit "フォロー" %>
