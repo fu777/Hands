@@ -9,6 +9,7 @@
     <%= @shop.customer.user_name %>
   <% end %>
   
+<% if customer_signed_in? %>
   <% if @customer == current_customer %>
     <%= link_to "ショップ情報を編集する", edit_shop_path %><br>
   
@@ -28,7 +29,7 @@
     <% end %>
 
   <% end %>
-  
+
   <div>
     <% if @shop.favourited_shop_by?(current_customer) %>
       <p>
@@ -44,6 +45,7 @@
       </p>
     <% end %>
   </div>
+<% end %>
 
 <% if Shop.find_by(params[:is_active]) && (@shop.is_active == 'true') %>
   <h1>作品一覧</h1>
