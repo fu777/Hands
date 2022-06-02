@@ -110,7 +110,7 @@
 
       <% @blogs.each do |blog| %>
         <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
-        <%= blog.name %><br>
+        <%= blog.title %><br>
     <% end %>
     <%= link_to "全てのブログを見る＞", item_item_blog_path(@item) %>
   <% end %>

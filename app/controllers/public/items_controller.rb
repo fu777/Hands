@@ -53,7 +53,7 @@ class Public::ItemsController < ApplicationController
   
   def item_blog
     @item = Item.find(params[:id])
-    @blogs = params[:item_id].present? ? Blog.find(params[:item_id]).blogs : Blog.all
+    @blogs = Blog.where(item_id: @item)
   end
 
   private
