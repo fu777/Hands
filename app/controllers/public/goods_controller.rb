@@ -1,7 +1,7 @@
 class Public::GoodsController < ApplicationController
-  
+
   # before_action :authenticate_customer!, only: [:create, :destroy]
-  
+
   def create
     blog = Blog.find(params[:blog_id])
     good = current_customer.goods.new(blog_id: blog)
@@ -17,5 +17,5 @@ class Public::GoodsController < ApplicationController
     redirect_to blog_path(blog)
   end
 
-  
+
 end
