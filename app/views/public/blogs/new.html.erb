@@ -10,16 +10,17 @@
   <%= f.text_field :title, autofocus: true, autocomplete: "title", placeholder: "タイトル" %><br>
   <%= f.label "本文" %>
   <%= f.text_area :body, autofocus: true, autocomplete: "body", placeholder: "ここに本文を入力してください。" %><br>
-  
-  <% unless params[:blog][:item_id].present? %>
-    <label>購入した作品がある場合、選択してください。</label>
-      <%= f.label "購入した作品" %>
-      <!--f.collection_select :order_detail_id, @order_detail_item, :item_id, :name, @blog.item_id, {prompt: "選択してください"}-->
-      <%= f.collection_select :item_id, @items, :id, :name, {prompt: "選択してください"} %>
+
+<% if params[:blog].present? %>
+  <%= f.hidden_field :item_id, :value =>params[:blog][:item_id] %>
+<% else %>
+  <label>購入した作品がある場合、選択してください。</label><br>
+    <%= f.label "購入した作品" %>
+    <!--f.collection_select :order_detail_id, @order_detail_item, :item_id, :name, @blog.item_id, {prompt: "選択してください"}-->
+    <%= f.collection_select :item_id, @items, :id, :name, {prompt: "選択してください"} %>
   <br>
-  <% end %>
-  
-  
+<% end %>
+
   <%= f.submit "投稿する" %>
-  
+
 <% end %>

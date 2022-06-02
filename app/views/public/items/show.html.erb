@@ -100,7 +100,7 @@
 
   <br>
 
-  <%= form_with model: @blogs, url: new_blog_path, method: :get do |f| %>
+  <%= form_with model: @blogs,  url: new_blog_path, method: :get do |f| %>
       <%= f.hidden_field :item_id, :value => @item.id %>
       <%= f.submit "#{@item.name}のブログを投稿する" %>
     <% end %>

@@ -7,6 +7,7 @@ class Blog < ApplicationRecord
   belongs_to :item, optional: true
   has_many :blog_comments, dependent: :destroy
   has_many :goods, dependent: :destroy
+  has_many :notices, dependent: :destroy
 
   has_many_attached :blog_images
   

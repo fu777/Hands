@@ -11,9 +11,18 @@
   <%= f.label "作品説明" %>
   <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "ここに作品説明を入力してください。" %><br>
 
-  <%= f.label "カテゴリ" %>
-  <%= f.collection_select :category_id, @categories, :id, :name, {prompt: "選択してください"} %>
-  <br>
+<div class="append__category">
+  <div class="category">
+    <div class="form__label">
+      <div class="weight-bold-text lavel__name ">
+        <%= f.label "カテゴリー" %>
+      </div>
+      <div class="lavel__Required">
+        <%= f.collection_select :category_id, @set_parents, :id, :name, { include_blank: "選択してください"}, class: "select_field", id: "item_category_id" %>
+      </div>
+    </div>
+  </div>
+</div>
 
   <%= f.label "サイズ" %>
   <%= f.text_field :size, autofocus: true, autocomplete: "size", placeholder: "10cm x 10cm" %><br>

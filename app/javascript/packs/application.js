@@ -20,5 +20,5 @@ ActiveStorage.start()
 
 window.$ = window.jQuery = require('jquery');
 
-require('packs/category_item');
+require('packs/category');
 require('packs/raty')

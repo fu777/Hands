@@ -19,6 +19,7 @@
         <% when 'blog_comment' then %>
           <% if notice.blog.customer_id == notice.visited.id %>
             <%= link_to "あなたの投稿", notice.blog, style: "font-weight: bold;" %>
+            にコメントしました
           <% end %>
         <% else %>
           <span>

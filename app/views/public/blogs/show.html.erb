@@ -13,16 +13,18 @@
 <%= @blog.body %>
 <br>
 
-<%= image_tag @blog.item.get_item_images.first.variant(resize: "150x150").processed %><br>
-<%= link_to admin_item_path(@blog.item.id) do %>
-  <%= @blog.item.name %>
-<% end %>
-<br>
-¥<%= @blog.item.price.to_s(:delimited) %>円<br>
-
-<%= image_tag @item.shop.get_shop_icon_image(100,100) %><br>
-<%= link_to shop_path(@item.shop.id) do %>
-  <%= @item.shop.name %>
+<% unless @blog.item_id == nil %>
+  <%= image_tag @blog.item.get_item_images.first.variant(resize: "150x150").processed %><br>
+  <%= link_to admin_item_path(@blog.item.id) do %>
+    <%= @blog.item.name %>
+  <% end %>
+  <br>
+  ¥<%= @blog.item.price.to_s(:delimited) %>円<br>
+  
+  <%= image_tag @item.shop.get_shop_icon_image(100,100) %><br>
+  <%= link_to shop_path(@item.shop.id) do %>
+    <%= @item.shop.name %>
+  <% end %>
 <% end %>
 
 <br>

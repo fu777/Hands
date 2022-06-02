@@ -9,6 +9,7 @@ class Public::BlogsController < ApplicationController
   def create
     @blog = Blog.new(blog_params)
     @items = Item.all
+    @blog.customer_id = current_customer.id
     if @blog.save
       flash[:notice] = "ブログを新規登録しました。"
       redirect_to blog_path(@blog)

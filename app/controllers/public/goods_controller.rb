@@ -4,7 +4,7 @@ class Public::GoodsController < ApplicationController
   
   def create
     blog = Blog.find(params[:blog_id])
-    good = current_customer.goods.new(blog_id: blog.id)
+    good = current_customer.goods.new(blog_id: blog)
     good.save
     blog.create_notice_good!(current_customer)
     redirect_to blog_path(blog)

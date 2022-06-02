@@ -5,12 +5,10 @@ class Public::ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.shop_id = current_customer.shop.id
-    @categories = Category.all
   end
 
   def create
     @item = Item.new(item_params)
-    @categories = Category.all
     if @item.save
       redirect_to item_path(@item.id)
       flash[:notice] = "作品を登録しました。"
@@ -37,12 +35,10 @@ class Public::ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    @categories = Category.all
   end
 
   def update
     @item = Item.find(params[:id])
-    @categories = Category.all
     if @item.update(item_params)
       flash[:notice] = "作品を編集しました。"
       redirect_to item_path(@item.id)
@@ -65,7 +61,7 @@ class Public::ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:shop_id, :name, :introduction, :size, :shipping_date, :price, :category_id, :is_active, item_images: [])
   end
-
+  
   def set_parents
     @set_parents = Category.where(ancestry: nil)
   end
