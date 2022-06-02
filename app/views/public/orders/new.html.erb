@@ -22,6 +22,6 @@
       <%= f.text_field :address, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0" %><br>
       <%= f.label "宛名" %>
       <%= f.text_field :name, autocomplete: "name", placeholder: "令和道子" %><br>
-      <%= f.hidden_field :shop_id, :value => params[:shop_id] %>
+      <%= f.hidden_field :shop_id, :value => @shop_id %>
   <%= f.submit "確認画面へ進む" %>
 <% end %>

@@ -4,22 +4,26 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @shop_id = params[:shop_id]
     @customer = current_customer
   end
 
   def confirm
     @order = Order.new(order_params)
     @new_order = Order.new
-    @cart = current_customer.carts.find_by(shop_id: params[:order][:shop_id])
+    @shop_id = params[:order][:shop_id]
+    @cart = current_customer.carts.find_by(shop_id: @shop_id)
     @total = @cart.cart_items.inject(0) { |sum, item| sum + item.subtotal }
     @shipping_cost = 800
     @total_payment = @total + @shipping_cost
+    @order.customer = current_customer
     if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:select_address] == "1"
-      if @order.postal_code.blank? or @order.address.blank? or @order.name.blank?
+      unless @order.valid?
+        @customer = current_customer
         render :new
       end
     end

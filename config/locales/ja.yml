@@ -27,6 +27,7 @@ ja:
       item: "作品"
       blog: "ブログ"
       review: "レビュー"
+      order: "注文"
     attributes:
       customer:
         user_name: "ユーザーネーム"
@@ -57,6 +58,10 @@ ja:
         body: "本文"
       review:
         review_comment: "レビューコメント"
+      order:
+        postal_code: "郵便番号"
+        address: "住所"
+        name: "宛名"
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
