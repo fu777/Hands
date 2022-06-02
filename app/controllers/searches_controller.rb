@@ -13,4 +13,8 @@ class SearchesController < ApplicationController
     @customers = Customer.search(params[:search])
   end
   
+  def blog_search
+    @blogs = Blog.search(params[:search])
+  end
+  
 end

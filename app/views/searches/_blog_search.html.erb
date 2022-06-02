@@ -1,0 +1,9 @@
+<h1>ブログ一覧</h1>
+
+  <%= form_tag blog_search_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], placeholder: "ブログ検索" %>
+    <%= button_tag :type => "submit", :title => nil do %>
+      <i class="fas fa-search"></i>
+    <% end %>
+  <% end %>
+  

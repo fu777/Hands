@@ -17,5 +17,4 @@
     <%= item.name %>
     <% end %><br>
     ¥<%= item.price.to_s(:delimited) %><br>
-    <%= link_to "削除する", item_path(item.id), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
   <% end %>

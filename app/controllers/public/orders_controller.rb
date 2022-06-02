@@ -18,6 +18,10 @@ class Public::OrdersController < ApplicationController
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.last_name + current_customer.first_name
+    elsif params[:order][:select_address] == "1"
+      if @order.postal_code.blank? or @order.address.blank? or @order.name.blank?
+        render :new
+      end
     end
   end
 

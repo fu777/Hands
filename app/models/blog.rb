@@ -58,4 +58,10 @@ class Blog < ApplicationRecord
     notice.save if notice.valid?
   end
   
+  def self.search(search)
+    if search
+      Blog.where(["title LIKE?", "%#{search}%"])
+    end
+  end
+  
 end
