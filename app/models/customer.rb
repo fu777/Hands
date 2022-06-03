@@ -18,7 +18,7 @@ class Customer < ApplicationRecord
   has_many :carts, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :blog_comments, dependent: :destroy
-  has_many :goods, dependent: :destroy
+  has_many :favourite_blogs, dependent: :destroy
   has_many :favourite_items, dependent: :destroy
   has_many :favourite_shops, dependent: :destroy
   has_many :relationships

@@ -3,10 +3,11 @@ class Blog < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
 
+default_scope -> { order(created_at: :desc) }
   belongs_to :customer
   belongs_to :item, optional: true
   has_many :blog_comments, dependent: :destroy
-  has_many :goods, dependent: :destroy
+  has_many :favourite_blogs, dependent: :destroy
   has_many :notices, dependent: :destroy
 
   has_many_attached :blog_images
@@ -19,17 +20,17 @@ class Blog < ApplicationRecord
     blog_images
   end
   
-  def was_good_by?(customer)
-    goods.exists?(customer_id: customer.id)
+  def was_favourite_blog_by?(customer)
+    favourite_blogs.exists?(customer_id: customer.id)
   end
   
-  def create_notice_good!(current_customer)
-    temp = Notice.where(["visitor_id = ? and visited_id = ? and blog_id = ? and action = ? ", current_customer.id, customer_id, id, 'good'])
+  def create_notice_favourite_blog!(current_customer)
+    temp = Notice.where(["visitor_id = ? and visited_id = ? and blog_id = ? and action = ? ", current_customer.id, customer_id, id, 'favourite_blog'])
     if temp.blank?
       notice = current_customer.active_notices.new(
         blog_id: id,
         visited_id: customer_id,
-        action: 'good'
+        action: 'favourite_blog'
       )
       if notice.visitor_id == notice.visited_id
         notice.checked = true

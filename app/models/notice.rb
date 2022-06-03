@@ -1,7 +1,7 @@
 class Notice < ApplicationRecord
   
   default_scope -> { order(created_at: :desc) }
-  belongs_to :good, optional: true
+  belongs_to :favourite_blog, optional: true
   belongs_to :blog_comment, optional: true
   belongs_to :blog, optional: true
   belongs_to :visitor, class_name: 'Customer', foreign_key: 'visitor_id', optional: true

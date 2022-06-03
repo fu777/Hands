@@ -1,9 +1,0 @@
-<h1>いいねしたブログ一覧(<%= @goods.count %>件)</h1>
-
-  <% @goods.each do |good| %>
-    <%= image_tag good.blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
-    <%= link_to blog_path(good.blog.id) do %>
-        <%= good.blog.title %>
-    <% end %>
-  <% end %>
-  

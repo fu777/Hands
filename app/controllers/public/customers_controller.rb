@@ -43,8 +43,8 @@ class Public::CustomersController < ApplicationController
     end
   end
 
-  def good
-    @goods = current_customer.goods.all
+  def favourite_blog
+    @favourite_blogs = current_customer.favourite_blogs.all
   end
 
   def favourite_item

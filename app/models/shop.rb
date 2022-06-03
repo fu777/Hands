@@ -4,6 +4,7 @@ class Shop < ApplicationRecord
   validates :introduction, presence: true
   validates :is_active, presence: true
 
+  default_scope -> { order(created_at: :desc) }
   belongs_to :customer
   has_many :items
   has_many :carts, dependent: :destroy

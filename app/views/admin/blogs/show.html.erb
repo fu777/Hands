@@ -13,30 +13,32 @@
 <%= @blog.body %>
 <br>
 
-<%= image_tag @blog.item.get_item_images.first.variant(resize: "150x150").processed %><br>
-<%= link_to item_path(@blog.item.id) do %>
-  <%= @blog.item.name %>
-<% end %>
-<br>
-¥<%= @blog.item.price.to_s(:delimited) %>円<br>
-
-<%= image_tag @item.shop.get_shop_icon_image(100,100) %><br>
-<%= link_to shop_path(@item.shop.id) do %>
-  <%= @item.shop.name %>
+<% unless @blog.item_id == nil %>
+  <%= image_tag @blog.item.get_item_images.first.variant(resize: "150x150").processed %><br>
+  <%= link_to item_path(@blog.item.id) do %>
+    <%= @blog.item.name %>
+  <% end %>
+  <br>
+  ¥<%= @blog.item.price.to_s(:delimited) %>円<br>
+  
+  <%= image_tag @item.shop.get_shop_icon_image(100,100) %><br>
+  <%= link_to shop_path(@item.shop.id) do %>
+    <%= @item.shop.name %>
+  <% end %>
 <% end %>
 
 <br>
     <%= link_to "削除", admin_blog_path(@blog), method: :delete, "data-confirm" => "本当に消しますか？" %>
 <br>
 
-  ♥<%= @blog.goods.count %> いいね
+  ♥<%= @blog.favourite_blogs.count %> いいね
 
 <div>
   <p>コメント件数：<%= @blog.blog_comments.count %></p>
   <% @blog.blog_comments.each do |blog_comment| %>
-    <p><%= image_tag blog_comment.customer.get_image(100,100) %></p>
-    <%= blog_comment.customer.user_name %>
-    <%= l blog_comment.created_at, format: :long %><%= blog_comment.comment %>
-      <%= link_to "削除", admin_blog_blog_comment_path(blog_comment.blog, blog_comment), method: :delete, "data-confirm" => "本当に消しますか？" %>
+    <p><%= image_tag blog_comment.customer.get_image(50,50) %></p>
+    <%= blog_comment.customer.user_name %><br>
+    <%= l blog_comment.created_at, format: :long %><%= blog_comment.comment %><br>
+      <%= link_to "削除", admin_blog_blog_comment_path(blog_comment.blog, blog_comment), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
   <% end %>
 </div>

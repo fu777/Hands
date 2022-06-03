@@ -3,7 +3,7 @@
   <% @customers.each do |customer| %>
     <%= image_tag customer.get_image(200,200) %><br>
     <%= link_to my_page_path(customer.id) do %>
-        <%= customer.user_name %>
+        <%= customer.user_name %><br>
     <% end %>
   <% end %>
   

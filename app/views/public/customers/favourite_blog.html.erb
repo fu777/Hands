@@ -1,0 +1,9 @@
+<h1>いいねしたブログ一覧(<%= @favourite_blogs.count %>件)</h1>
+
+  <% @favourite_blogs.each do |favourite_blog| %>
+    <%= image_tag favourite_blog.blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
+    <%= link_to blog_path(favourite_blog.blog.id) do %>
+        <%= favourite_blog.blog.title %><br>
+    <% end %>
+  <% end %>
+  

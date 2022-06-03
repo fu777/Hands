@@ -1,15 +1,18 @@
 <br>
   <% @reviews.each do |review| %>
-    <%= link_to admin_item_path(review.item.id) do %>
+    作品名: 
+    <%= link_to item_path(review.item.id) do %>
       <%= review.item.name %><br>
     <% end %>
+    ショップ: 
     <%= link_to shop_path(review.item.shop.id) do %>
       <%= review.item.shop.name %><br>
     <% end %>
+    レビューしたユーザー: 
     <%= link_to admin_customer_path(review.customer.id) do %>
       <%= review.customer.user_name %><br>
     <% end %>
-    ¥<%= review.item.price.to_s(:delimited) %><br>
-    <%= review.review_comment %>
+    レビューコメント: 
+    <%= review.review_comment %><br>
     <%= link_to "削除する", admin_review_path(review.id), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
   <% end %>

@@ -45,6 +45,8 @@
       </p>
     <% end %>
   </div>
+<% else %>
+  ♡<%= @shop.favourite_shops.count %>
 <% end %>
 
 <% if Shop.find_by(params[:is_active]) && (@shop.is_active == 'true') %>

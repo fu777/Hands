@@ -1,4 +1,4 @@
-class Good < ApplicationRecord
+class FavouriteBlog < ApplicationRecord
   
   belongs_to :customer
   belongs_to :blog

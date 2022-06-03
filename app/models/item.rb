@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   validates :price, presence: true
   validates :is_active, presence: true
   
+  default_scope -> { order(created_at: :desc) }
   belongs_to :shop
   has_many :categories
   has_many :blogs, dependent: :destroy

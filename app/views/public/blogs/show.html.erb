@@ -27,6 +27,7 @@
   <% end %>
 <% end %>
 
+<% if customer_signed_in? %>
 <br>
   <% if @blog.customer == current_customer %>
     <%= link_to "編集する", edit_blog_path(@blog) %>
@@ -34,36 +35,45 @@
   <% end %>
 <br>
 
-  <% if @blog.was_good_by?(current_customer) %>
+  <% if @blog.was_favourite_blog_by?(current_customer) %>
     <p>
-      <%= link_to blog_goods_path(@blog), method: :delete do %>
-        ♥<%= @blog.goods.count %> いいね
+      <%= link_to blog_favourite_blogs_path(@blog), method: :delete do %>
+        ♥<%= @blog.favourite_blogs.count %> いいね
       <% end %>
     </p>
     <% else %>
     <p>
-      <%= link_to blog_goods_path(@blog), method: :post do %>
-        ♡<%= @blog.goods.count %> いいね
+      <%= link_to blog_favourite_blogs_path(@blog), method: :post do %>
+        ♡<%= @blog.favourite_blogs.count %> いいね
       <% end %>
     </p>
   <% end %>
-
+<% else %>
+  ♡<%= @blog.favourite_blogs.count %> いいね
+<% end %>
+  
 <div>
   <p>コメント件数：<%= @blog.blog_comments.count %></p>
   <% @blog.blog_comments.each do |blog_comment| %>
     <p><%= image_tag blog_comment.customer.get_image(100,100) %></p>
     <%= blog_comment.customer.user_name %>
     <%= l blog_comment.created_at, format: :long %><%= blog_comment.comment %>
-    <% if blog_comment.customer == current_customer %>
-      <%= link_to "削除", blog_blog_comment_path(blog_comment.blog, blog_comment), method: :delete %>
+    <% if customer_signed_in? %>
+      <% if blog_comment.customer == current_customer %>
+        <%= link_to "削除", blog_blog_comment_path(blog_comment.blog, blog_comment), method: :delete %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
+
 <div>
+<% if customer_signed_in? %>
   <%= render 'blog_comment_error', blog_comment: @blog_comment %>
   
   <%= form_with model: [@blog, @blog_comment] do |f| %>
     <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
     <%= f.submit "送信する" %>
   <% end %>
+<% end %>
 </div>
+

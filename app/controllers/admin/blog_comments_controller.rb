@@ -1,6 +1,6 @@
 class Admin::BlogCommentsController < ApplicationController
   
-  before_action :authenticate_admin!, only: [:destroy]
+  # before_action :authenticate_admin!, only: [:destroy]
   
   def destroy
     BlogComment.find(params[:id]).destroy

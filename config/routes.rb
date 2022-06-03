@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get 'customers' => 'customers#index', as: 'index'
     get 'customers/profile_edit' => 'customers#profile_edit', as: 'profile_edit'
     patch 'customers/profile_update' => 'customers#profile_update', as: 'profile_update'
-    get 'customers/good' => 'customers#good', as: 'good'
+    get 'customers/favourite_blog' => 'customers#favourite_blog', as: 'favourite_blog'
     get 'customers/favourite_item' => 'customers#favourite_item', as: 'favourite_item'
     get 'customers/favourite_shop' => 'customers#favourite_shop', as: 'favourite_shop'
     get 'customers/customer_blog/:id' => 'customers#customer_blog', as: 'customer_blog'
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     end
     resources :blogs do
       resources :blog_comments, only: [:create, :destroy]
-      resource :goods, only: [:create, :destroy]
+      resource :favourite_blogs, only: [:create, :destroy]
     end
     post 'orders/confirm' => 'orders#confirm', as: 'confirm'
     get 'orders/complete' => 'orders#complete', as: 'complete'

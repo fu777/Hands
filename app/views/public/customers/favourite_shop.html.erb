@@ -3,7 +3,7 @@
   <% @favourite_shops.each do |favourite_shop| %>
     <%= image_tag favourite_shop.shop.get_shop_icon_image(100,100) %><br>
     <%= link_to shop_path(favourite_shop.shop.id) do %>
-        <%= favourite_shop.shop.name %>
+        <%= favourite_shop.shop.name %><br>
     <% end %>
   <% end %>
   

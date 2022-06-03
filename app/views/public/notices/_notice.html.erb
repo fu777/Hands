@@ -13,12 +13,12 @@
         <% case notice.action %>
         <% when 'follow' then %>
           あなたをフォローしました
-        <% when 'good' then %>
-          <%= link_to 'あなたの投稿', notice.blog, style: "font-weight: bold;" %>
+        <% when 'favourite_blog' then %>
+          <%= link_to 'あなたのブログ', notice.blog, style: "font-weight: bold;" %>
           にいいねしました
         <% when 'blog_comment' then %>
           <% if notice.blog.customer_id == notice.visited.id %>
-            <%= link_to "あなたの投稿", notice.blog, style: "font-weight: bold;" %>
+            <%= link_to "あなたのブログ", notice.blog, style: "font-weight: bold;" %>
             にコメントしました
           <% end %>
         <% else %>
