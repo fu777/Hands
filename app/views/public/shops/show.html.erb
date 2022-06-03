@@ -6,7 +6,7 @@
 
   <%= image_tag @shop.customer.get_image(200,200) %><br>
   <%= link_to my_page_path(@shop.customer.id) do %>
-    <%= @shop.customer.user_name %>
+    <%= @shop.customer.user_name %><br>
   <% end %>
 
 <% if customer_signed_in? %>

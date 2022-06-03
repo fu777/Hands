@@ -31,6 +31,9 @@ class Public::BlogsController < ApplicationController
   def edit
     @blog = Blog.find(params[:id])
     @items = Item.all
+    unless current_customer == @blog.customer
+      redirect_to root_path
+    end
   end
 
   def update

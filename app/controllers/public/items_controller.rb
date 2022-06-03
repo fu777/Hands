@@ -34,6 +34,9 @@ class Public::ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    unless current_customer.shop == @item.shop
+      redirect_to root_path
+    end
   end
 
   def update

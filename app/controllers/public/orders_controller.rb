@@ -1,6 +1,6 @@
 class Public::OrdersController < ApplicationController
 
-  # before_action :authenticate_customer!, only: [:index, :show]
+  before_action :authenticate_customer!, only: [:index, :show]
 
   def new
     @customer = current_customer
@@ -74,6 +74,9 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_details = @order.order_details
     @total = @order_details.inject(0) { |sum, item| sum + item.subtotal }
+    unless current_customer == @order.customer
+      redirect_to root_path
+    end
   end
 
   def update

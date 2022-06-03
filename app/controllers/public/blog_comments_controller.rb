@@ -1,7 +1,5 @@
 class Public::BlogCommentsController < ApplicationController
 
-  before_action :authenticate_customer!, only: [:create, :destroy]
-
   def create
     blog = Blog.find(params[:blog_id])
     comment = current_customer.blog_comments.new(blog_comment_params)

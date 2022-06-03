@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
 
-  before_action :authenticate_customer!, only: [:index, :show]
+  before_action :authenticate_customer!
 
   def index
     @customers = Customer.all
@@ -17,6 +17,9 @@ class Public::CustomersController < ApplicationController
 
   def edit
     @customer = current_customer
+    unless current_customer == @customer
+      redirect_to root_path
+    end
   end
 
   def update
@@ -31,6 +34,9 @@ class Public::CustomersController < ApplicationController
 
   def profile_edit
     @customer = current_customer
+    unless current_customer == @customer
+      redirect_to root_path
+    end
   end
 
   def profile_update

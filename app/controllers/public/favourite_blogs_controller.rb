@@ -1,7 +1,5 @@
 class Public::FavouriteBlogsController < ApplicationController
   
-  before_action :authenticate_customer!, only: [:create, :destroy]
-  
   def create
     blog = Blog.find(params[:blog_id])
     favourite_blog = current_customer.favourite_blogs.new(blog_id: blog.id)

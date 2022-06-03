@@ -1,15 +1,22 @@
 class Public::ShopOrdersController < ApplicationController
 
-  # before_action :authenticate_customer!, only: [:index, :show]
+  before_action :authenticate_customer!, only: [:index, :show]
 
   def index
     @orders = params[:shop_id].present? ? Shop.find(params[:shop_id]).orders : Order.all
+    @shop = Shop.find(params[:shop_id])
+    unless current_customer.shop == @shop
+      redirect_to root_path
+    end
   end
 
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details
     @total = @order_details.inject(0) { |sum, item| sum + item.subtotal }
+    unless current_customer.shop == @order.shop
+      redirect_to root_path
+    end
   end
 
   def update

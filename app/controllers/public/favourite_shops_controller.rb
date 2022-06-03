@@ -1,7 +1,5 @@
 class Public::FavouriteShopsController < ApplicationController
   
-  # before_action :authenticate_customer!, only: [:create, :destroy]
-  
   def create
     shop = Shop.find(params[:shop_id])
     favourite_shop = current_customer.favourite_shops.new(shop_id: shop.id)
