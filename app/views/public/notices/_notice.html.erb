@@ -3,7 +3,7 @@
       
       <span>
         <%= link_to my_page_path(notice.visitor) do %>
-          <%= image_tag notice.visitor.get_image(50,50), class: "icon_mini" %><br>
+          <%= image_tag notice.visitor.get_image(50,50), class: "icon_mini" %>
           <strong>
             <%= notice.visitor.user_name %>
           </strong>
@@ -12,28 +12,28 @@
       
         <% case notice.action %>
         <% when 'follow' then %>
-          あなたをフォローしました
+          あなたをフォローしました。
         <% when 'favourite_blog' then %>
           <%= link_to 'あなたのブログ', notice.blog, style: "font-weight: bold;" %>
-          にいいねしました
+          にいいねしました。
         <% when 'blog_comment' then %>
           <% if notice.blog.customer_id == notice.visited.id %>
             <%= link_to "あなたのブログ", notice.blog, style: "font-weight: bold;" %>
-            にコメントしました
-          <% end %>
-        <% else %>
-          <span>
-            <%= link_to blog_path(notice.blog) do %>
-              <%= image_tag notice.blog.customer.get_image(50,50), class: "icon_mini" %>
-            <% end %>
+            にコメントしました。
+          <% else %>
+            <span>
+              <%= link_to blog_path(notice.blog) do %>
+                <%= image_tag notice.blog.customer.get_image(50,50), class: "icon_mini" %>
               <strong>
-                <%= notice.blog.customer.user_name + 'さんの投稿' %>
+                <%= notice.blog.customer.user_name + 'さんのブログ' %>
               </strong>
-          </span>
-            にコメントしました
-          <p class="text-muted mb-0">
-            <%= BlogComment.find_by(id: notice.blog_comment_id)&.comment %>
-          </p>
+              <% end %>
+            </span>
+            にコメントしました。
+            <p class="text-muted mb-0">
+              <%= BlogComment.find_by(id: notice.blog_comment_id)&.comment %>
+            </p>
+          <% end %>
         <% end %>
       </span>
     </div>
