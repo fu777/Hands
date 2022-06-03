@@ -1,10 +1,4 @@
 class Public::CartItemsController < ApplicationController
-  
-  def update
-    @cart_item = CartItem.find(params[:id])
-    @cart_item.update(amount: params[:cart_item][:amount].to_i)
-    redirect_to carts_path
-  end
 
   def destroy
     @cart_item = CartItem.find(params[:id])

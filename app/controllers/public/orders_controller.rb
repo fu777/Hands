@@ -3,9 +3,16 @@ class Public::OrdersController < ApplicationController
   # before_action :authenticate_customer!, only: [:index, :show]
 
   def new
+    @customer = current_customer
+    @cart = @customer.carts.find_by(shop_id: params[:shop_id])
+    @cart.cart_items.each do |cart_item|
+      if cart_item.item.limit == 0
+        flash[:alert] = "売り切れた作品があります。カートから削除してください。"
+        redirect_to carts_path(@customer)
+      end
+    end
     @order = Order.new
     @shop_id = params[:shop_id]
-    @customer = current_customer
   end
 
   def confirm
@@ -45,6 +52,13 @@ class Public::OrdersController < ApplicationController
         @order_detail.order_id = @order.id
         @order_detail.price = cart_item.item.price
         @order_detail.amount = cart_item.amount
+        unless @order_detail.item.limit.nil?
+          limit = @order_detail.item.limit -= 1
+          @order_detail.item.update(limit: limit)
+          if @order_detail.item.limit == 0
+            @order_detail.item.update(is_active: false)
+          end
+        end
         @order_detail.save
       end
     @order.create_check_first_order!(current_customer)

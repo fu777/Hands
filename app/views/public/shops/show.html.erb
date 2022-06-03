@@ -3,26 +3,26 @@
   <%= image_tag @shop.get_shop_icon_image(200,200) %><br>
   <%= @shop.name %><br>
   <%= @shop.introduction %><br>
-  
+
   <%= image_tag @shop.customer.get_image(200,200) %><br>
   <%= link_to my_page_path(@shop.customer.id) do %>
     <%= @shop.customer.user_name %>
   <% end %>
-  
+
 <% if customer_signed_in? %>
   <% if @customer == current_customer %>
     <%= link_to "ショップ情報を編集する", edit_shop_path %><br>
-  
+
     <%= form_with model: @item, url: new_item_path, method: :get do |f| %>
       <%= f.hidden_field :shop_id, :value => @shop.id %>
       <%= f.submit "作品を登録する" %>
     <% end %>
-    
+
     <%= form_with model: @order, url: shop_orders_path, method: :get do |f| %>
       <%= f.hidden_field :shop_id, :value => @shop.id %>
       <%= f.submit "注文履歴一覧を見る" %>
     <% end %>
-    
+
     <%= form_with model: @check, url: shop_checks_path, method: :get do |f| %>
       <%= f.hidden_field :shop_id, :value => @shop.id %>
       <%= f.submit "ショップのやること一覧" %><%= @shop_checks.count %>
@@ -49,6 +49,17 @@
 
 <% if Shop.find_by(params[:is_active]) && (@shop.is_active == 'true') %>
   <h1>作品一覧</h1>
+
+    <%= link_to shop_path(@shop) do %>
+    <label>すべて</label>
+    <% end %>
+    |
+    <%= link_to shop_path(@shop, is_active: "true") do %>
+    <label>販売中</label>
+    <% end %>
+
+    <br>
+
     <% @items.each do |item| %>
       <%= image_tag item.get_item_images.first.variant(resize: "150x150").processed %>
       <br>

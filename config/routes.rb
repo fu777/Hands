@@ -48,7 +48,7 @@ Rails.application.routes.draw do
       collection do
         delete 'destroy_all'
       end
-      resources :cart_items, only: [:update, :destroy]
+      resources :cart_items, only: [:destroy]
     end
     resources :orders, only: [:new, :create, :index, :show, :update]
     resources :relationships, only: [:create, :destroy]

@@ -30,6 +30,8 @@
   <%= f.text_field :shipping_date, autofocus: true, autocomplete: "shipping_date", placeholder: "3" %>日<br>
   <%= f.label "値段" %>
   <%= f.text_field :price, autofocus: true, autocomplete: "price", placeholder: "1000" %>円<br>
+  <%= f.label "販売個数がある場合、選択してください。" %>
+  <%= f.select :limit, options_for_select(*[0..10]) %><br>個
 
   <%= f.label "販売ステータス" %>
   <%= f.radio_button :is_active, "true" %>

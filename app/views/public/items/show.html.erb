@@ -10,11 +10,17 @@
 <%= @item.name %><br>
 ¥<%= @item.price.to_s(:delimited) %>円<br>
 
+<% if @item.limit.nil? %>
+<% elsif @item.limit == 0 %>
+<% else %>
+  残り<%= @item.limit %>個です<br>
+<% end %>
+
 <% if customer_signed_in? %>
   <% if Item.find_by(params[:shop_id]) && (@item.shop_id == current_customer.shop.id) %>
   <% elsif Item.find_by(params[:is_active]) && (@item.is_active == 'true') %>
     <%= form_with model: [@cart, @cart_item], url: carts_path, method: :post, local: true do |f| %>
-      <%= f.select :amount, *[1..10], { include_blank: '個数選択' }, autofocus: true, autocomplete: "amount" %>
+      <%= f.hidden_field :amount, :value => '1' %>
       <%= f.hidden_field :item_id, :value => @item.id %>
       <%= hidden_field_tag "cart[shop_id]", @item.shop.id %>
       <%= hidden_field_tag "cart[customer_id]", current_customer.id %>

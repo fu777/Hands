@@ -23,7 +23,7 @@ class Public::ShopsController < ApplicationController
     @shop = Shop.find(params[:id])
     @orders = Order.where(params[:shop_id])
     @customer = @shop.customer
-    @items = @shop.items.all
+    @items = params[:is_active].present? ? @shop.items.where(is_active: true) : @shop.items.all
     @shop_checks = @shop.shop_passive_checks.where(checked: false)
   end
 

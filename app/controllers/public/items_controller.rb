@@ -18,7 +18,6 @@ class Public::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
     @items = params[:is_active].present? ? Item.where(is_active: true) : Item.all
   end
 
@@ -59,7 +58,7 @@ class Public::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:shop_id, :name, :introduction, :size, :shipping_date, :price, :category_id, :is_active, item_images: [])
+    params.require(:item).permit(:shop_id, :name, :introduction, :size, :shipping_date, :price, :category_id, :is_active, :limit, item_images: [])
   end
   
   def set_parents
