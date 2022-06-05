@@ -1,6 +1,7 @@
 class Admin::ReviewsController < ApplicationController
   
-  before_action :authenticate_admin!, only: [:index]
+  skip_before_action :authenticate_customer!, only: [:destroy]
+  before_action :authenticate_admin!, only: [:index, :destroy]
 
   def index
     @reviews = Review.all

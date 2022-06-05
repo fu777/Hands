@@ -18,6 +18,9 @@
     <%= link_to 'ゲストログイン（閲覧用）', public_guest_sign_in_path, method: :post %>
     <%= link_to '管理者ゲストログイン（閲覧用）', admin_guest_sign_in_path, method: :post %>
     <% if customer_signed_in? %>
+      <%= link_to root_path do %>
+        <h1>Hands</h1>
+      <% end %>
       <%= link_to "マイページ", my_page_path(current_customer) %>
       <%= link_to "作品一覧", items_path %>
       <%= link_to "ショップ一覧", shops_path %>
@@ -26,31 +29,37 @@
       <%= link_to "ユーザー一覧", index_path %>
       <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
     <% elsif admin_signed_in? %>
-        <%= link_to "作品一覧", admin_items_path %>
-        <%= link_to "ユーザー一覧", admin_customers_path %>
-        <%= link_to "ブログ一覧", admin_blogs_path %>
-        <%= link_to "注文履歴一覧", admin_root_path %>
-        <%= link_to "レビュ一覧", admin_reviews_path %>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+      <%= link_to admin_root_path do %>
+        <h1>Hands</h1>
+      <% end %>
+      <%= link_to "作品一覧", admin_items_path %>
+      <%= link_to "ユーザー一覧", admin_customers_path %>
+      <%= link_to "ブログコメント一覧", admin_blog_comments_path %>
+      <%= link_to "注文履歴一覧", admin_root_path %>
+      <%= link_to "レビュ一覧", admin_reviews_path %>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
     <% else %>
-        <li>
-          <%= link_to "About", about_path %>
-        </li>
-        <li>
-          <%= link_to "作品一覧", items_path %>
-        </li>
-        <li>
-          <%= link_to "ショップ一覧", shops_path %>
-        </li>
-        <li>
-          <%= link_to "ブログ一覧", blogs_path %>
-        </li>
-        <li>
-          <%= link_to "新規登録", new_customer_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_customer_session_path %>
-        </li>
+      <%= link_to root_path do %>
+        <h1>Hands</h1>
+      <% end %>
+      <li>
+        <%= link_to "About", about_path %>
+      </li>
+      <li>
+        <%= link_to "作品一覧", items_path %>
+      </li>
+      <li>
+        <%= link_to "ショップ一覧", shops_path %>
+      </li>
+      <li>
+        <%= link_to "ブログ一覧", blogs_path %>
+      </li>
+      <li>
+        <%= link_to "新規登録", new_customer_registration_path %>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_customer_session_path %>
+      </li>
     <% end %>
 
     <% flash.each do |key, value| %>

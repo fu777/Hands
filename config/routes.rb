@@ -4,11 +4,13 @@ Rails.application.routes.draw do
     root to: "homes#top"
     resources :customers, only: [:index, :show, :edit, :update]
     resources :items, only: [:index, :show]
+    resources :blogs, only: [:index, :show, :destroy]
     resources :blogs, only: [:index, :show, :destroy] do
       resources :blog_comments, only: [:destroy]
     end
     resources :orders, only: [:show, :index, :update]
     resources :reviews, only: [:index, :destroy]
+    resources :blog_comments, only: [:index, :destroy]
   end
   
   scope module: :public do

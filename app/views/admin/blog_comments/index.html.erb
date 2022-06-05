@@ -1,0 +1,18 @@
+<br>
+  <% @blog_comments.each do |blog_comment| %>
+    ブログ名: 
+    <%= link_to admin_blog_path(blog_comment.blog) do %>
+      <%= blog_comment.blog.title %><br>
+    <% end %>
+    投稿したユーザー名: 
+    <%= link_to admin_customer_path(blog_comment.blog.customer) do %>
+      <%= blog_comment.blog.customer.user_name %><br>
+    <% end %>
+    コメントしたユーザー: 
+    <%= link_to admin_customer_path(blog_comment.customer) do %>
+      <%= blog_comment.customer.user_name %><br>
+    <% end %>
+    コメント: 
+    <%= blog_comment.comment %><br>
+    <%= link_to "削除する", admin_blog_comment_path(blog_comment), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
+  <% end %>
