@@ -30,6 +30,9 @@ class Public::ItemsController < ApplicationController
     @review = Review.new
     @reviews = @item.reviews.all
     @blogs = Blog.limit(5).order(created_at: :desc).where(item_id: @item)
+    @category_id = @item.category_id
+    @category_parent = Category.find(@category_id).parent
+    @category_child = Category.find(@category_id)
   end
 
   def edit

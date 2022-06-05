@@ -7,6 +7,9 @@
   <%= @item.shop.name %><br>
 <% end %>
 
+カテゴリ: 
+<%=  "#{ @category_parent.name } > #{ @category_child.name }" %><br>
+
 <%= @item.name %><br>
 ¥<%= @item.price.to_s(:delimited) %>円<br>
 
@@ -54,7 +57,7 @@
     <% end %>
   </div>
 <% else %>
-  ♡<%= @item.favourite_items.count %>
+  ♥<%= @item.favourite_items.count %>
 <% end %>
 
   <div>
