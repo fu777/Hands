@@ -1,0 +1,25 @@
+<%= render partial: 'category_item', items: @items %>
+
+<%= link_to item_search_item_path do %>
+<label>すべて</label>
+<% end %>
+|
+<%= link_to item_search_item_path(is_active: "true") do %>
+<label>販売中</label>
+<% end %>
+
+<br>
+
+<% if params[:is_active].present? %>
+  <% @true_items.each do |item| %>
+    <%= image_tag item.get_item_images.first.variant(resize: "150x150").processed %>
+    <br>
+    <%= link_to item_path(item.id) do %>
+    <%= item.name %>
+    <% end %><br>
+    ¥<%= item.price.to_s(:delimited) %><br>
+  <% end %>
+<% else %>
+  <%= render 'item_list', items: @items %>
+<% end %>
+  

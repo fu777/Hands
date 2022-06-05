@@ -22,3 +22,4 @@ window.$ = window.jQuery = require('jquery');
 
 require('packs/category');
 require('packs/raty')
+require('./category_item');

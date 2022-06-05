@@ -1,0 +1,8 @@
+<% items.each do |item| %>
+  <%= image_tag item.get_item_images.first.variant(resize: "150x150").processed %>
+  <br>
+  <%= link_to item_path(item.id) do %>
+  <%= item.name %>
+  <% end %><br>
+  ¥<%= item.price.to_s(:delimited) %><br>
+<% end %>

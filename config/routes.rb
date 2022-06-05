@@ -34,6 +34,10 @@ Rails.application.routes.draw do
       resource :favourite_items, only: [:create, :destroy]
       collection do
         get "get_category_children", defaults: { format: "json" }
+        get "menu_search"
+      end
+      member do
+        get "item_search"
       end
       resources :reviews, only: [:create]
       get 'item_blog/:id' => 'items#item_blog', as: 'item_blog'
