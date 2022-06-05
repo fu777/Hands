@@ -1,2 +1,29 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<h4>人気の作品</h4>
+  <% @item_ranks.each.with_index(1) do |item, i| %>
+    第<%= i %>位<br>
+    <%= image_tag item.get_item_images.first.variant(resize: "100x100").processed %><br>
+    <%= link_to item_path(item) do %>
+      <%= item.name %><br>
+    <% end %>
+  <% end %>
+  <%= link_to "全ての作品を見る", items_path %><br>
+
+<h4>人気のショップ</h4>
+  <% @shop_ranks.each.with_index(1) do |shop, i| %>
+    第<%= i %>位<br>
+    <%= image_tag shop.get_shop_icon_image(100,100) %><br>
+    <%= link_to shop_path(shop) do %>
+      <%= shop.name %><br>
+    <% end %>
+  <% end %>
+  <%= link_to "全てのショップを見る", shops_path %><br>
+
+<h4>人気のブログ</h4>
+  <% @blog_ranks.each.with_index(1) do |blog, i| %>
+    第<%= i %>位<br>
+    <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
+    <%= link_to blog_path(blog) do %>
+      <%= blog.title %><br>
+    <% end %>
+  <% end %>
+  <%= link_to "全てのブログを見る", blogs_path %><br>

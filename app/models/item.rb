@@ -37,6 +37,10 @@ class Item < ApplicationRecord
       Item.where(["name LIKE?", "%#{search}%"])
     end
   end
+  
+  def self.create_item_ranks
+    Item.find(FavouriteItem.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+  end
 
   enum is_active: {true: true, false: false}
   

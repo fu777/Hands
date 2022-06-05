@@ -12,6 +12,7 @@ class Customer < ApplicationRecord
   validates :postal_code, presence: true
   validates :address, presence: true
   validates :telephone_number, presence: true
+  validates :email, uniqueness: true
 
   has_one :shop
   has_many :blogs, dependent: :destroy

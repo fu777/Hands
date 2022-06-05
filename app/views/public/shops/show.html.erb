@@ -1,8 +1,8 @@
-<div><%= image_tag @shop.get_shop_image(200,200) %></div>
-
+<div>
   <%= image_tag @shop.get_shop_icon_image(200,200) %><br>
   <%= @shop.name %><br>
   <%= @shop.introduction %><br>
+</div>
 
   <%= image_tag @shop.customer.get_image(200,200) %><br>
   <%= link_to my_page_path(@shop.customer.id) do %>

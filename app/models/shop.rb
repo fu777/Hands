@@ -4,7 +4,6 @@ class Shop < ApplicationRecord
   validates :introduction, presence: true
   validates :is_active, presence: true
 
-  default_scope -> { order(created_at: :desc) }
   belongs_to :customer
   has_many :items
   has_many :carts, dependent: :destroy
@@ -15,14 +14,6 @@ class Shop < ApplicationRecord
 
   has_one_attached :shop_image
   has_one_attached :shop_icon_image
-
-  def get_shop_image(width, height)
-    unless shop_image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      shop_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
-    end
-    shop_image.variant(resize_to_limit: [width, height]).processed
-  end
 
   def get_shop_icon_image(width, height)
     unless shop_icon_image.attached?
@@ -40,6 +31,10 @@ class Shop < ApplicationRecord
     if search
       Shop.where(["name LIKE?", "%#{search}%"])
     end
+  end
+  
+  def self.create_shop_ranks
+    Shop.find(FavouriteShop.group(:shop_id).order('count(shop_id) desc').limit(3).pluck(:shop_id))
   end
 
   enum is_active: {true: true, false: false}
