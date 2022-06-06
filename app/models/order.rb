@@ -29,7 +29,7 @@ class Order < ApplicationRecord
       shop_visitor_id: shop_id,
       order_id: id,
       visited_id: customer_id,
-      action: 'transaction_completed'
+      action: 'receipt_confirmation'
     )
     check.save if check.valid?
   end

@@ -12,9 +12,6 @@
   </head>
 
   <body>
-    <%= link_to root_path do %>
-      <h1>Hands</h1>
-    <% end %>
     <%= link_to 'ゲストログイン（閲覧用）', public_guest_sign_in_path, method: :post %>
     <%= link_to '管理者ゲストログイン（閲覧用）', admin_guest_sign_in_path, method: :post %>
     <% if customer_signed_in? %>

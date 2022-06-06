@@ -102,7 +102,9 @@ class Public::ItemsController < ApplicationController
       # @items = []
       # find_item(category)
     end
-  @true_items = @items.where(is_active: true)
+    if params[:is_active].present?
+      @true_items = @items.where(is_active: true)
+    end
   end
 
   def find_item(category)

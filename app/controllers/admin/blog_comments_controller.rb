@@ -4,7 +4,7 @@ class Admin::BlogCommentsController < ApplicationController
   before_action :authenticate_admin!, only: [:index, :destroy]
   
   def index
-    @blog_comments = BlogComment.all
+    @blog_comments = BlogComment.all.order(created_at: :desc)
   end
   
   def destroy

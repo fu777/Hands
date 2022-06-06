@@ -17,6 +17,14 @@ class Public::ShopOrdersController < ApplicationController
     unless current_customer.shop == @order.shop
       redirect_to root_path
     end
+    @order.shop.shop_passive_checks.where(action: 'transaction_completed').each do |check|
+      if check.action == 'transaction_completed'
+        check.update(checked: true)
+        if check.checked == true
+          check.destroy
+        end
+      end
+    end
   end
 
   def update

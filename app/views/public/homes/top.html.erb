@@ -27,3 +27,30 @@
     <% end %>
   <% end %>
   <%= link_to "全てのブログを見る", blogs_path %><br>
+
+<h4>新着作品</h4>
+  <% @item.each do |item| %>
+    <%= image_tag item.get_item_images.first.variant(resize: "100x100").processed %><br>
+    <%= link_to item_path(item) do %>
+      <%= item.name %><br>
+    <% end %>
+  <% end %>
+  <%= link_to "全ての作品を見る", items_path %><br>
+
+<h4>新着ショップ</h4>
+  <% @shop.each do |shop| %>
+    <%= image_tag shop.get_shop_icon_image(100,100) %><br>
+    <%= link_to shop_path(shop) do %>
+      <%= shop.name %><br>
+    <% end %>
+  <% end %>
+  <%= link_to "全てのショップを見る", shops_path %><br>
+
+<h4>新着ブログ</h4>
+  <% @blog.each do |blog| %>
+    <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
+    <%= link_to blog_path(blog) do %>
+      <%= blog.title %><br>
+    <% end %>
+  <% end %>
+  <%= link_to "全てのブログを見る", blogs_path %><br>
