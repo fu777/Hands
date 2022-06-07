@@ -1,25 +1,31 @@
-<h1>プロフィール情報編集</h1>
-
-<%= form_with model: @customer, url: profile_update_path(@customer_params), method: :patch do |f| %>
-
-<%= render 'customer_error', customer: @customer %>
-
-  <div class="field">
-    <%= f.label "アイコン写真" %>
-    <%= f.file_field :customer_image, accept: "image/*" %><br>
+<div class="container">
+  <div class="row col-12 d-flex justify-content-center my-3">
+    <h2 class="bg-light px-3">プロフィール情報編集</h2>
   </div>
-  
-  <div class="field">
-    <%= f.label "ユーザー名" %>
-    <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", placeholder: "ニックネーム" %>
+  <div class="row offset-3 my-3">
+    <div class="col-9">
+      <div class="my-3 ml-3">
+        <div class="form-group">
+        <%= form_with model: @customer, url: profile_update_path(@customer_params), method: :patch do |f| %>
+          <%= render 'customer_error', customer: @customer %>
+          <div class="row field my-3">
+            <%= f.label "アイコン写真", class: 'col-3' %>
+            <%= f.file_field :customer_image, accept: "image/*" %>
+          </div>
+          <div class="row field my-3">
+            <%= f.label "ユーザー名", class: 'col-3' %>
+            <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", placeholder: "ニックネーム" %>
+          </div>
+          <div class="row field my-3">
+            <%= f.label "自己紹介", class: 'col-3' %>
+            <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "よろしくお願いします。", size: "40x5" %>
+          </div>
+          <div class="actions col-10 my-2 text-center">
+            <%= f.submit "編集内容を保存", class: 'btn btn-outline-success rounded-pill mr-2' %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-  
-  <div class="field">
-    <%= f.label "自己紹介" %>
-    <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "よろしくお願いします。" %>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit "編集内容を保存" %>
-  </div>
-<% end %>
+</div>
