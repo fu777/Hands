@@ -15,12 +15,12 @@ class Shop < ApplicationRecord
   has_one_attached :shop_image
   has_one_attached :shop_icon_image
 
-  def get_shop_icon_image(width, height)
+  def get_shop_icon_image
     unless shop_icon_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       shop_icon_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    shop_icon_image.variant(resize_to_limit: [width, height]).processed
+    shop_icon_image
   end
 
   def favourited_shop_by?(customer)

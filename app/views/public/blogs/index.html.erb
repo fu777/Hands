@@ -1,24 +1,15 @@
 <%= render 'searches/blog_search', blog: @blog %>
 
 <%= link_to blogs_path do %>
-<label>すべて</label>
+  <label>すべて</label>
 <% end %>
 |
-<%= link_to blogs_path(item_id: nil) do %>
-<label>オリジナル</label>
+<%= link_to blogs_path(item_id: "nil") do %>
+  <label>オリジナル</label>
 <% end %>
 
 <br>
 
-<%= link_to "オリジナルのブログを投稿する", new_blog_path %>
+<%= link_to "オリジナルのブログを投稿する", new_blog_path %><br>
 
-<br>
-
-<% @blogs.each do |blog| %>
-  <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
-  <%= link_to blog_path(blog.id) do %>
-  <%= blog.title %>
-  <% end %><br>
-  <%= link_to "♥#{blog.favourite_blogs.count} いいね", blog_path(blog.id) %><br>
-  <%= link_to "#{blog.blog_comments.count} コメント", blog_path(blog.id) %><br>
-<% end %>
+<%= render 'blog_list', blogs: @blogs %>
