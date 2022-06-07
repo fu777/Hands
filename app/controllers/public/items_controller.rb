@@ -112,7 +112,6 @@ class Public::ItemsController < ApplicationController
       #子・孫レコードのidと一致するitemを取得
       item_array = Item.where(category_id: id).order(created_at: :desc)
       next unless item_array.present?
-
       item_array.each do |item|
         #一致して取得したitemを1つずつ取り出して@itemsに順次追加
         @items.push(item) if item.present?

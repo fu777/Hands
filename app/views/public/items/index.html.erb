@@ -1,15 +1,17 @@
-<%= render 'searches/item_search', item: @item %>
-
-<%= render partial: 'category_item', items: @items %>
-
-<%= link_to items_path do %>
-  <label>すべて</label>
-<% end %>
-|
-<%= link_to items_path(is_active: "true") do %>
-  <label>販売中</label>
-<% end %>
-
-<br>
-
-<%= render 'item_list', items: @items %>
+    <%= render 'searches/item_search', item: @item %>
+    <div class="col-3">
+      <%= render partial: 'category_item', items: @items %>
+    </div>
+    <div class="col-7"></div>
+    <div class="col-2 mt-3">
+      <%= link_to items_path do %>
+        <label>すべて</label>
+      <% end %>
+      |
+      <%= link_to items_path(is_active: "true") do %>
+        <label>販売中</label>
+      <% end %>
+    </div>
+    <%= render 'item_list', items: @items %>
+  </div>
+</div>

@@ -1,15 +1,11 @@
 <%= render 'item_search', item: @item %>
-
-<% if @items.present? %>
-  <% @items.each do |item| %>
-    <%= image_tag item.get_item_images.first.variant(resize: "150x150").processed %>
-    <br>
-    <%= link_to item_path(item.id) do %>
-    <%= item.name %>
-    <% end %><br>
-    ¥<%= item.price.to_s(:delimited) %><br>
-  <% end %>
-<% else %>
-  <p>作品の検索結果はありませんでした。</p>
-  <p>キーワードを変更してもう一度検索してください。</p>
-<% end %>
+    <% if @items.present? %>
+      <%= render 'public/items/item_list', items: @items %>
+    <% else %>
+    <div class="col-12 text-center m-3">
+      <p>作品の検索結果はありませんでした。</p>
+      <p>キーワードを変更してもう一度検索してください。</p>
+    </div>
+    <% end %>
+  </div>
+</div>

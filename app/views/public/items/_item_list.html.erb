@@ -1,7 +1,8 @@
+
     <div class="col-12 card-list-container">
       <div class="row d-flex justify-content-center">
       <% items.each do |item| %>
-        <div class="card mx-3 col-3 shadow">
+        <div class="card m-3 col-3 shadow">
         <%= link_to item_path(item.id) do %>
           <%= image_tag item.get_item_images.first.variant(gravity: :center, resize: "300x230^", crop: "300x230+0+0").processed, class: "card-img-top" %>
         <% end %>
