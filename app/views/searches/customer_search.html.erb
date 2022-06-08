@@ -1,13 +1,14 @@
 <%= render 'customer_search', customer: @customer %>
+    <% if @customers.present? %>
+    <div class="col-12 card-list-container">
+      <div class="row d-flex justify-content-start">
+      <%= render 'public/customers/customer_list', customers: @customers %>
+    <% else %>
+    <div class="col-12 text-center m-3">
+      <p>ユーザーの検索結果はありませんでした。</p>
+      <p>キーワードを変更してもう一度検索してください。</p>
+    </div>
+    <% end %>
+  </div>
+</div>
 
-<% if @customers.present? %>
-  <% @customers.each do |customer| %>
-    <%= image_tag customer.get_image(100,100) %><br>
-    <%= link_to my_page_path(customer) do %>
-    <%= customer.user_name %>
-    <% end %><br>
-  <% end %>
-<% else %>
-  <p>ユーザーの検索結果はありませんでした。</p>
-  <p>キーワードを変更してもう一度検索してください。</p>
-<% end %>

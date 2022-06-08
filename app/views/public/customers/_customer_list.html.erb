@@ -1,0 +1,14 @@
+      <% @customers.each do |customer| %>
+        <div class="col-2 d-flex justify-content-center">
+          <div class="mx-auto my-3">
+          <%= link_to my_page_path(customer), class: "text-dark" do %>
+            <%= image_tag customer.get_image.variant(gravity: :center, resize: "100x100^", crop: "100x100+0+0").processed, class: 'rounded-circle mx-auto' %>
+            <div class="row justify-content-center">
+              <%= customer.user_name %>
+          <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>

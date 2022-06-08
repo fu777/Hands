@@ -2,7 +2,7 @@
   <%= image_tag item_image, size: "300x300" %>
 <% end %><br>
 
-<%= image_tag @item.shop.get_shop_icon_image(100,100) %><br>
+<%= image_tag @item.shop.get_shop_icon_image.variant(resize: "100x100").processed %><br>
 <%= link_to shop_path(@item.shop.id) do %>
   <%= @item.shop.name %><br>
 <% end %>

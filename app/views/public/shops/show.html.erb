@@ -1,5 +1,5 @@
 <div>
-  <%= image_tag @shop.get_shop_icon_image(200,200) %><br>
+  <%= image_tag @shop.get_shop_icon_image.variant(resize: "150x150").processed %><br>
   <%= @shop.name %><br>
   <%= @shop.introduction %><br>
 </div>

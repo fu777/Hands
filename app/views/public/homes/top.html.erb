@@ -33,7 +33,7 @@
               <div class="row">
                 <div class="col-3 text-center">
                   <%= link_to shop_path(item.shop) do %>
-                    <%= image_tag item.shop.get_shop_icon_image.variant(resize: "60x60").processed, class: "rounded-circle" %>
+                    <%= image_tag item.shop.get_shop_icon_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
                   <% end %>
                 </div>
                 <div class="col-8 text-center">
@@ -89,7 +89,7 @@
               <div class="row">
                 <div class="col-3 text-center">
                   <%= link_to my_page_path(shop.customer) do %>
-                    <%= image_tag shop.customer.get_image(50,50), class: "rounded-circle" %>
+                    <%= image_tag shop.customer.get_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
                   <% end %>
                 </div>
                 <div class="col-8 text-center">
@@ -147,7 +147,7 @@
               <div class="row">
                 <div class="col-3 text-center">
                   <%= link_to my_page_path(blog.customer) do %>
-                    <%= image_tag blog.customer.get_image(50,50), class: "rounded-circle" %>
+                    <%= image_tag blog.customer.get_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
                   <% end %>
                 </div>
                 <div class="col-8 text-center">

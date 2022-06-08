@@ -36,12 +36,12 @@ class Customer < ApplicationRecord
   
   has_one_attached :customer_image
 
-  def get_image(width, height)
+  def get_image
     unless customer_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       customer_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    customer_image.variant(resize_to_limit: [width, height]).processed
+    customer_image
   end
   
   def address_display

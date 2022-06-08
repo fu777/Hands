@@ -106,7 +106,8 @@ class Public::CustomersController < ApplicationController
                                      :postal_code,
                                      :address,
                                      :telephone_number,
-                                     :is_deleted)
+                                     :is_deleted,
+                                     :customer_image)
   end
 
 end

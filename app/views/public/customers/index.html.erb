@@ -1,9 +1,7 @@
-<%= render 'searches/customer_search', customer: @customer %>
-
-  <% @customers.each do |customer| %>
-    <%= image_tag customer.get_image(100,100) %><br>
-    <%= link_to my_page_path(customer) do %>
-    <%= customer.user_name %>
-    <% end %><br>
-  <% end %>
+    <%= render 'searches/customer_search', customer: @customer %>
+    <div class="col-12 container">
+      <div class="row d-flex justify-content-start">
+      <%= render 'public/customers/customer_list', customers: @customers %>
+  </div>
+</div>
   
