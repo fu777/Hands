@@ -1,13 +1,13 @@
 <%= render 'blog_search', blog: @blog %>
-
-<% if @blogs.present? %>
-  <% @blogs.each do |blog| %>
-    <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %>
-    <%= link_to blog_path(blog.id) do %>
-    <%= blog.name %><br>
-    <% end %><br>
-  <% end %>
-<% else %>
-  <p>ブログの検索結果はありませんでした。</p>
-  <p>キーワードを変更してもう一度検索してください。</p>
-<% end %>
+    <% if @blogs.present? %>
+    <div class="col-12 card-list-container">
+      <div class="row d-flex justify-content-start">
+      <%= render 'public/blogs/blog_list', blogs: @blogs %>
+    <% else %>
+    <div class="col-12 text-center m-3">
+      <p>ブログの検索結果はありませんでした。</p>
+      <p>キーワードを変更してもう一度検索してください。</p>
+    </div>
+    <% end %>
+  </div>
+</div>
