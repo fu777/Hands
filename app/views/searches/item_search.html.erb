@@ -1,5 +1,7 @@
 <%= render 'item_search', item: @item %>
     <% if @items.present? %>
+    <div class="col-12 card-list-container">
+      <div class="row d-flex justify-content-start">
       <%= render 'public/items/item_list', items: @items %>
     <% else %>
     <div class="col-12 text-center m-3">

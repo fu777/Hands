@@ -1,4 +1,7 @@
-<%= render 'searches/shop_search', shop: @shop %>
-
-<%= render 'shop_list', shops: @shops %>
+    <%= render 'searches/shop_search', shop: @shop %>
+    <div class="col-12 card-list-container">
+      <div class="row d-flex justify-content-start">
+    <%= render 'shop_list', shops: @shops %>
+  </div>
+</div>
   
