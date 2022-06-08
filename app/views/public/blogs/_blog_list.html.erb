@@ -1,43 +1,43 @@
-    <div class="col-12 card-list-container">
-      <div class="row d-flex justify-content-center">
       <% blogs.each do |blog| %>
-        <div class="card mx-3 col-3 shadow">
-          <%= link_to blog_path(blog.id) do %>
-            <%= image_tag blog.get_blog_images.first.variant(gravity: :center, resize: "300x230^", crop: "300x230+0+0").processed, class: "card-img-top" %>
-          <% end %>
-        <% if customer_signed_in? %>
-          <% if blog.was_favourite_blog_by?(current_customer) %>
-            <div class="favourited_heart btn btn-light rounded-circle">
-              <%= link_to blog_favourite_blogs_path(blog), class: "heart", method: :delete do %>
-                <i class="fas fa-heart"></i>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="favourited_heart btn btn-light rounded-circle">
-              <%= link_to blog_favourite_blogs_path(blog), class: "text-secondary", method: :post do %>
-                <i class="fas fa-heart"></i>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-3 text-center">
-                <%= link_to my_page_path(blog.customer), class: "text-dark" do %>
-                  <%= image_tag blog.customer.get_image(50,50), class: "rounded-circle mt-3" %>
-                <% end %>
-              </div>
-              <div class="col-8 text-center">
-                <%= link_to blog_path(blog), class: "text-dark" do %>
-                <p class="card-title">
-                  <%= blog.title %>
-                </p>
-                <% end %>
-                <p class="card-text">
-                  <%= link_to my_page_path(blog.customer), class: "text-dark" do %>
-                    <%= blog.customer.user_name %>
+        <div class="col-3">
+          <div class="card mx-auto my-3 shadow">
+            <%= link_to blog_path(blog.id) do %>
+              <%= image_tag blog.get_blog_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
+            <% end %>
+            <% if customer_signed_in? %>
+              <% if blog.was_favourite_blog_by?(current_customer) %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to blog_favourite_blogs_path(blog), class: "heart", method: :delete do %>
+                    <i class="fas fa-heart"></i>
                   <% end %>
-                </p>
+                </div>
+              <% else %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to blog_favourite_blogs_path(blog), class: "text-secondary", method: :post do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-3 text-center">
+                  <%= link_to my_page_path(blog.customer) do %>
+                    <%= image_tag blog.customer.get_image(50,50), class: "rounded-circle" %>
+                  <% end %>
+                </div>
+                <div class="col-8 text-center">
+                  <%= link_to blog_path(blog), class: "text-dark" do %>
+                  <p class="card-title">
+                    <%= blog.title %>
+                  </p>
+                  <% end %>
+                  <p class="card-text">
+                    <%= link_to my_page_path(blog.customer), class: "text-dark" do %>
+                      <%= blog.customer.user_name %>
+                    <% end %>
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -1,33 +1,43 @@
-    <div class="col-12 card-list-container">
-      <div class="row d-flex justify-content-center">
       <% shops.each do |shop| %>
-        <div class="card mx-3 col-3 shadow">
-          <%= link_to shop_path(shop) do %>
-            <%= image_tag shop.get_shop_icon_image.variant(gravity: :center, resize: "300x230^", crop: "300x230+0+0").processed, class: "card-img-top" %>
-          <% end %>
-        <% if customer_signed_in? %>
-          <% if shop.favourited_shop_by?(current_customer) %>
-            <div class="favourited_heart btn btn-light rounded-circle">
-              <%= link_to shop_favourite_shops_path(shop), class: "heart", method: :delete do %>
-                <i class="fas fa-heart"></i>
+        <div class="col-3">
+          <div class="card mx-auto my-3 shadow">
+            <%= link_to shop_path(shop) do %>
+              <%= image_tag shop.get_shop_icon_image.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
+            <% end %>
+            <% if customer_signed_in? %>
+              <% if shop.favourited_shop_by?(current_customer) %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to shop_favourite_shops_path(shop), class: "heart", method: :delete do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to shop_favourite_shops_path(shop), class: "text-secondary", method: :post do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                </div>
               <% end %>
-            </div>
-          <% else %>
-            <div class="favourited_heart btn btn-light rounded-circle">
-              <%= link_to shop_favourite_shops_path(shop), class: "text-secondary", method: :post do %>
-                <i class="fas fa-heart"></i>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12 text-center m-auto">
-                <%= link_to shop_path(shop), class: "text-dark" do %>
-                <p class="card-title mt-4">
-                  <%= shop.name %>
-                </p>
-                <% end %>
+            <% end %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-3 text-center">
+                  <%= link_to my_page_path(shop.customer) do %>
+                    <%= image_tag shop.customer.get_image(50,50), class: "rounded-circle" %>
+                  <% end %>
+                </div>
+                <div class="col-8 text-center">
+                  <%= link_to shop_path(shop), class: "text-dark" do %>
+                  <p class="card-title">
+                    <%= shop.name %>
+                  </p>
+                  <% end %>
+                  <p class="card-text">
+                    <%= link_to my_page_path(shop.customer), class: "text-dark" do %>
+                      <%= shop.customer.user_name %>
+                    <% end %>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
