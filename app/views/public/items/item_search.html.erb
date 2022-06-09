@@ -3,11 +3,11 @@
     <div class="col-12 text-center">
       <h4 class="my-3"><i class="fas fa-gem"></i> 作品一覧</h4>
     </div>
-    <div class="col-3">
+    <div class="col-lg-3 col-sm-6">
       <%= render partial: 'category_item', items: @items %>
     </div>
-    <div class="col-7"></div>
-    <div class="col-2 mt-3">
+    <div class="col-lg-7 col-sm-2"></div>
+    <div class="col-lg-2 col-sm-4 mt-3 text-right">
       <%= link_to item_search_item_path do %>
         <label>すべて</label>
       <% end %>
@@ -20,26 +20,12 @@
     <div class="col-12 card-list-container">
       <div class="row d-flex justify-content-start">
       <% @true_items.each do |item| %>
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-6">
           <div class="card mx-auto my-3 shadow">
           <%= link_to item_path(item.id) do %>
             <%= image_tag item.get_item_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
           <% end %>
-          <% if customer_signed_in? %>
-            <% if item.favourited_item_by?(current_customer) %>
-              <div class="favourited_heart btn btn-light rounded-circle">
-                <%= link_to item_favourite_items_path(item), class: "heart", method: :delete do %>
-                  <i class="fas fa-heart"></i>
-                <% end %>
-              </div>
-            <% else %>
-              <div class="favourited_heart btn btn-light rounded-circle">
-                <%= link_to item_favourite_items_path(item), class: "text-secondary", method: :post do %>
-                  <i class="fas fa-heart"></i>
-                <% end %>
-              </div>
-            <% end %>
-          <% end %>
+          <%= render 'public/favourite_items/favourite_item', item: item %>
           <div class="card-body">
             <div class="row">
               <div class="col-3 text-center">

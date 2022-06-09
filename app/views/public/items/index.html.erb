@@ -1,9 +1,9 @@
     <%= render 'searches/item_search', item: @item %>
-    <div class="col-3">
+    <div class="col-lg-3 col-sm-6">
       <%= render partial: 'category_item', items: @items %>
     </div>
-    <div class="col-7"></div>
-    <div class="col-2 mt-3">
+    <div class="col-lg-7 col-sm-2"></div>
+    <div class="col-lg-2 col-sm-4 mt-3 text-right">
       <%= link_to items_path do %>
         <label>すべて</label>
       <% end %>

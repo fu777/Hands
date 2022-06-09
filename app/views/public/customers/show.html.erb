@@ -1,68 +1,77 @@
 <div class="container">
   <div class="row">
-    <div class="col-4 d-flex justify-content-center mt-3">
-      <div class="box bg-light">
-        <% if @customer == current_customer %>
-        <ul>
-          <li class="text-center mt-3 mb-2">
-            マイページ
-          </li>
-          <li>
-            <div class="d-flex justify-content-center m-2">
-              <%= form_with model: @relationships, url: followers_path, method: :get do |f| %>
-                <%= f.hidden_field :customer_id, :value => @customer.id %>
-                <%= f.submit "フォロー", class: 'mr-1 btn btn-outline-warning' %>
-              <% end %>
-              <%= form_with model: @relationships, url: followings_path, method: :get do |f| %>
-                <%= f.hidden_field :customer_id, :value => @customer.id %>
-                <%= f.submit "フォロワー", class: 'ml-1 btn btn-outline-warning' %>
-              <% end %>
-            </div>
-          </li>
-          <li class="li_list">
-            <%= link_to "プロフィール情報を編集する", profile_edit_path, class: 'li_btn' %>
-          </li>
-          <li class="li_list">
-            <%= link_to "お気に入りのショップ一覧", favourite_shop_path, class: 'li_btn' %>
-          </li>
-          <li class="li_list">
-            <%= link_to "お気に入りの作品一覧", favourite_item_path, class: 'li_btn' %>
-          </li>
-          <li class="li_list">
-            <%= link_to "いいねしたブログ一覧", favourite_blog_path, class: 'li_btn' %>
-          </li>
-          <li class="li_list">
-            <%= link_to "注文履歴一覧", orders_path, class: 'li_btn' %>
-          </li>
-          <li class="li_list">
-            <div class="d-flex justify-content-start">
-              <%= link_to "やること一覧", checks_path, class: 'li_btn mr-3' %>
-              <% unless @checks.count == 0 %>
-                <p class="check-radius text-center"><%= @checks.count %></p>
-              <% end %>
-            </div>
-          </li>
-          <li class="li_list">
-            <div class="d-flex justify-content-start">
-              <%= link_to "通知一覧", notices_path, class: 'li_btn mr-3' %>
-              <% unless @notices.count == 0 %>
-                <p class="check-radius text-center"><%= @notices.count %></p>
-              <% end %>
-            </div>
-          </li>
-          <li class="text-center">
-            <% if current_customer.shop.blank? %>
-              <%= form_with model: @shop, url: new_shop_path, method: :get do |f| %>
-                <%= f.hidden_field :customer_id, :value => current_customer.id %>
-                <%= f.submit "ショップを開設する", class: 'm-2 orange_btn' %>
-              <% end %>
-            <% end %>
-          </li>
-        </ul>
-        <% end %>
-      </div>
+    <% if @customer == current_customer %>
+    <div class="col-lg-4">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <div class="box bg-light mt-3 d-flex justify-content-center">
+            <ul>
+              <li class="text-center mt-3 mb-2">
+                マイページ
+              </li>
+              <li>
+                <div class="d-flex justify-content-center m-2">
+                  <%= form_with model: @relationships, url: followers_path, method: :get do |f| %>
+                    <%= f.hidden_field :customer_id, :value => @customer.id %>
+                    <%= f.submit "フォロー", class: 'mr-1 btn btn-outline-warning' %>
+                  <% end %>
+                  <%= form_with model: @relationships, url: followings_path, method: :get do |f| %>
+                    <%= f.hidden_field :customer_id, :value => @customer.id %>
+                    <%= f.submit "フォロワー", class: 'ml-1 btn btn-outline-warning' %>
+                  <% end %>
+                </div>
+              </li>
+              <li class="li_list">
+                <%= link_to "プロフィール情報を編集する", profile_edit_path, class: 'li_btn' %>
+              </li>
+              <li class="li_list">
+                <%= link_to "お気に入りのショップ一覧", favourite_shop_path, class: 'li_btn' %>
+              </li>
+              <li class="li_list">
+                <%= link_to "お気に入りの作品一覧", favourite_item_path, class: 'li_btn' %>
+              </li>
+              <li class="li_list">
+                <%= link_to "いいねしたブログ一覧", favourite_blog_path, class: 'li_btn' %>
+              </li>
+              <li class="li_list">
+                <%= link_to "注文履歴一覧", orders_path, class: 'li_btn' %>
+              </li>
+              <li class="li_list">
+                <div class="d-flex justify-content-start">
+                  <%= link_to "やること一覧", checks_path, class: 'li_btn mr-3' %>
+                  <% unless @checks.count == 0 %>
+                    <p class="check-radius text-center"><%= @checks.count %></p>
+                  <% end %>
+                </div>
+              </li>
+              <li class="li_list">
+                <div class="d-flex justify-content-start">
+                  <%= link_to "通知一覧", notices_path, class: 'li_btn mr-3' %>
+                  <% unless @notices.count == 0 %>
+                    <p class="check-radius text-center"><%= @notices.count %></p>
+                  <% end %>
+                </div>
+              </li>
+              <li class="text-center">
+                <% if current_customer.shop.blank? %>
+                  <%= form_with model: @shop, url: new_shop_path, method: :get do |f| %>
+                    <%= f.hidden_field :customer_id, :value => current_customer.id %>
+                    <%= f.submit "ショップを開設する", class: 'm-2 orange_btn' %>
+                  <% end %>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
     <div class="col-8 mt-3">
+    <% else %>
+    <div class="col-12 d-flex justify-content-center mt-3">
+    <% end %>
       <div class="text-center">
       <%= image_tag @customer.get_image.variant(gravity: :center, resize: "200x200^", crop: "200x200+0+0").processed, class: 'rounded-circle' %><br>
       <h4 class="m-2"><%= @customer.user_name %></h4>
@@ -70,72 +79,70 @@
       <div class="mt-2 mb-3">
         <% unless @customer.shop.blank? %>
           <%= @customer.user_name %>さんのショップ:
-          <%= link_to shop_path(@shop), class: 'ml-1 orange_btn' do %>
+          <%= link_to shop_path(@shop), class: 'ml-1 orange_out_btn' do %>
             <%= @shop.name %>
           <% end %>
         <% end %>
       </div>
       <div class="m-2">
-        <%= link_to "#{@customer.user_name}さんのブログ一覧を見る", customer_blog_path(@customer), class: 'orange_btn' %>
+        <%= link_to "#{@customer.user_name}さんのブログ一覧を見る", customer_blog_path(@customer), class: 'btn btn-outline-success' %>
+      </div>
+      <div class="m-2">
+        <% unless current_customer == @customer %>
+          <% if current_customer.following?(@customer) %>
+            <%= form_for(current_customer.relationships.find_by(follow_id: @customer.id), html: { method: :delete }) do |f| %>
+              <%= hidden_field_tag :follow_id, @customer.id %>
+              <%= f.submit 'フォローを外す', class: 'btn btn-outline-info' %>
+            <% end %>
+          <% else %>
+            <%= form_for(current_customer.relationships.build) do |f| %>
+              <%= hidden_field_tag :follow_id, @customer.id %>
+              <%= f.submit 'フォロー', class: 'btn btn-outline-info' %>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
       <% if @customer == current_customer %>
       <div class="col-12 d-flex justify-content-center mt-4 mb-2">
-        <div class="offset-1"></div>
-        <h4 class="col-3 bg-light">会員登録情報</h4>
-        <div class="col-3"></div>
-        <div class="col-5">
+        <div class="offset-lg-1"></div>
+        <h4 class="col-lg-5 mr-auto col-sm-8 col-md-7 text-center bg-light">会員登録情報</h4>
+        <div class="col-lg-5 col-sm-8 col-md-7 text-center">
           <%= link_to "会員情報を編集する", edit_path(current_customer), class: 'btn btn-outline-warning' %>
         </div>
       </div>
-        <div class="col-12 d-flex justify-content-center">
-          <div class="col-10">
-            <table class="table table-bordered border-dark">
-              <tbody>
-                <tr>
-                  <th class="table-bordered bg-light">氏名</th>
-                  <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-                </tr>
-                <tr>
-                  <th class="table-bordered bg-light">カナ</th>
-                  <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
-                </tr>
-                <tr>
-                  <th class="table-bordered bg-light">郵便番号</th>
-                  <td><%= @customer.postal_code %></td>
-                </tr>
-                <tr>
-                  <th class="table-bordered bg-light">住所</th>
-                  <td><%= @customer.address %></td>
-                </tr>
-                <tr>
-                  <th class="table-bordered bg-light">電話番号</th>
-                  <td><%= @customer.telephone_number %></td>
-                </tr>
-                <tr>
-                  <th class="table-bordered bg-light">メールアドレス</th>
-                  <td><%= @customer.email %></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <div class="col-12 d-flex justify-content-center">
+        <div class="col-lg-10 col-sm-12">
+          <table class="table table-bordered border-dark">
+            <tbody>
+              <tr>
+                <th class="table-bordered bg-light">氏名</th>
+                <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+              </tr>
+              <tr>
+                <th class="table-bordered bg-light">カナ</th>
+                <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+              </tr>
+              <tr>
+                <th class="table-bordered bg-light">郵便番号</th>
+                <td><%= @customer.postal_code %></td>
+              </tr>
+              <tr>
+                <th class="table-bordered bg-light">住所</th>
+                <td><%= @customer.address %></td>
+              </tr>
+              <tr>
+                <th class="table-bordered bg-light">電話番号</th>
+                <td><%= @customer.telephone_number %></td>
+              </tr>
+              <tr>
+                <th class="table-bordered bg-light">メールアドレス</th>
+                <td><%= @customer.email %></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-  <% end %>
-
-
-<% unless current_customer == @customer %>
-  <% if current_customer.following?(@customer) %>
-    <%= form_for(current_customer.relationships.find_by(follow_id: @customer.id), html: { method: :delete }) do |f| %>
-      <%= hidden_field_tag :follow_id, @customer.id %>
-      <%= f.submit 'フォローを外す' %>
-    <% end %>
-  <% else %>
-    <%= form_for(current_customer.relationships.build) do |f| %>
-      <%= hidden_field_tag :follow_id, @customer.id %>
-      <%= f.submit 'フォロー' %>
-    <% end %>
-  <% end %>
-<% end %>
-
+      </div>
+      <% end %>
     </div>
-    </div>
+  </div>
+</div>

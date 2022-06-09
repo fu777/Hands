@@ -67,7 +67,7 @@ default_scope -> { order(created_at: :desc) }
   end
   
   def self.create_blog_ranks
-    Blog.find(FavouriteBlog.group(:blog_id).order('count(blog_id) desc').limit(3).pluck(:blog_id))
+    Blog.find(FavouriteBlog.group(:blog_id).order('count(blog_id) desc').limit(4).pluck(:blog_id))
   end
   
 end

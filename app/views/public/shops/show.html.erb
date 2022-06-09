@@ -1,10 +1,38 @@
+<div class="container">
+  <div class="row">
+  <% if customer_signed_in? %>
+  <% end %>
+    <% if @customer == current_customer %>
+    <% end %>
+    <div class="col-4 d-flex justify-content-center mt-3">
+      <div class="box bg-light">
+        <ul>
+          <li class="text-center mt-3 mb-2">
+            マイショップ
+          </li>
+          <li class="li_list">
+            <%= link_to "ショップ情報を編集する", edit_shop_path, class: 'li_btn' %>
+          </li>
+          <li class="li_list">
+            <%= form_with model: @item, url: new_item_path, method: :get do |f| %>
+              <%= f.hidden_field :shop_id, :value => @shop.id %>
+              <%= f.submit "作品を登録する", class: 'li_btn' %>
+            <% end %>
+          </li>
+          <li class="li_list">
+            <%= link_to "いいねしたブログ一覧", favourite_blog_path, class: 'li_btn' %>
+          </li>
+          <li class="li_list">
+            <%= link_to "注文履歴一覧", orders_path, class: 'li_btn' %>
+          </li>
+
 <div>
   <%= image_tag @shop.get_shop_icon_image.variant(resize: "150x150").processed %><br>
   <%= @shop.name %><br>
   <%= @shop.introduction %><br>
 </div>
 
-  <%= image_tag @shop.customer.get_image(200,200) %><br>
+  <%= image_tag @shop.customer.get_image.variant(gravity: :center, resize: "200x200^", crop: "200x200+0+0").processed %><br>
   <%= link_to my_page_path(@shop.customer.id) do %>
     <%= @shop.customer.user_name %><br>
   <% end %>
@@ -29,6 +57,8 @@
     <% end %>
 
   <% end %>
+  
+<%= render 'public/favourite_shops/favourite_shop', shop: @shop %>
 
   <div>
     <% if @shop.favourited_shop_by?(current_customer) %>

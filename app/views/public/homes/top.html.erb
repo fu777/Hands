@@ -4,9 +4,9 @@
       <h4 class="my-3"><i class="fas fa-star"></i>人気の作品</h4>
     </div>
     <div class="col-12 card-list-container">
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-start">
       <% @item_ranks.each.with_index(1) do |item, i| %>
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-6">
           <div class="card shadow mx-auto">
             <%= link_to item_path(item.id) do %>
               <%= image_tag item.get_item_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
@@ -14,21 +14,7 @@
             <div class="rank bg-light rounded-circle">
               <p class="rank_number text-center m-auto p-auto"><%= i %></p>
             </div>
-          <% if customer_signed_in? %>
-            <% if item.favourited_item_by?(current_customer) %>
-              <div class="favourited_heart btn btn-light rounded-circle">
-                <%= link_to item_favourite_items_path(item), class: "heart", method: :delete do %>
-                  <i class="fas fa-heart"></i>
-                <% end %>
-              </div>
-            <% else %>
-              <div class="favourited_heart btn btn-light rounded-circle">
-                <%= link_to item_favourite_items_path(item), class: "text-secondary", method: :post do %>
-                  <i class="fas fa-heart"></i>
-                <% end %>
-              </div>
-            <% end %>
-          <% end %>
+            <%= render 'public/favourite_items/favourite_item', item: item %>
             <div class="card-body">
               <div class="row">
                 <div class="col-3 text-center">
@@ -60,9 +46,9 @@
       <h4 class="my-3"><i class="fas fa-star"></i>人気のショップ</h4>
     </div>
     <div class="col-12 card-list-container">
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center scroll">
       <% @shop_ranks.each.with_index(1) do |shop, i| %>
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-6">
           <div class="card mx-auto shadow">
             <%= link_to shop_path(shop) do %>
               <%= image_tag shop.get_shop_icon_image.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
@@ -70,21 +56,7 @@
             <div class="rank bg-light rounded-circle">
               <p class="rank_number text-center m-auto p-auto"><%= i %></p>
             </div>
-          <% if customer_signed_in? %>
-            <% if shop.favourited_shop_by?(current_customer) %>
-              <div class="favourited_heart btn btn-light rounded-circle">
-                <%= link_to shop_favourite_shops_path(shop), class: "heart", method: :delete do %>
-                  <i class="fas fa-heart"></i>
-                <% end %>
-              </div>
-            <% else %>
-              <div class="favourited_heart btn btn-light rounded-circle">
-                <%= link_to shop_favourite_shops_path(shop), class: "text-secondary", method: :post do %>
-                  <i class="fas fa-heart"></i>
-                <% end %>
-              </div>
-            <% end %>
-          <% end %>
+            <%= render 'public/favourite_shops/favourite_shop', shop: shop %>
             <div class="card-body">
               <div class="row">
                 <div class="col-3 text-center">
@@ -120,7 +92,7 @@
     <div class="col-12 card-list-container">
       <div class="row d-flex justify-content-center">
       <% @blog_ranks.each.with_index(1) do |blog, i| %>
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-6">
           <div class="card mx-auto shadow">
             <%= link_to blog_path(blog.id) do %>
               <%= image_tag blog.get_blog_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
@@ -128,21 +100,7 @@
             <div class="rank bg-light rounded-circle">
               <p class="rank_number text-center m-auto p-auto"><%= i %></p>
             </div>
-            <% if customer_signed_in? %>
-              <% if blog.was_favourite_blog_by?(current_customer) %>
-                <div class="favourited_heart btn btn-light rounded-circle">
-                  <%= link_to blog_favourite_blogs_path(blog), class: "heart", method: :delete do %>
-                    <i class="fas fa-heart"></i>
-                  <% end %>
-                </div>
-              <% else %>
-                <div class="favourited_heart btn btn-light rounded-circle">
-                  <%= link_to blog_favourite_blogs_path(blog), class: "text-secondary", method: :post do %>
-                    <i class="fas fa-heart"></i>
-                  <% end %>
-                </div>
-              <% end %>
-            <% end %>
+            <%= render 'public/favourite_blogs/favourite_blog', blog: blog %>
             <div class="card-body">
               <div class="row">
                 <div class="col-3 text-center">

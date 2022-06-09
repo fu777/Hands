@@ -1,0 +1,15 @@
+            <% if customer_signed_in? %>
+              <% if blog.was_favourite_blog_by?(current_customer) %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to blog_favourite_blogs_path(blog), class: "heart", method: :delete do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to blog_favourite_blogs_path(blog), class: "text-secondary", method: :post do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>

@@ -1,24 +1,10 @@
       <% items.each do |item| %>
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-6">
           <div class="card mx-auto my-3 shadow">
             <%= link_to item_path(item.id) do %>
               <%= image_tag item.get_item_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
             <% end %>
-            <% if customer_signed_in? %>
-              <% if item.favourited_item_by?(current_customer) %>
-                <div class="favourited_heart btn btn-light rounded-circle">
-                  <%= link_to item_favourite_items_path(item), class: "heart", method: :delete do %>
-                    <i class="fas fa-heart"></i>
-                  <% end %>
-                </div>
-              <% else %>
-                <div class="favourited_heart btn btn-light rounded-circle">
-                  <%= link_to item_favourite_items_path(item), class: "text-secondary", method: :post do %>
-                    <i class="fas fa-heart"></i>
-                  <% end %>
-                </div>
-              <% end %>
-            <% end %>
+            <%= render 'public/favourite_items/favourite_item', item: item %>
             <div class="card-body">
               <div class="row">
                 <div class="col-3 text-center">

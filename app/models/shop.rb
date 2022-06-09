@@ -34,7 +34,7 @@ class Shop < ApplicationRecord
   end
   
   def self.create_shop_ranks
-    Shop.find(FavouriteShop.group(:shop_id).order('count(shop_id) desc').limit(3).pluck(:shop_id))
+    Shop.find(FavouriteShop.group(:shop_id).order('count(shop_id) desc').limit(4).pluck(:shop_id))
   end
 
   enum is_active: {true: true, false: false}
