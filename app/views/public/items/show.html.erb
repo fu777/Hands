@@ -80,7 +80,7 @@
             score: <%= review.star %>,
           });
         </script>
-        <%= image_tag review.customer.get_image(50,50) %><br>
+        <%= image_tag review.customer.get_image %><br>
         <%= link_to my_page_path(review.customer.id) do %>
           <%= review.customer.user_name %>
         <% end %>

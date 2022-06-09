@@ -2,25 +2,25 @@
   <div class="row col-12 d-flex justify-content-center my-3">
     <h2 class="bg-light px-3">プロフィール情報編集</h2>
   </div>
-  <div class="row offset-3 my-3">
-    <div class="col-9">
+  <div class="row offset-lg-3 my-3">
+    <div class="col-lg-9 col-sm-12">
       <div class="my-3 ml-3">
         <div class="form-group">
         <%= form_with model: @customer, url: profile_update_path(@customer_params), method: :patch do |f| %>
           <%= render 'customer_error', customer: @customer %>
           <div class="row field my-3">
-            <%= f.label "アイコン写真", class: 'col-3' %>
+            <%= f.label "アイコン写真", class: 'col-lg-3 col-sm-3' %>
             <%= f.file_field :customer_image, accept: "image/*" %>
           </div>
           <div class="row field my-3">
-            <%= f.label "ユーザー名", class: 'col-3' %>
+            <%= f.label "ユーザー名", class: 'col-lg-3 col-sm-3' %>
             <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", placeholder: "ニックネーム" %>
           </div>
           <div class="row field my-3">
-            <%= f.label "自己紹介", class: 'col-3' %>
+            <%= f.label "自己紹介", class: 'col-lg-3 col-sm-3' %>
             <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "よろしくお願いします。", size: "40x5" %>
           </div>
-          <div class="actions col-10 my-2 text-center">
+          <div class="actions col-lg-10 col-sm-12 my-2 text-center">
             <%= f.submit "編集内容を保存", class: 'btn btn-outline-success rounded-pill mr-2' %>
           </div>
         <% end %>
