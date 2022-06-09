@@ -3,7 +3,7 @@
 
       <span>
         <%= link_to shop_path(check.shop_visitor) do %>
-          <%= image_tag check.shop_visitor.get_shop_icon_image(50,50), class: "icon_mini" %><br>
+          <%= image_tag check.shop_visitor.get_shop_icon_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle mx-auto" %><br>
         <% end %>
         <strong>
           <%= check.shop_visitor.name %>

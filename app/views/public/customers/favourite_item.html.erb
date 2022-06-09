@@ -1,9 +1,57 @@
-<h1>お気に入りの作品一覧(<%= @favourite_items.count %>件)</h1>
-
-  <% @favourite_items.each do |favourite_item| %>
-    <%= image_tag favourite_item.item.get_item_images.first.variant(resize: "150x150").processed %><br>
-    <%= link_to item_path(favourite_item.item.id) do %>
-        <%= favourite_item.item.name %><br>
-    <% end %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h4 class="my-3"><i class="fas fa-gem"></i> お気に入りの作品一覧(<%= @favourite_items.count %>件)</h4>
+    </div>
+    <div class="col-12 card-list-container">
+      <div class="row d-flex justify-content-start">
+      <% @favourite_items.each do |favourite_item| %>
+        <div class="col-lg-3 col-sm-6">
+          <div class="card mx-auto my-3 shadow">
+            <%= link_to item_path(favourite_item.item) do %>
+              <%= image_tag favourite_item.item.get_item_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
+            <% end %>
+          <% if customer_signed_in? %>
+            <% unless favourite_item.item.shop.customer == current_customer %>
+              <% if favourite_item.item.favourited_item_by?(current_customer) %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to item_favourite_items_path(favourite_item.item), class: "heart", method: :delete do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to item_favourite_items_path(favourite_item.item), class: "text-secondary", method: :post do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                </div>
+              <% end %>
+              <% end %>
+          <% end %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-3 text-center">
+                  <%= link_to shop_path(favourite_item.item.shop) do %>
+                    <%= image_tag favourite_item.item.shop.get_shop_icon_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
+                  <% end %>
+                </div>
+                <div class="col-9 text-center m-auto">
+                  <%= link_to item_path(favourite_item.item), class: "text-dark" do %>
+                  <p class="card-title">
+                    <%= favourite_item.item.name %>
+                  </p>
+                  <p class="card-text">
+                    ¥<%= favourite_item.item.price.to_s(:delimited) %>
+                  </p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
   

@@ -1,9 +1,72 @@
-<h1>いいねしたブログ一覧(<%= @favourite_blogs.count %>件)</h1>
-
-  <% @favourite_blogs.each do |favourite_blog| %>
-    <%= image_tag favourite_blog.blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
-    <%= link_to blog_path(favourite_blog.blog.id) do %>
-        <%= favourite_blog.blog.title %><br>
-    <% end %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h4 class="my-3"><i class="fas fa-gem"></i> いいねしたブログ一覧(<%= @favourite_blogs.count %>件)</h4>
+    </div>
+    <div class="col-12 card-list-container">
+      <div class="row d-flex justify-content-start">
+      <% @favourite_blogs.each do |favourite_blog| %>
+        <div class="col-lg-3 col-sm-6">
+          <div class="card mx-auto my-3 shadow">
+            <%= link_to blog_path(favourite_blog.blog) do %>
+              <%= image_tag favourite_blog.blog.get_blog_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
+            <% end %>
+            <% if customer_signed_in? %>
+              <% unless favourite_blog.blog.customer == current_customer %>
+                <% if favourite_blog.blog.was_favourite_blog_by?(current_customer) %>
+                  <div class="favourited_heart btn btn-light rounded-circle">
+                    <%= link_to blog_favourite_blogs_path(favourite_blog.blog), class: "heart", method: :delete do %>
+                      <i class="fas fa-heart"></i>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="favourited_heart btn btn-light rounded-circle">
+                    <%= link_to blog_favourite_blogs_path(favourite_blog.blog), class: "text-secondary", method: :post do %>
+                      <i class="fas fa-heart"></i>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            <% end %>
+            <% if customer_signed_in? %>
+              <% if favourite_blog.blog.was_favourite_blog_by?(current_customer) %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to blog_favourite_blogs_path(favourite_blog.blog), class: "heart", method: :delete do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="favourited_heart btn btn-light rounded-circle">
+                  <%= link_to blog_favourite_blogs_path(favourite_blog.blog), class: "text-secondary", method: :post do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-3 text-center">
+                  <%= link_to my_page_path(favourite_blog.blog.customer) do %>
+                    <%= image_tag favourite_blog.blog.customer.get_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
+                  <% end %>
+                </div>
+                <div class="col-8 text-center">
+                  <%= link_to blog_path(favourite_blog.blog), class: "text-dark" do %>
+                  <p class="card-title">
+                    <%= favourite_blog.blog.title %>
+                  </p>
+                  <% end %>
+                  <p class="card-text">
+                    <%= link_to my_page_path(favourite_blog.blog.customer), class: "text-dark" do %>
+                      <%= favourite_blog.blog.customer.user_name %>
+                    <% end %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
   

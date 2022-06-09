@@ -17,11 +17,11 @@
                 <ul class="text-left">
                   <li class="li_list">
                     <div class="d-flex justify-content-start">
-                      <%= form_with model: @check, url: shop_checks_path, method: :get do |f| %>
+                      <%= form_with model: @check, url: shop_checks_path, method: :get, class: 'd-inline-flex' do |f| %>
                         <%= f.hidden_field :shop_id, :value => @shop.id %>
-                        <%= f.submit "ショップのやること一覧", class: 'not_btn li_btn' %>
+                        <%= f.submit "ショップのやること一覧", class: 'not_btn li_btn mr-3' %>
                         <% unless @shop_checks.count == 0 %>
-                          <p class="check-radius text-center"><%= @shop_checks.count %></p>
+                          <p class="check-radius text-center mt-1"><%= @shop_checks.count %></p>
                         <% end %>
                       <% end %>
                     </div>

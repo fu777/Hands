@@ -19,7 +19,9 @@
       <%= link_to root_path do %>
         <h1>Hands</h1>
       <% end %>
-      <%= link_to "マイページ", my_page_path(current_customer) %>
+      <%= link_to my_page_path(current_customer) do %>
+        <i class="fas fa-user-circle"></i>マイページ
+      <% end %>
       <%= link_to "作品一覧", items_path %>
       <%= link_to "ショップ一覧", shops_path %>
       <%= link_to "ブログ一覧", blogs_path %>

@@ -15,7 +15,7 @@
  */
 
   .heart {
-    color: pink;
+    color: #FF69A3;
   }
 
   .card {
@@ -41,6 +41,17 @@
 
   .fa-gem {
     color: #FFCC33;
+  }
+  
+  .fa-users {
+    color: #FFCC33;
+  }
+  
+  .fa-user-friends {
+    color: #FFA500;
+  }
+  .fa-users {
+    color: #FFA500;
   }
 
   .card-image-top {
