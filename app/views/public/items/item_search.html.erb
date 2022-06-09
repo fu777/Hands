@@ -8,12 +8,12 @@
     </div>
     <div class="col-lg-7 col-sm-2"></div>
     <div class="col-lg-2 col-sm-4 mt-3 text-right">
-      <%= link_to item_search_item_path do %>
-        <label>すべて</label>
+      <%= link_to item_search_item_path, class: 'text-dark' do %>
+        すべて
       <% end %>
       |
-      <%= link_to item_search_item_path(is_active: "true") do %>
-        <label>販売中</label>
+      <%= link_to item_search_item_path(is_active: "true"), class: 'text-dark' do %>
+        販売中
       <% end %>
     </div>
     <% if params[:is_active].present? %>

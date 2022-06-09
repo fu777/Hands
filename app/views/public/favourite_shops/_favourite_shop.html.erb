@@ -1,15 +1,17 @@
             <% if customer_signed_in? %>
-              <% if shop.favourited_shop_by?(current_customer) %>
-                <div class="favourited_heart btn btn-light rounded-circle">
-                  <%= link_to shop_favourite_shops_path(shop), class: "heart", method: :delete do %>
-                    <i class="fas fa-heart"></i>
-                  <% end %>
-                </div>
-              <% else %>
-                <div class="favourited_heart btn btn-light rounded-circle">
-                  <%= link_to shop_favourite_shops_path(shop), class: "text-secondary", method: :post do %>
-                    <i class="fas fa-heart"></i>
-                  <% end %>
-                </div>
+              <% unless shop.customer == current_customer %>
+                <% if shop.favourited_shop_by?(current_customer) %>
+                  <div class="favourited_heart btn btn-light rounded-circle">
+                    <%= link_to shop_favourite_shops_path(shop), class: "heart", method: :delete do %>
+                      <i class="fas fa-heart"></i>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="favourited_heart btn btn-light rounded-circle">
+                    <%= link_to shop_favourite_shops_path(shop), class: "text-secondary", method: :post do %>
+                      <i class="fas fa-heart"></i>
+                    <% end %>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>

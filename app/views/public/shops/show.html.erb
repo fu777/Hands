@@ -1,105 +1,106 @@
 <div class="container">
   <div class="row">
-  <% if customer_signed_in? %>
-  <% end %>
-    <% if @customer == current_customer %>
-    <% end %>
-    <div class="col-4 d-flex justify-content-center mt-3">
-      <div class="box bg-light">
-        <ul>
-          <li class="text-center mt-3 mb-2">
-            マイショップ
-          </li>
-          <li class="li_list">
-            <%= link_to "ショップ情報を編集する", edit_shop_path, class: 'li_btn' %>
-          </li>
-          <li class="li_list">
-            <%= form_with model: @item, url: new_item_path, method: :get do |f| %>
-              <%= f.hidden_field :shop_id, :value => @shop.id %>
-              <%= f.submit "作品を登録する", class: 'li_btn' %>
+    <div class="col-lg-3 col-sm-12">
+      <div class="mini-box bg-light mt-3 text-center">
+        <%= image_tag @shop.customer.get_image.variant(gravity: :center, resize: "150x150^", crop: "150x150+0+0").processed, class: 'mt-3 mb-2 rounded-circle' %><br>
+        作家 :
+        <%= link_to my_page_path(@shop.customer.id), class: 'mb-2 text-dark' do %>
+          <%= @shop.customer.user_name %><br>
+        <% end %>
+        <% if customer_signed_in? %>
+          <% if @customer == current_customer %>
+            <nav class="navbar navbar-expand-lg navbar-light">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="text-left">
+                  <li class="li_list">
+                    <div class="d-flex justify-content-start">
+                      <%= form_with model: @check, url: shop_checks_path, method: :get do |f| %>
+                        <%= f.hidden_field :shop_id, :value => @shop.id %>
+                        <%= f.submit "ショップのやること一覧", class: 'not_btn li_btn' %>
+                        <% unless @shop_checks.count == 0 %>
+                          <p class="check-radius text-center"><%= @shop_checks.count %></p>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </li>
+                  <li class="li_list">
+                    <%= form_with model: @order, url: shop_orders_path, method: :get do |f| %>
+                      <%= f.hidden_field :shop_id, :value => @shop.id %>
+                      <%= f.submit "注文履歴一覧を見る", class: 'not_btn li_btn' %>
+                    <% end %>
+                  </li>
+                  <li class="li_list">
+                    <div class="ml-1">
+                      <%= link_to "ショップ情報を編集する", edit_shop_path, class: 'li_btn' %>
+                    </div>
+                  </li>
+                  <li class="li_list">
+                    <%= form_with model: @item, url: new_item_path, method: :get do |f| %>
+                      <%= f.hidden_field :shop_id, :value => @shop.id %>
+                      <%= f.submit "作品を登録する", class: 'not_btn li_btn' %>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6 text-center my-auto">
+      <%= image_tag @shop.get_shop_icon_image.variant(gravity: :center, resize: "200x200^", crop: "200x200+0+0").processed, class: 'rounded-circle' %>
+    </div>
+    <div class="col-lg-6 col-sm-6 my-auto text-center">
+      <div class="d-flex justify-content-center">
+        <h4 class="mt-1 mb-2 mr-1"><%= @customer.user_name %></h4>
+          <div class="ml-1">
+            <% if customer_signed_in? %>
+              <% unless @shop.customer == current_customer %>
+                <% if @shop.favourited_shop_by?(current_customer) %>
+                  <div class="btn btn-light rounded-circle">
+                    <%= link_to shop_favourite_shops_path(@shop), class: "heart", method: :delete do %>
+                      <i class="fas fa-heart"></i>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="btn btn-light rounded-circle">
+                    <%= link_to shop_favourite_shops_path(@shop), class: "text-secondary", method: :post do %>
+                      <i class="fas fa-heart"></i>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
             <% end %>
-          </li>
-          <li class="li_list">
-            <%= link_to "いいねしたブログ一覧", favourite_blog_path, class: 'li_btn' %>
-          </li>
-          <li class="li_list">
-            <%= link_to "注文履歴一覧", orders_path, class: 'li_btn' %>
-          </li>
-
-<div>
-  <%= image_tag @shop.get_shop_icon_image.variant(resize: "150x150").processed %><br>
-  <%= @shop.name %><br>
-  <%= @shop.introduction %><br>
-</div>
-
-  <%= image_tag @shop.customer.get_image.variant(gravity: :center, resize: "200x200^", crop: "200x200+0+0").processed %><br>
-  <%= link_to my_page_path(@shop.customer.id) do %>
-    <%= @shop.customer.user_name %><br>
-  <% end %>
-
-<% if customer_signed_in? %>
-  <% if @customer == current_customer %>
-    <%= link_to "ショップ情報を編集する", edit_shop_path %><br>
-
-    <%= form_with model: @item, url: new_item_path, method: :get do |f| %>
-      <%= f.hidden_field :shop_id, :value => @shop.id %>
-      <%= f.submit "作品を登録する" %>
-    <% end %>
-
-    <%= form_with model: @order, url: shop_orders_path, method: :get do |f| %>
-      <%= f.hidden_field :shop_id, :value => @shop.id %>
-      <%= f.submit "注文履歴一覧を見る" %>
-    <% end %>
-
-    <%= form_with model: @check, url: shop_checks_path, method: :get do |f| %>
-      <%= f.hidden_field :shop_id, :value => @shop.id %>
-      <%= f.submit "ショップのやること一覧" %><%= @shop_checks.count %>
-    <% end %>
-
-  <% end %>
-  
-<%= render 'public/favourite_shops/favourite_shop', shop: @shop %>
-
-  <div>
-    <% if @shop.favourited_shop_by?(current_customer) %>
-      <p>
-        <%= link_to shop_favourite_shops_path(@shop), method: :delete do %>
-          ♥<%= @shop.favourite_shops.count %>
-        <% end %>
-      </p>
-      <% else %>
-      <p>
-        <%= link_to shop_favourite_shops_path(@shop), method: :post do %>
-          ♡<%= @shop.favourite_shops.count %>
-        <% end %>
-      </p>
-    <% end %>
+          </div>
+          <p class="count ml-2 mt-1 heart"><%= @shop.favourite_shops.count %></p>
+        </div>
+      <p class="py-2"><%= @shop.introduction %></p>
+    </div>
   </div>
-<% else %>
-  ♡<%= @shop.favourite_shops.count %>
-<% end %>
-
-<% if Shop.find_by(params[:is_active]) && (@shop.is_active == 'true') %>
-  <h1>作品一覧</h1>
-
-    <%= link_to shop_path(@shop) do %>
-    <label>すべて</label>
-    <% end %>
-    |
-    <%= link_to shop_path(@shop, is_active: "true") do %>
-    <label>販売中</label>
-    <% end %>
-
-    <br>
-
-    <% @items.each do |item| %>
-      <%= image_tag item.get_item_images.first.variant(resize: "150x150").processed %>
-      <br>
-      <%= link_to item_path(item.id) do %>
-      <%= item.name %>
-      <% end %><br>
-      ¥<%= item.price.to_s(:delimited) %><br>
-    <% end %>
-<% else %>
-  閉店中です。
-<% end %>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+      <% if Shop.find_by(params[:is_active]) && (@shop.is_active == 'true') %>
+        <div class="text-right mb-1">
+          <%= link_to shop_path(@shop), class: 'text-dark' do %>
+          すべて
+          <% end %>
+          |
+          <%= link_to shop_path(@shop, is_active: "true"), class: 'text-dark' do %>
+          販売中
+          <% end %>
+        </div>
+        <div class="card-list-container">
+          <div class="row d-flex justify-content-start">
+            <%= render 'public/items/item_list', items: @items %>
+      <% else %>
+          <div class="col-lg-9 text-center m-3">
+            閉店中です。
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
