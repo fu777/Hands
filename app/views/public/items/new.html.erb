@@ -1,45 +1,70 @@
-<h1>作品新規登録</h1>
-
-<%= form_with model: @item, url: items_path, method: :post do |f| %>
-
-<%= render 'item_error', item: @item %>
-
-  <%= f.label "作品画像" %>
-  <%= f.file_field :item_images, accept: "image/*", multiple: true %><br>
-  <%= f.label "作品名" %>
-  <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "作品名" %><br>
-  <%= f.label "作品説明" %>
-  <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "ここに作品説明を入力してください。" %><br>
-  
-<div class="append__category">
-  <div class="category">
-    <div class="form__label">
-      <div class="weight-bold-text lavel__name ">
-        <%= f.label "カテゴリー" %>
-      </div>
-      <div class="lavel__Required">
-        <%= f.collection_select :category_id, @set_parents, :id, :name, { include_blank: "選択してください"}, class: "select_field", id: "item_category_id" %>
+<div class="container">
+  <div class="row col-12 d-flex justify-content-center my-3">
+    <h2 class="bg-light px-3">作品新規登録</h2>
+  </div>
+  <div class="row my-3 ml-sm-4">
+    <div class="offset-lg-2"></div>
+    <div class="col-lg-10 col-sm-12">
+      <div class="my-3 ml-lg-3">
+        <div class="form-group">
+        <%= form_with model: @item, url: items_path, method: :post do |f| %>
+        <%= render 'item_error', item: @item %>
+          <div class="row field my-3">
+            <%= f.label "作品画像", class: 'col-lg-3 col-sm-3' %>
+            <%= f.file_field :item_images, accept: "image/*", multiple: true %>
+          </div>
+          <div class="row field my-3">
+            <%= f.label "作品名", class: 'col-lg-3 col-sm-3' %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "作品名" %>
+          </div>
+          <div class="row field my-3">
+            <%= f.label "作品説明", class: 'col-lg-3 col-sm-3' %>
+            <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "ここに作品説明を入力してください。", size: "40x5" %>
+          </div>
+          <div class="append__category">
+            <div class="category row field mt-3 mb-1">
+              <div class="weight-bold-text lavel__name col-lg-3 col-sm-3">
+                <%= f.label "カテゴリー" %>
+              </div>
+              <div class="lavel__Required">
+                <%= f.collection_select :category_id, @set_parents, :id, :name, { include_blank: "選択してください"}, class: "select_field", id: "item_category_id" %>
+              </div>
+            </div>
+          </div>
+          <div class="row field my-3">
+            <%= f.label "値段", class: 'col-lg-3 col-sm-3' %>
+            <%= f.text_field :price, autofocus: true, autocomplete: "price", placeholder: "1000" %>円
+          </div>
+          <div class="row field my-3">
+            <%= f.label "サイズ", class: 'col-lg-3 col-sm-3' %>
+            <%= f.text_field :size, autofocus: true, autocomplete: "size", placeholder: "10cm x 10cm" %>
+          </div>
+          <div class="row field my-3">
+            <%= f.label "発送日までの日数", class: 'col-lg-3 col-sm-12' %>
+            <div class="offset-lg-0 offset-sm-3"></div>
+            <%= f.text_field :shipping_date, autofocus: true, autocomplete: "shipping_date", placeholder: "3" %>日
+          </div>
+          <div class="row field my-3">
+            <%= f.label "販売個数がある場合、選択してください。", class: 'col-lg-12 col-sm-12' %>
+            <div class="offset-lg-3 offset-sm-3"></div>
+            <%= f.number_field :limit, autofocus: true, autocomplete: "limit", placeholder: "10" %>個
+          </div>
+          <div class="row field my-3">
+            <%= f.label "販売ステータス", class: 'col-lg-3 col-sm-12' %>
+            <div class="offset-lg-0 offset-sm-3">
+              <%= f.radio_button :is_active, "true", class: 'align-baseline' %>
+              <%= f.label :is_active, "販売中", class: 'mx-2' %>
+              <%= f.radio_button :is_active, "false", class: 'align-baseline' %>
+              <%= f.label :is_active, "販売停止中", class: 'mx-2' %>
+            </div>
+          </div>
+          <%= f.hidden_field :shop_id, :value => @item.shop_id %>
+          <div class="actions col-lg-8 col-sm-10 my-2 text-center">
+            <%= f.submit "新規登録", class: 'btn btn-outline-success rounded-pill ml-lg-4 ml-sm-3' %>
+          </div>
+        <% end %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-  
-  <%= f.label "サイズ" %>
-  <%= f.text_field :size, autofocus: true, autocomplete: "size", placeholder: "10cm x 10cm" %><br>
-  <%= f.label "発送日までの日数" %>
-  <%= f.text_field :shipping_date, autofocus: true, autocomplete: "shipping_date", placeholder: "3" %>日<br>
-  <%= f.label "値段" %>
-  <%= f.text_field :price, autofocus: true, autocomplete: "price", placeholder: "1000" %>円<br>
-  <%= f.label "販売個数がある場合、選択してください。" %>
-  <%= f.select :limit, options_for_select(*[0..10]) %><br>個
-
-  <%= f.label "販売ステータス" %>
-  <%= f.radio_button :is_active, "true" %>
-  <%= f.label :is_active, "販売中" %>
-  <%= f.radio_button :is_active, "false" %>
-  <%= f.label :is_active, "販売停止中" %><br>
-
-  <%= f.hidden_field :shop_id, :value => @item.shop_id %>
-
-  <%= f.submit "新規登録" %>
-<% end %>

@@ -8,7 +8,8 @@ $(document).on('turbolinks:load', function() {
   //②子カテゴリー用のセレクトボックスを生成
   function appendChildrenBox(insertHTML){
     var childSelectHtml = "";
-    childSelectHtml = `<div class="category__child" id="children_wrapper">
+    childSelectHtml = `<div class="category__child row field mb-3" id="children_wrapper">
+                        <div class="offset-lg-3 offset-sm-3"><div>
                         <select id="child__category" name="item[category_id]" class="select_field">
                           <option value="">---</option>
                           //optionタグを埋め込む
