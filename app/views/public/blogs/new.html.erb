@@ -1,25 +1,42 @@
-<h1>ブログ新規登録</h1>
-
-<%= form_with model: @blog, url: blogs_path, method: :post do |f| %>
-
-<%= render 'blog_error', blog: @blog %>
-
-  <%= f.label "ブログ画像" %>
-  <%= f.file_field :blog_images, accept: "image/*", multiple: true %><br>
-  <%= f.label "タイトル" %>
-  <%= f.text_field :title, autofocus: true, autocomplete: "title", placeholder: "タイトル" %><br>
-  <%= f.label "本文" %>
-  <%= f.text_area :body, autofocus: true, autocomplete: "body", placeholder: "ここに本文を入力してください。" %><br>
-
-<% if params[:blog].present? %>
-  <%= f.hidden_field :item_id, :value =>params[:blog][:item_id] %>
-<% else %>
-  <label>購入した作品がある場合、選択してください。</label><br>
-    <%= f.label "購入した作品" %>
-    <%= f.collection_select :item_id, @items, :id, :name, {prompt: "選択してください"} %>
-  <br>
-<% end %>
-
-  <%= f.submit "投稿する" %>
-
-<% end %>
+<div class="container">
+  <div class="row col-12 d-flex justify-content-center my-3">
+    <h2 class="bg-light px-3">ブログ新規登録</h2>
+  </div>
+  <div class="row offset-lg-2 my-3">
+    <div class="col-lg-10 col-sm-12">
+      <div class="my-3 ml-3">
+        <div class="form-group">
+        <%= form_with model: @blog, url: blogs_path, method: :post do |f| %>
+        <%= render 'blog_error', blog: @blog %>
+          <div class="row field my-3">
+            <%= f.label "ブログ画像", class: 'col-lg-3 col-sm-12' %>
+            <div class="offset-lg-0 offset-sm-3">
+              <%= f.file_field :blog_images, accept: "image/*", multiple: true %>
+            </div>
+          </div>
+          <div class="row field my-3">
+            <%= f.label "タイトル", class: 'col-lg-3 col-sm-3' %>
+            <%= f.text_field :title, autofocus: true, autocomplete: "title", placeholder: "タイトル" %>
+          </div>
+          <div class="row field my-3">
+            <%= f.label "本文", class: 'col-lg-3 col-sm-3' %>
+            <%= f.text_area :body, autofocus: true, autocomplete: "body", placeholder: "ここに本文を入力してください。", size: "40x5" %>
+          </div>
+          <% if params[:blog].present? %>
+            <%= f.hidden_field :item_id, :value =>params[:blog][:item_id] %>
+          <% else %>
+          <div class="row field my-3">
+            <%= f.label "ブログで紹介する作品がある場合、選択して下さい。", class: 'mb-3 col-lg-12 col-sm-12' %>
+            <%= f.label "作品", class: 'col-lg-3 col-sm-3' %>
+            <%= f.collection_select :item_id, @items, :id, :name, {prompt: "選択してください"} %>
+          </div>
+          <% end %>
+          <div class="actions col-lg-10 col-sm-11 my-2 text-center">
+            <%= f.submit "投稿する", class: 'btn btn-outline-success rounded-pill ml-lg-2 mr-sm-1' %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -55,7 +55,7 @@
 <div>
   <p>コメント件数：<%= @blog.blog_comments.count %></p>
   <% @blog.blog_comments.each do |blog_comment| %>
-    <p><%= image_tag blog_comment.customer.get_image(100,100) %></p>
+    <p><%= image_tag blog_comment.customer.get_image %></p>
     <%= blog_comment.customer.user_name %>
     <%= l blog_comment.created_at, format: :long %><%= blog_comment.comment %>
     <% if customer_signed_in? %>
