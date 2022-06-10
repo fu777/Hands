@@ -43,14 +43,11 @@
     color: #FFCC33;
   }
   
-  .fa-users {
-    color: #FFCC33;
-  }
-  
-  .fa-user-friends {
+  .fa-users, .fa-user-friends {
     color: #FFA500;
   }
-  .fa-users {
+  
+  .fa-user-circle {
     color: #FFA500;
   }
 
@@ -142,7 +139,7 @@
     background: white;
     outline: none;
     transition: 0.4s;
-    border: solid 2px #FFA500;
+    border: solid 1px #FFA500;
     padding: 5px;
     cursor: pointer;
     border-radius: 5px;
@@ -169,7 +166,7 @@
     background: #FFA500;
     outline: none;
     transition: 0.4s;
-    border: solid 2px #FFA500;
+    border: solid 1px #FFA500;
     padding: 5px;
     cursor: pointer;
     border-radius: 5px;

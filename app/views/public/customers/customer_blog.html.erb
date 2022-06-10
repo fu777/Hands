@@ -1,9 +1,10 @@
-<h1><%= @customer.user_name %>さんのブログ一覧</h1>
-
-<% @blogs.each do |blog| %>
-  <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
-  <%= link_to blog_path(blog.id) do %>
-  <%= blog.title %>
-  <% end %><br>
-  <%= link_to "#{blog.blog_comments.count} コメント", blog_path(blog.id) %><br>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h4 class="my-3"><i class="fas fa-gem"></i> <%= @customer.user_name %>さんのブログ一覧(<%= @customer.blogs.count %>件)</h4>
+    </div>
+    <div class="col-12 card-list-container">
+      <div class="row d-flex justify-content-start">
+    <%= render 'public/blogs/blog_list', blogs: @blogs %>
+  </div>
+</div>

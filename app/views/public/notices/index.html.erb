@@ -1,5 +1,9 @@
 <% if @notices.exists? %>
   <%= render partial: 'notice', collection: @notices %>
 <% else %>
-  <p>通知はありません。</p>
+  <div class="container">
+    <div class="row col-12 d-flex justify-content-center mt-5">
+      <p>通知はありません。</p>
+    </div>
+  </div>
 <% end %>

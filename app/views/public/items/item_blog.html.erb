@@ -1,3 +1,10 @@
-<h1><%= @item.name %>のブログ一覧</h1>
-
-<%= render 'public/blogs/blog_list', blogs: @blogs %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h4 class="my-3"><i class="fas fa-gem"></i> <%= @item.name %>のブログ一覧</h4>
+    </div>
+    <div class="col-12 card-list-container">
+      <div class="row d-flex justify-content-start">
+    <%= render 'public/blogs/blog_list', blogs: @blogs %>
+  </div>
+</div>
