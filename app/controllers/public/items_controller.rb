@@ -37,6 +37,9 @@ class Public::ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @category_id = @item.category_id
+    @category_parent = Category.find(@category_id).parent
+    @category_children = @category_parent.children
     unless current_customer.shop == @item.shop
       redirect_to root_path
     end
