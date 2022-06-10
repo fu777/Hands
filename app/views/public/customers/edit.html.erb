@@ -2,24 +2,29 @@
   <div class="row col-12 d-flex justify-content-center my-3">
     <h2 class="bg-light px-3">会員情報編集</h2>
   </div>
-  <div class="row offset-lg-2 my-3">
+  <div class="row my-3 ml-sm-4">
+    <div class="offset-lg-1"></div>
     <div class="col-lg-10 col-sm-12">
-      <div class="my-3 ml-3">
+      <div class="my-3 ml-lg-3">
         <div class="form-group">
         <%= form_with model: @customer, url: update_path(@customer_params), method: :patch do |f| %>
           <%= render 'customer_error', customer: @customer %>
           <div class="row field my-3">
-            <%= f.label "氏名", class: 'col-lg-4 col-sm-12' %>
-            <%= f.label "(姓)　", class: 'mr-2' %>
+            <%= f.label "氏名", class: 'col-lg-4 col-sm-5' %>
+            <%= f.label "(姓)　", class: 'mr-lg-2 mr-sm-2' %>
             <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder: "令和" %>
-            <%= f.label "(名)　", class: 'mx-2' %>
+            <div class="offset-lg-0 offset-sm-5">
+            </div>
+            <%= f.label "(名)　", class: 'mx-lg-2 mr-sm-2' %>
             <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "道子" %>
           </div>
           <div class="row field my-3">
-            <%= f.label "フリガナ", class: 'col-lg-4 col-sm-12' %>
-            <%= f.label "(セイ)", class: 'mr-2' %>
+            <%= f.label "フリガナ", class: 'col-lg-4 col-sm-5' %>
+            <%= f.label "(セイ)", class: 'mr-lg-2 mr-sm-2' %>
             <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana", placeholder: "レイワ" %>
-            <%= f.label "(メイ)", class: 'mx-2' %>
+            <div class="offset-lg-0 offset-sm-5">
+            </div>
+            <%= f.label "(メイ)", class: 'mx-lg-2 mr-sm-2' %>
             <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", placeholder: "ミチコ" %>
           </div>
           <div class="row field my-3">
