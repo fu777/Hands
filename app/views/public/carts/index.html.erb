@@ -1,58 +1,79 @@
-<h1>ショッピングカート</h1>
-
-<%= link_to "全てのショップのカートを空にする", destroy_all_carts_path, method: :delete %>
-
-<br>
-
-<% @carts.each do |cart| %>
-  <%= link_to shop_path(cart.shop.id) do %>
-    <%= cart.shop.name %>
-    <% end %>
-  <%= link_to "ショップのカートを空にする", cart_path(cart), method: :delete %>
-    <table>
-      <thead>
-        <tr>
-          <th>商品名</th>
-          <th></th>
-          <th>単価</th>
-          <th>数量</th>
-          <th>小計</th>
-          <th></th>
-        </tr>
-      </thead>
-    <% cart.cart_items.each do |cart_item| %>
-    <tbody>
-      <tr>
-        <td><%= image_tag cart_item.item.get_item_images.first.variant(resize: "150x150").processed %></td>
-        <td><%= cart_item.item.name %></td>
-        <td><%= cart_item.item.price.to_s(:delimited) %></td>
-        <td><%= cart_item.amount %></td>
-        <td><%= cart_item.subtotal.to_s(:delimited) %></td>
-        <td><%= link_to "削除する", cart_cart_item_path(cart, cart_item), method: :delete %></td>
-        <% if cart_item.item.limit == 0 %>
-          <td>この作品は売り切れです。削除してください。</td>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h4 class="my-3">ショッピングカート</h4>
+    </div>
+    <div class="col-12">
+      <%= link_to "全てのショップのカートを空にする", destroy_all_carts_path, method: :delete, class: 'btn btn-outline-danger' %>
+    </div>
+    <div class="col-12 my-3">
+      <div class="row d-flex justify-content-center">
+        <% @carts.each do |cart| %>
+        <div class="d-flex justify-content-start col-lg-12 col-sm-12">
+          <%= link_to shop_path(cart.shop.id), class: 'text-dark' do %>
+            <p class="pt-2"><strong><%= cart.shop.name %></strong> ショップ</p>
+          <% end %>
+          <div class="ml-auto">
+            <%= link_to cart_path(cart), method: :delete, class: 'btn btn-outline-danger' do %>
+              <%= cart.shop.name %>のカートを空にする
+            <% end %>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center col-lg-12 col-sm-12">
+          <table class="table table-bordered border-dark">
+            <thead class="table-bordered table-warning">
+              <tr>
+                <th colspan="2">作品名</th>
+                <th>単価</th>
+                <th>数量</th>
+                <th>小計</th>
+              </tr>
+            </thead>
+          <% cart.cart_items.each do |cart_item| %>
+            <% if cart_item.item.limit == 0 %>
+            <thead>
+              <th colspan="5" class="text-center">この作品は売り切れです。削除してください。</th>
+            </thead>
+            <% end %>
+            <tbody>
+              <tr>
+                <td>
+                  <%= image_tag cart_item.item.get_item_images.first.variant(resize: "100x100").processed %>
+                  <%= cart_item.item.name %>
+                </td>
+                <td class="p-auto"><%= cart_item.item.price.to_s(:delimited) %></td>
+                <td><%= cart_item.amount %></td>
+                <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+                <td><%= link_to "削除", cart_cart_item_path(cart, cart_item), method: :delete %></td>
+              </tr>
+            </tbody>
+          <% end %>
+          </table>
+        </div>
+        <div class="mt-2 ml-auto">
+          <% unless cart.blank? %>
+            <%= form_with model: @order, url: new_order_path, method: :get do |f| %>
+              <%= f.hidden_field :shop_id, :value => cart.shop.id %>
+              <%= f.submit "情報入力に進む", class: 'btn btn-outline-info' %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>合計金額</th>
+                <% @total = cart.cart_items.inject(0) { |sum, item| sum + item.subtotal } %>
+                <td class=" text-right"><%= @total.to_s(:delimited) %>円</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <% end %>
-      </tr>
-    </tbody>
-    <% end %>
-  </table>
-  <table>
-    <tbody>
-      <tr>
-      <th>合計金額</th>
-      <% @total = cart.cart_items.inject(0) { |sum, item| sum + item.subtotal } %>
-      <td><%= @total.to_s(:delimited) %></td>
-      </tr>
-    </tbody>
-  </table>
-  <% unless cart.blank? %>
-    <%= form_with model: @order, url: new_order_path, method: :get do |f| %>
-      <%= f.hidden_field :shop_id, :value => cart.shop.id %>
-      <%= f.submit "情報入力に進む" %>
-    <% end %>
-  <% end %>
-  <br>
-<% end %>
-
-<br>
-<%= link_to "買い物を続ける", root_path %>
+      </div>
+      <div class="col-12 d-flex justify-content-center mb-3">
+        <%= link_to "買い物を続ける", root_path, class: 'orange_out_btn' %>
+      </div>
+    </div>
+  </div>
+</div>
