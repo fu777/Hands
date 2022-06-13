@@ -29,7 +29,7 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem
     @review = Review.new
     @reviews = @item.reviews.all
-    @blogs = Blog.limit(5).order(created_at: :desc).where(item_id: @item)
+    @blogs = Blog.limit(4).order(created_at: :desc).where(item_id: @item)
     @category_id = @item.category_id
     @category_parent = Category.find(@category_id).parent
     @category_child = Category.find(@category_id)

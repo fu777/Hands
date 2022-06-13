@@ -13,6 +13,18 @@
  *= require_tree .
  *= require_self
  */
+ 
+  .notice {
+    color: green;
+  }
+  
+  #error_explanation {
+    color: red;
+  }
+  
+  .error {
+    color: red;
+  }
 
   .heart {
     color: #FF69A3;
@@ -192,6 +204,6 @@
     width: 80%;
   }
   
-  
-  
-  
+    
+
+

@@ -1,8 +1,10 @@
 <% if item.errors.any? %>
-  <h3><%= item.errors.count %>件のエラーが発生しました</h3>
-  <ul>
-    <% item.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
+  <div class="error">
+    <h3><%= item.errors.count %>件のエラーが発生しました</h3>
+    <ul>
+      <% item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

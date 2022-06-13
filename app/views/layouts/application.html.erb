@@ -61,10 +61,11 @@
         <%= link_to "ログイン", new_customer_session_path %>
       </li>
     <% end %>
-
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
+    <div class="text-center" %>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
