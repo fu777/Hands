@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   
-  before_action :authenticate_customer!, except: [:top, :index, :show, :about, :search]
+  before_action :authenticate_customer!, except: [:top, :index, :show, :about, :search, :item_search, :get_category_children, :menu_search]
   
   before_action :configure_permitted_parameters, if: :devise_controller?
   
