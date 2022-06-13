@@ -32,10 +32,11 @@
       <%= link_to admin_root_path do %>
         <h1>Hands</h1>
       <% end %>
-      <%= link_to "作品一覧", admin_items_path %>
       <%= link_to "ユーザー一覧", admin_customers_path %>
-      <%= link_to "ブログコメント一覧", admin_blog_comments_path %>
       <%= link_to "注文履歴一覧", admin_root_path %>
+      <%= link_to "ブログ一覧", blogs_path %>
+      <%= link_to "ブログコメント一覧", admin_blog_comments_path %>
+      <%= link_to "作品一覧", items_path %>
       <%= link_to "レビュ一覧", admin_reviews_path %>
       <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
     <% else %>
