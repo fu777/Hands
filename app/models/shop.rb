@@ -4,7 +4,7 @@ class Shop < ApplicationRecord
   validates :introduction, presence: true
   validates :is_active, presence: true
 
-  belongs_to :customer, unique: true
+  belongs_to :customer
   has_many :items
   has_many :carts, dependent: :destroy
   has_many :orders, dependent: :destroy
