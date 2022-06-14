@@ -15,14 +15,21 @@
                 <th>注文商品</th>
                 <th>注文個数</th>
                 <th>ステータス</th>
-                <th>注文詳細</th>
               </tr>
             </thead>
             <% @orders.each do |order| %>
             <tbody>
               <tr>
-                <td><%= order.created_at.to_s(:ymd) %></td>
-                <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+                <td>
+                  <%= link_to admin_order_path(order), class: 'text-dark' do %>
+                    <%= order.created_at.to_s(:ymd) %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to admin_customer_path(order.customer), class: 'text-dark' do %>
+                    <%= order.customer.last_name %><%= order.customer.first_name %>
+                  <% end %>
+                </td>
                 <td>
                   〒<%= order.postal_code %><br>
                   <%= order.address %><br>
@@ -35,7 +42,6 @@
                 </td>
                 <td><%= order.order_details.count %></td>
                 <td><%= order.status_i18n %></td>
-                <td><%= link_to "表示する", admin_order_path(order), class: 'orange_out_btn' %></td>
               </tr>
             </tbody>
             <% end %>

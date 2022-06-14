@@ -1,13 +1,13 @@
 <div class="container my-3">
   <div class="row">
     <div class="col-lg-8 co-lsm-12 d-flex justify-content-center">
-      <% @item.get_item_images.each do |item_image| %>
-        <div id="tall">
-          <div id="theTarget">
-            <%= image_tag item_image, size: "300x300" %>
-          </div>
+      <div id="tall">
+        <div id="theTarget">
+        <% @item.get_item_images.each do |item_image| %>
+          <%= image_tag item_image, size: "300x300" %>
+        <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
     <div class="col-lg-4 co-lsm-12 mt-3">
       <div class="row">

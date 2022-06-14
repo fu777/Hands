@@ -3,6 +3,7 @@ class Shop < ApplicationRecord
   validates :name, presence: true
   validates :introduction, presence: true
   validates :is_active, presence: true
+  validates :customer_id, uniqueness: true
 
   belongs_to :customer
   has_many :items

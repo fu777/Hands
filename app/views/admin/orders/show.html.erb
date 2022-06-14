@@ -9,9 +9,27 @@
           <table class="table table-bordered border-dark">
             <tbody>
               <tr>
+                <th>ショップ</th>
+                <td>
+                  <%= link_to shop_path(@order.shop), class: 'text-dark' do %>
+                    <%= @order.shop.name %>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th>ショップユーザー</th>
+                <td>
+                  <%= link_to admin_customer_path(@order.shop.customer), class: 'text-dark' do %>
+                    <%= @order.shop.customer.last_name %> <%= @order.shop.customer.first_name %>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
                 <th>購入者</th>
                 <td>
-                  <%= @order.customer.last_name %> <%= @order.customer.first_name %>
+                  <%= link_to admin_customer_path(@order.customer), class: 'text-dark' do %>
+                    <%= @order.customer.last_name %> <%= @order.customer.first_name %>
+                  <% end %>
                 </td>
               </tr>
               <tr>
