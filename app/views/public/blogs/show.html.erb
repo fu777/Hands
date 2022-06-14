@@ -1,45 +1,81 @@
 <div class="container my-3">
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
-      <h4 class="font-weight-bold"><%= @blog.title %></h4>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-11 d-flex justify-content-end">
-      <%= link_to my_page_path(@blog.customer.id), class: 'text-dark mr-2' do %>
-        <%= @blog.customer.user_name %>
+      <h4 class="font-weight-bold mr-3 mt-1"><%= @blog.title %></h4>
+      <% if customer_signed_in? %>
+        <% unless @blog.customer == current_customer %>
+          <% if @blog.was_favourite_blog_by?(current_customer) %>
+            <div class="btn btn-light rounded-circle">
+              <%= link_to blog_favourite_blogs_path(@blog), class: "heart", method: :delete do %>
+                <i class="fas fa-heart"></i>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="btn btn-light rounded-circle">
+              <%= link_to blog_favourite_blogs_path(@blog), class: "text-secondary", method: :post do %>
+                <i class="fas fa-heart"></i>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
-      <%= @blog.created_at.to_s(:ymd) %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 d-flex justify-content-end">
-      <% @blog.get_blog_images.each do |blog_image| %>
+  <div class="row mt-3">
+    <div class="col-lg-9 col-sm-12 d-flex justify-content-center">
+      <div class="row">
         <div id="tall">
           <div id="theTarget">
-            <%= image_tag blog_image, size: "300x300" %>
+          <% @blog.get_blog_images.each do |blog_image| %>
+            <%= image_tag blog_image %>
+          <% end %>
           </div>
         </div>
+      </div>
+      <div class="row my-2 d-flex justify-content-center">
+        <p class="py-2"><%= @blog.body %></p>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <p class="mb-3"><%= @blog.created_at.to_s(:ymd) %></p>
+      <p class="text-secondary">投稿者: </p>
+      <%= link_to my_page_path(@blog.customer.id), class: 'text-dark' do %>
+        <%= image_tag @blog.customer.get_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle mr-2" %>
+        <%= @blog.customer.user_name %>
+      <% end %>
+      <% unless @blog.item_id == nil %>
+      <p class="text-secondary mt-3">作品: </p>
+      <div class="row">
+        <div class="col-lg-3 mr-2">
+          <%= link_to admin_item_path(@blog.item) do %>
+            <%= image_tag @blog.item.get_item_images.first.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
+          <% end %>
+        </div>
+        <div class="col-lg-8">
+          <%= link_to admin_item_path(@blog.item), class: 'text-dark' do %>
+            <%= @blog.item.name %>
+          <% end %>
+          <br>
+          ¥<%= @blog.item.price.to_s(:delimited) %>円
+        </div>
+      </div>
+      <p class="text-secondary mt-3">ショップ: </p>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-start">
+          <%= link_to shop_path(@item.shop) do %>
+            <%= image_tag @item.shop.get_shop_icon_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "mr-2 rounded-circle" %>
+          <% end %>
+          <%= link_to shop_path(@item.shop), class: 'text-dark' do %>
+            <p class="pt-3"><%= @item.shop.name %></p>
+          <% end %>
+        </div>
+      </div>
       <% end %>
     </div>
+  </div>
 
 
-<%= @blog.body %>
-<br>
 
-<% unless @blog.item_id == nil %>
-  <%= image_tag @blog.item.get_item_images.first.variant(resize: "150x150").processed %><br>
-  <%= link_to admin_item_path(@blog.item.id) do %>
-    <%= @blog.item.name %>
-  <% end %>
-  <br>
-  ¥<%= @blog.item.price.to_s(:delimited) %>円<br>
-
-  <%= image_tag @item.shop.get_shop_icon_image(100,100) %><br>
-  <%= link_to shop_path(@item.shop.id) do %>
-    <%= @item.shop.name %>
-  <% end %>
-<% end %>
 
 <% if customer_signed_in? %>
 <br>
