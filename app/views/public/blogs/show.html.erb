@@ -1,6 +1,6 @@
-<div class="container my-3">
+<div class="container">
   <div class="row">
-    <div class="col-12 d-flex justify-content-center">
+    <div class="col-12 d-flex justify-content-center my-3">
       <h4 class="font-weight-bold mr-3 mt-1"><%= @blog.title %></h4>
       <% if customer_signed_in? %>
         <% unless @blog.customer == current_customer %>
@@ -22,22 +22,41 @@
     </div>
   </div>
   <div class="row mt-3">
-    <div class="col-lg-9 col-sm-12 d-flex justify-content-center">
+    <div class="col-lg-8 col-sm-12">
       <div class="row">
-        <div id="tall">
-          <div id="theTarget">
-          <% @blog.get_blog_images.each do |blog_image| %>
-            <%= image_tag blog_image %>
-          <% end %>
+        <div class="col-12 d-flex justify-content-center">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <% @blog.get_blog_images.each do |blog_image| %>
+                <div class="swiper-slide">
+                  <%= image_tag blog_image, size: "500x300" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev text-warning"></div>
+            <div class="swiper-button-next text-warning"></div>
           </div>
+          <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+          <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+          <%= javascript_pack_tag "swiper/swiper.js" %>
         </div>
       </div>
-      <div class="row my-2 d-flex justify-content-center">
-        <p class="py-2"><%= @blog.body %></p>
+      <div class="row my-2">
+        <div class="col-12">
+          <p class="py-2 text-center"><%= @blog.body %></p>
+        </div>
       </div>
     </div>
-    <div class="col-lg-3">
-      <p class="mb-3"><%= @blog.created_at.to_s(:ymd) %></p>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-lg-8">
+          <p class="mb-3"><%= @blog.created_at.to_s(:ymd) %></p>
+        </div>
+        <div class="col-lg-4">
+          <p class="count ml-2 heart"><i class="fas fa-heart"></i> <%= @blog.favourite_blogs.count %></p>
+        </div>
+      </div>
       <p class="text-secondary">投稿者: </p>
       <%= link_to my_page_path(@blog.customer.id), class: 'text-dark' do %>
         <%= image_tag @blog.customer.get_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle mr-2" %>
@@ -71,59 +90,59 @@
         </div>
       </div>
       <% end %>
+      <div class="row">
+        <div class="col-12 mt-3">
+          <h5 class="pb-3 text-center">コメント</h5>
+          <div class="d-flex justify-content-start">
+            <p class="mr-3">コメント件数: </p>
+            <%= @blog.blog_comments.count %>
+          </div>
+          <hr>
+        </div>
+      </div>
+      <% @blog.blog_comments.each do |blog_comment| %>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-start">
+        <%= link_to my_page_path(blog_comment.customer), class: 'text-dark' do%>
+          <%= image_tag blog_comment.customer.get_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "mr-2 rounded-circle" %>
+          <%= blog_comment.customer.user_name %>
+        <% end %>
+        </div>
+      </div>
+      <p class="py-1"><%= blog_comment.comment %></p>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-start">
+        <% if customer_signed_in? %>
+          <% if blog_comment.customer == current_customer %>
+            <%= link_to "削除", blog_blog_comment_path(blog_comment.blog, blog_comment), method: :delete, class: 'text-dark' %>
+          <% end %>
+        <% end %>
+          <p class="ml-auto"><%= l blog_comment.created_at, format: :long %></p>
+        </div>
+      </div>
+      <hr>
+      <% end %>
+      <% if customer_signed_in? %>
+        <%= render 'blog_comment_error', blog_comment: @blog_comment %>
+        <%= form_with model: [@blog, @blog_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", size: "40x5" %>
+      <div class="row my-2">
+        <div class="col-12 d-flex justify-content-center">
+          <%= f.submit "送信する", class: 'btn btn-outline-success' %>
+        </div>
+      </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
-
-
-
-
-<% if customer_signed_in? %>
-<br>
-  <% if @blog.customer == current_customer %>
-    <%= link_to "編集する", edit_blog_path(@blog) %>
-    <%= link_to "削除", blog_path(@blog), method: :delete %>
-  <% end %>
-<br>
-
-  <% if @blog.was_favourite_blog_by?(current_customer) %>
-    <p>
-      <%= link_to blog_favourite_blogs_path(@blog), method: :delete do %>
-        ♥<%= @blog.favourite_blogs.count %> いいね
+  <div class="row my-3">
+    <div class="col-12 d-flex justify-content-center">
+      <% if customer_signed_in? %>
+        <% if @blog.customer == current_customer %>
+          <%= link_to "編集する", edit_blog_path(@blog), class: 'btn btn-outline-primary mr-1' %>
+          <%= link_to "削除", blog_path(@blog), class: 'btn btn-outline-danger ml-1' , method: :delete %>
+        <% end %>
       <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to blog_favourite_blogs_path(@blog), method: :post do %>
-        ♡<%= @blog.favourite_blogs.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
-<% else %>
-  ♥<%= @blog.favourite_blogs.count %> いいね
-<% end %>
-
-<div>
-  <p>コメント件数：<%= @blog.blog_comments.count %></p>
-  <% @blog.blog_comments.each do |blog_comment| %>
-    <p><%= image_tag blog_comment.customer.get_image %></p>
-    <%= blog_comment.customer.user_name %>
-    <%= l blog_comment.created_at, format: :long %><%= blog_comment.comment %>
-    <% if customer_signed_in? %>
-      <% if blog_comment.customer == current_customer %>
-        <%= link_to "削除", blog_blog_comment_path(blog_comment.blog, blog_comment), method: :delete %>
-      <% end %>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
 </div>
-
-<div>
-<% if customer_signed_in? %>
-  <%= render 'blog_comment_error', blog_comment: @blog_comment %>
-
-  <%= form_with model: [@blog, @blog_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-<% end %>
-</div>
-
