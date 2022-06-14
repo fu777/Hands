@@ -100,6 +100,10 @@
     color: #FF8C00;
     font-size: 20px;
   }
+  
+  .orange {
+    color: #FF8C00;
+  }
 
   .box {
     width: 100%;
@@ -116,8 +120,16 @@
   .count {
     font-size: 20px;
   }
+  
+  .f-30 {
+    font-size: 30px;
+  }
+  
+  .head:hover {
+    text-decoration: none;
+  }
 
-  ul {
+  .li_ul {
     list-style: none;
     padding-left: 0;
   }
