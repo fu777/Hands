@@ -1,5 +1,5 @@
 class Public::ShopsController < ApplicationController
-  
+
   def new
     @shop = Shop.new
     @customer_id = current_customer.id
@@ -60,5 +60,5 @@ class Public::ShopsController < ApplicationController
   def shop_params
     params.require(:shop).permit(:name, :introduction, :is_active, :shop_icon_image, :customer_id)
   end
-  
+
 end

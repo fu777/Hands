@@ -67,13 +67,13 @@ class Public::CustomersController < ApplicationController
   end
   
   def followers
-    customer = Customer.find(params[:customer_id])
-    @customers = customer.followings
+    @customer = Customer.find(params[:customer_id])
+    @customers = @customer.followings
   end
   
   def followings
-    customer = Customer.find(params[:customer_id])
-    @customers = customer.followers
+    @customer = Customer.find(params[:customer_id])
+    @customers = @customer.followers
   end
 
   def unsubscribe

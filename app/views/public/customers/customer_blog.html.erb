@@ -1,7 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center">
-      <h4 class="my-3"><i class="fas fa-gem"></i> <%= @customer.user_name %>さんのブログ一覧(<%= @customer.blogs.count %>件)</h4>
+      <h4 class="my-3"><i class="fas fa-gem"></i>
+        <%= link_to my_page_path(@customer), class: 'text-dark' do %>
+          <%= @customer.user_name %>さん
+        <% end %>
+        のブログ一覧(<%= @customer.blogs.count %>件)
+      </h4>
     </div>
     <div class="col-12 card-list-container">
       <div class="row d-flex justify-content-start">

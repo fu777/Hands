@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   validates :address, presence: true
   validates :name, presence: true
   
+  default_scope -> { order(created_at: :desc) }
   belongs_to :customer
   belongs_to :shop
   has_many :order_details

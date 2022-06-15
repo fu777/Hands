@@ -20,8 +20,8 @@
     <div class="col-lg-4 co-lsm-12 mt-3">
       <div class="row">
         <div class="col-lg-9 col-sm-8 mt-3">
-          <%= image_tag @item.shop.get_shop_icon_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
           <%= link_to shop_path(@item.shop), class: 'text-dark' do %>
+            <%= image_tag @item.shop.get_shop_icon_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
             <%= @item.shop.name %>
           <% end %>
         </div>
@@ -58,9 +58,10 @@
           </div>
           <div class="col-lg-6 col-sm-12 text-danger">
             <% if @item.limit.nil? %>
-            <% elsif @item.limit == 0 %>
             <% else %>
-              残り<strong><%= @item.limit %>個</strong>です
+              <% if @item.is_active == true %>
+              <% end %>
+                残り<strong><%= @item.limit %>個</strong>です
             <% end %>
           </div>
         </div>
@@ -217,7 +218,7 @@
       <% if customer_signed_in? %>
     <div class="row d-flex justify-content-center">
       <div class="col-12 d-flex justify-content-center">
-        <% if Item.find_by(params[:shop_id]) && (@item.shop_id == current_customer.shop) %>
+        <% if Item.find_by(params[:shop_id]) && (@item.shop_id == current_customer.shop.id) %>
           <%= link_to "作品を編集する", edit_item_path(@item.id), class: 'btn btn-outline-warning' %>
         <% end %>
       </div>

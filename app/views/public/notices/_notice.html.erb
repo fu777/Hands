@@ -23,7 +23,7 @@
           <% else %>
             <span>
               <%= link_to blog_path(notice.blog) do %>
-                <%= image_tag notice.blog.customer.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle mx-auto" %>
+                <%= image_tag notice.blog.customer.get_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle mx-auto" %>
               <strong>
                 <%= notice.blog.customer.user_name + 'さんのブログ' %>
               </strong>

@@ -1,7 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center">
-      <h4 class="mt-3"><%= @order.shop.name %>の注文履歴詳細</h4>
+      <h4 class="mt-3">
+        <%= link_to shop_path(@order.shop), class: 'text-dark' do %>
+          <%= @order.shop.name %>
+        <% end %>
+        の注文履歴詳細
+      </h4>
     </div>
     <div class="col-12 my-3">
       <div class="row d-flex justify-content-center">

@@ -5,6 +5,7 @@ class Shop < ApplicationRecord
   validates :is_active, presence: true
   validates :customer_id, uniqueness: true
 
+  default_scope -> { order(created_at: :desc) }
   belongs_to :customer
   has_many :items
   has_many :carts, dependent: :destroy

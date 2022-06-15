@@ -1,7 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center">
-      <h4 class="my-3"><i class="fas fa-users"></i> フォロワー(<%= @customers.count %>件)</h4>
+      <h4 class="my-3">
+        <i class="fas fa-users"></i> 
+        <%= link_to my_page_path(@customer), class: 'text-dark' do %>
+          <%= @customer.user_name %>さん
+        <% end %>
+        のフォロワー(<%= @customers.count %>件)
+      </h4>
     </div>
     <div class="col-12 d-flex justify-content-center mb-3">
       <%= form_with model: @relationships, url: followers_path, method: :get do |f| %>

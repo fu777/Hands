@@ -66,12 +66,12 @@
       <p class="text-secondary mt-3">作品: </p>
       <div class="row">
         <div class="col-lg-3 mr-2">
-          <%= link_to admin_item_path(@blog.item) do %>
+          <%= link_to item_path(@blog.item) do %>
             <%= image_tag @blog.item.get_item_images.first.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
           <% end %>
         </div>
         <div class="col-lg-8">
-          <%= link_to admin_item_path(@blog.item), class: 'text-dark' do %>
+          <%= link_to item_path(@blog.item), class: 'text-dark' do %>
             <%= @blog.item.name %>
           <% end %>
           <br>
