@@ -84,10 +84,12 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
     @shop = current_customer.shop
     @customer.update(is_deleted: true)
-      @shop.update(is_active: false)
-        @shop.items.each do |item|
-          item.update(is_active: false)
-        end
+      if @shop.present?
+        @shop.update(is_active: false)
+          @shop.items.each do |item|
+            item.update(is_active: false)
+          end
+      end
     reset_session
     redirect_to root_path
   end

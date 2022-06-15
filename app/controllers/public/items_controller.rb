@@ -13,6 +13,7 @@ class Public::ItemsController < ApplicationController
       redirect_to item_path(@item.id)
       flash[:notice] = "作品を登録しました。"
     else
+      @item.shop_id = current_customer.shop.id
       render :new
     end
   end

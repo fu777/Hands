@@ -11,6 +11,7 @@ class Public::ShopsController < ApplicationController
       redirect_to shop_path(@shop.id)
       flash[:notice] = "ショップを登録しました。"
     else
+      @customer_id = current_customer.id
       render :new
     end
   end

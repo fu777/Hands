@@ -23,7 +23,7 @@
             <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", placeholder: "ここにショップ説明を入力してください。", size: "40x5" %>
           </div>
             <%= f.hidden_field :is_active, :value => true %>
-            <%= f.hidden_field :customer_id, :value => @customer_id %>
+            
           <div class="actions col-lg-10 col-sm-12 my-2 text-center">
             <%= f.submit "新規登録", class: 'btn btn-outline-success rounded-pill mr-2' %>
           </div>

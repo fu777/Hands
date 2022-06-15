@@ -1,6 +1,6 @@
   <div class="col-md-6 mx-auto">
     <div class="form-inline">
-      
+
       <span>
         <%= link_to my_page_path(notice.visitor) do %>
           <%= image_tag notice.visitor.get_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle mx-auto" %>
@@ -9,7 +9,7 @@
           </strong>
         <% end %>
         さんが
-      
+
         <% case notice.action %>
         <% when 'follow' then %>
           あなたをフォローしました。
@@ -42,4 +42,3 @@
     </div>
     <hr>
   </div>
-  

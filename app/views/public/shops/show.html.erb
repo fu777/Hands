@@ -38,10 +38,9 @@
                     </div>
                   </li>
                   <li class="li_list">
-                    <%= form_with model: @item, url: new_item_path, method: :get do |f| %>
-                      <%= f.hidden_field :shop_id, :value => @shop.id %>
-                      <%= f.submit "作品を登録する", class: 'not_btn li_btn' %>
-                    <% end %>
+                    <div class="ml-1">
+                      <%= link_to "作品を登録する", new_item_path, class: 'li_btn' %>
+                    </div>
                   </li>
                 </ul>
               </div>
