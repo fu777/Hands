@@ -59,12 +59,20 @@
     color: #FFCC33;
   }
   
-  .fa-users, .fa-user-friends {
+  .fa-users, .fa-user-friends, .fa-user-circle {
     color: #FFA500;
   }
   
-  .fa-user-circle {
-    color: #FFA500;
+  .fa-shopping-cart {
+    color: #FFCC33;
+  }
+  
+  .fa-user-plus {
+    color: 	green;
+  }
+  
+  .fa-sign-out-alt {
+    color: red;
   }
 
   .card-image-top {

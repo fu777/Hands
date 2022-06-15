@@ -38,11 +38,11 @@
                   <%= link_to my_page_path(current_customer), class: 'head' do %>
                     <i class="fas fa-user-circle f-30 mr-2"></i>
                   <% end %>
-                  <%= link_to destroy_customer_session_path, method: :delete, class: 'head' do %>
-                    <i class="fas fa-sign-out-alt f-30 mr-2"></i>
-                  <% end %>
                   <%= link_to carts_path, class: 'head' do %>
-                    <i class="fas fa-shopping-cart f-30"></i>
+                    <i class="fas fa-shopping-cart f-30 mr-2"></i>
+                  <% end %>
+                  <%= link_to destroy_customer_session_path, method: :delete, class: 'head' do %>
+                    <i class="fas fa-sign-out-alt f-30"></i>
                   <% end %>
                 </div>
               </div>
@@ -163,9 +163,14 @@
         <%= content_tag(:div, value, class: "#{key}") %>
       <% end %>
     </div>
-    <div class="my-2 text-center">
-      <p id="notice"></p>
-    </div>
-    <%= yield %>
+    <main>
+      <div class="my-2 text-center">
+        <p id="notice"></p>
+      </div>
+      <%= yield %>
+    </main>
+    <footer>
+      <p></p>
+    </footer>
   </body>
 </html>
