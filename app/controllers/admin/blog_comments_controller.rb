@@ -9,11 +9,7 @@ class Admin::BlogCommentsController < ApplicationController
   
   def destroy
     BlogComment.find(params[:id]).destroy
-    if params[:blog_id].present?
-      redirect_to admin_blog_path(params[:blog_id])
-    else
-      redirect_to admin_blog_comments_path
-    end
+    redirect_to request.referer
   end
 
   private

@@ -3,13 +3,12 @@ class Admin::BlogsController < ApplicationController
   before_action :authenticate_admin!, only: [:index, :show]
   
   def index
-    @blogs = Blog.all
+    @blogs = params[:item_id].present? ? Blog.where(item_id: nil) : Blog.all
   end
 
   def show
     @blog = Blog.find(params[:id])
     @item = @blog.item
-    @blog_comment = BlogComment.new
   end
 
   def destroy

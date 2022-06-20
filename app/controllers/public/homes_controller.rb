@@ -8,8 +8,5 @@ class Public::HomesController < ApplicationController
     @shops = Shop.limit(4).order(created_at: :desc).where(is_active: true)
     @blogs = Blog.limit(4).order(created_at: :desc)
   end
-
-  def about
-  end
   
 end

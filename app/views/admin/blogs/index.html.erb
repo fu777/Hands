@@ -1,10 +1,53 @@
-<h1>ブログ一覧</h1>
-
-<% @blogs.each do |blog| %>
-  <%= image_tag blog.get_blog_images.first.variant(resize: "150x150").processed %><br>
-  <%= link_to admin_blog_path(blog.id) do %>
-  <%= blog.title %><br>
-  <% end %>
-  <%= link_to "#{blog.blog_comments.count} コメント", admin_blog_path(blog.id) %><br>
-  <%= link_to "削除する", admin_blog_path(blog.id), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h4 class="my-3"><i class="fas fa-gem"></i> ブログ一覧</h4>
+    </div>
+    
+    <div class="offset-lg-10 offset-sm-8"></div>
+    <div class="col-lg-2 col-sm-4 mt-3 text-right">
+      <%= link_to admin_blogs_path, class: 'text-dark' do %>
+        すべて
+      <% end %>
+      |
+      <%= link_to admin_blogs_path(item_id: "nil"), class: 'text-dark' do %>
+        オリジナル
+      <% end %>
+    </div>
+    <div class="col-12 card-list-container">
+      <div class="row d-flex justify-content-start">
+      <% @blogs.each do |blog| %>
+        <div class="col-lg-3 col-sm-6">
+          <div class="card mx-auto my-3 shadow">
+            <%= link_to admin_blog_path(blog) do %>
+              <%= image_tag blog.get_blog_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
+            <% end %>
+            <%= render 'public/favourite_blogs/favourite_blog', blog: blog %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-3 text-center">
+                  <%= link_to admin_customer_path(blog.customer) do %>
+                    <%= image_tag blog.customer.get_image.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: "rounded-circle" %>
+                  <% end %>
+                </div>
+                <div class="col-8 text-center">
+                  <%= link_to admin_blog_path(blog), class: "text-dark" do %>
+                  <p class="card-title">
+                    <%= blog.title %>
+                  </p>
+                  <% end %>
+                  <p class="card-text">
+                    <%= link_to admin_customer_path(blog.customer), class: "text-dark" do %>
+                      <%= blog.customer.user_name %>
+                    <% end %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

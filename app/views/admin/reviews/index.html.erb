@@ -35,7 +35,7 @@
                   <% end %>
                 </td>
                 <td><%= review.review_comment %></td>
-                <td><%= link_to "削除する", admin_review_path(review.id), method: :delete, "data-confirm" => "本当に消しますか？", class: 'text-dark' %></td>
+                <td><%= link_to "削除", admin_review_path(review.id), method: :delete, "data-confirm" => "本当に消しますか？", class: 'text-dark' %></td>
               </tr>
             </tbody>
             <% end %>

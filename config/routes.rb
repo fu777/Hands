@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "homes#top"
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :items, only: [:index, :show]
-    resources :blogs, only: [:index, :show, :destroy]
     resources :blogs, only: [:index, :show, :destroy] do
       resources :blog_comments, only: [:destroy]
     end
@@ -15,7 +13,6 @@ Rails.application.routes.draw do
   
   scope module: :public do
     root to: "homes#top"
-    get '/about' => 'homes#about', as: 'about'
     get 'customers/unsubscribe', as: 'unsubscribe'
     patch 'customers/withdraw', as: 'withdraw'
     get 'customers/my_page/:id' => 'customers#show', as: 'my_page'

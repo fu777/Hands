@@ -35,7 +35,7 @@
                   <% end %>
                 </td>
                 <td><%= blog_comment.comment %></td>
-                <td><%= link_to "削除する", admin_blog_comment_path(blog_comment), method: :delete, "data-confirm" => "本当に消しますか？", class: 'text-dark' %></td>
+                <td><%= link_to "削除", admin_blog_comment_path(blog_comment), method: :delete, "data-confirm" => "本当に消しますか？", class: 'text-dark' %></td>
               </tr>
             </tbody>
             <% end %>
