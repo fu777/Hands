@@ -146,15 +146,8 @@ ActiveRecord::Schema.define(version: 2022_06_14_081656) do
   end
 
   create_table "favourite_shops", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "customer_id"
     t.integer "shop_id"
-  end
-
-  create_table "goods", force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "blog_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
