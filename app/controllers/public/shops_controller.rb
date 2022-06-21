@@ -7,6 +7,7 @@ class Public::ShopsController < ApplicationController
 
   def create
     @shop = Shop.new(shop_params)
+    @shop.customer_id = current_customer.id
     if @shop.save
       redirect_to shop_path(@shop.id)
       flash[:notice] = "ショップを登録しました。"
