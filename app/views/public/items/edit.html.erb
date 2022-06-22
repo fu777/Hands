@@ -27,13 +27,13 @@
                 <%= f.label "カテゴリー" %>
               </div>
               <div class="lavel__Required">
-                <%= f.select :category_id, options_from_collection_for_select(@set_parents, :id, :name, @category_parent), class: "select_field", id: "item_category_id" %>
+                <%= f.select :category_id, options_from_collection_for_select(@set_parents, :id, :name, {selected: @item.category.parent.id}), class: "select_field", id: "item_category_id" %>
               </div>
             </div>
             <div class="category__child row field mb-3" id="children_wrapper">
               <div class="offset-lg-3 offset-sm-3"></div>
               <div class="lavel__Required">
-                <%= f.select :category_id, options_from_collection_for_select(@category_children, :id, :name, selected: @item.category_id), class: "select_field", id: "child__category" %>
+                <%= f.select :category_id, options_from_collection_for_select(@category_children, :id, :name, @item.category_id), class: "select_field", id: "child__category" %>
               </div>
             </div>
           </div>

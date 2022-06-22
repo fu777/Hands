@@ -30,7 +30,7 @@
             <div class="col-lg-12 col-sm-12">
               <%= f.radio_button :select_item, 1, checked: true, class: 'ml-4' %>
               <%= f.label :select_item, "作品を紹介する", class: 'col-lg-3 col-sm-5' %>
-              <%= f.select :item_id, options_from_collection_for_select(@items, :id, :name, selected: @blog.item), include_blank: "選択してください。" %>
+              <%= f.select :item_id, options_from_collection_for_select(@items, :id, :name, {selected: @blog.item_id}), include_blank: "選択してください。" %>
             </div>
             <div class="col-lg-12 col-sm-12 mt-1">
               <%= f.radio_button :select_item, 2, class: 'ml-4' %>

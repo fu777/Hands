@@ -39,10 +39,10 @@ class Public::BlogsController < ApplicationController
   def update
     @blog = Blog.find(params[:id])
     @items = Item.all
-    if params[:blog][:select_item] == "2"
-      @blog.item = nil
-    end
     if @blog.update(blog_params)
+      if params[:blog][:select_item] == "2"
+        @blog.update(item_id: nil)
+      end
       flash[:notice] = "ブログを編集しました。"
       redirect_to blog_path(@blog)
     else
