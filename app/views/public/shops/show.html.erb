@@ -54,7 +54,7 @@
     </div>
     <div class="col-lg-6 col-sm-6 my-auto text-center">
       <div class="d-flex justify-content-center">
-        <h4 class="mt-1 mb-2 mr-1"><%= @customer.user_name %></h4>
+        <h4 class="mt-1 mb-2 mr-1"><%= @shop.name %></h4>
           <div class="ml-1">
             <% if customer_signed_in? %>
               <% unless @shop.customer == current_customer %>
