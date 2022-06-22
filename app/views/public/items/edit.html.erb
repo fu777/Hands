@@ -33,7 +33,7 @@
             <div class="category__child row field mb-3" id="children_wrapper">
               <div class="offset-lg-3 offset-sm-3"></div>
               <div class="lavel__Required">
-                <%= f.select :category_id, options_from_collection_for_select(@category_children, :id, :name, @item.category_id), class: "select_field", id: "child__category" %>
+                <%= f.select :category_id, options_from_collection_for_select(@category_children, :id, :name, selected: @item.category_id), class: "select_field", id: "child__category" %>
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@
           <div class="row field my-3">
             <%= f.label "販売個数がある場合、選択してください。", class: 'col-lg-12 col-sm-12' %>
             <div class="offset-lg-3 offset-sm-3"></div>
-            <%= f.number_field :limit, autofocus: true, autocomplete: "limit", placeholder: "10" %>個
+            <%= f.number_field :limit, autofocus: true, autocomplete: "limit", placeholder: "0" %>個
           </div>
           <div class="row field my-3">
             <%= f.label "販売ステータス", class: 'col-lg-3 col-sm-12' %>
