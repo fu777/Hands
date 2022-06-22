@@ -38,7 +38,7 @@
                 <td>
                   <% order.order_details.each do |order_detail| %>
                     <%= order_detail.item.name %>
-                  <% end %>
+                  <% end %><br>
                 </td>
                 <td><%= order.order_details.count %></td>
                 <td><%= order.status_i18n %></td>

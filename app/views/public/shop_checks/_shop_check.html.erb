@@ -10,7 +10,7 @@
             注文
           </strong>
           を完了しました。
-          <%= link_to "配送してください", shop_order_path(shop_check.order.id) %>
+          <%= link_to "配送してください。", shop_order_path(shop_check.order.id) %>
         <% when 'transaction_completed' then %>
           <%= shop_check.visitor.last_name %><%= shop_check.visitor.first_name %>
           さんが
