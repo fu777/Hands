@@ -1,5 +1,8 @@
 class SearchesController < ApplicationController
   
+  include ItemSearch
+  before_action :set_parents
+  
   def item_search
     @items = Item.search(params[:search])
     @Category = Category.where(ancestry: nil)

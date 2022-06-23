@@ -1,5 +1,6 @@
 class Public::ItemsController < ApplicationController
 
+  include ItemSearch
   before_action :set_parents
 
   def new
@@ -110,10 +111,6 @@ class Public::ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:shop_id, :name, :introduction, :size, :shipping_date, :price, :category_id, :is_active, :limit, item_images: [])
-  end
-
-  def set_parents
-    @set_parents = Category.where(ancestry: nil)
   end
 
 end
