@@ -42,6 +42,9 @@ https://drive.google.com/file/d/1Jus98ri-YivK8ZGs55YzuKaNYRGgfBH4/view?usp=shari
 詳細設計
 https://docs.google.com/spreadsheets/d/13gFgfuJvELWC66tmep_d7yP3SR6YzGGM/edit?usp=sharing&ouid=116963870675918973741&rtpof=true&sd=true
 
+テスト仕様書
+https://docs.google.com/spreadsheets/d/1QvNpi8LL92GnXhwRZsaEFKaM6BtZniM58kTSzIF0V0A/edit?usp=sharing
+
 ## 開発環境
 
 - OS：Linux(CentOS)
