@@ -8,12 +8,16 @@ class Public::ShopsController < ApplicationController
   def create
     @shop = Shop.new(shop_params)
     @shop.customer_id = current_customer.id
-    if @shop.save
-      redirect_to shop_path(@shop.id)
-      flash[:notice] = "ショップを登録しました。"
+    unless current_customer == @shop.customer
+      redirect_to root_path
     else
-      @customer_id = current_customer.id
-      render :new
+      if @shop.save
+        redirect_to shop_path(@shop.id)
+        flash[:notice] = "ショップを登録しました。"
+      else
+        @customer_id = current_customer.id
+        render :new
+      end
     end
   end
 
@@ -38,23 +42,21 @@ class Public::ShopsController < ApplicationController
 
   def update
     @shop = Shop.find(params[:id])
-    if @shop.update(shop_params)
-      if @shop.is_active == 'false'
-        @shop.items.each do |item|
-          item.update(is_active: false)
-        end
-      end
-      flash[:notice] = "ショップを編集しました。"
-      redirect_to shop_path(@shop.id)
+    unless current_customer == @shop.customer
+      redirect_to root_path
     else
-      render :edit
+      if @shop.update(shop_params)
+        if @shop.is_active == 'false'
+          @shop.items.each do |item|
+            item.update(is_active: false)
+          end
+        end
+        flash[:notice] = "ショップを編集しました。"
+        redirect_to shop_path(@shop.id)
+      else
+        render :edit
+      end
     end
-  end
-
-  def destroy
-    @shop = Shop.find(params[:id])
-    @shop.destroy
-    redirect_to shops_path
   end
 
   private

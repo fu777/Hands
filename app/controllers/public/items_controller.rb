@@ -10,12 +10,16 @@ class Public::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save
-      redirect_to item_path(@item.id)
-      flash[:notice] = "作品を登録しました。"
+    unless current_customer == @item.shop.customer
+      redirect_to root_path
     else
-      @item.shop_id = current_customer.shop.id
-      render :new
+      if @item.save
+        redirect_to item_path(@item.id)
+        flash[:notice] = "作品を登録しました。"
+      else
+        @item.shop_id = current_customer.shop.id
+        render :new
+      end
     end
   end
 
@@ -49,11 +53,15 @@ class Public::ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    if @item.update(item_params)
-      flash[:notice] = "作品を編集しました。"
-      redirect_to item_path(@item.id)
+    unless current_customer == @item.shop.customer
+      redirect_to root_path
     else
-      render :edit
+      if @item.update(item_params)
+        flash[:notice] = "作品を編集しました。"
+        redirect_to item_path(@item.id)
+      else
+        render :edit
+      end
     end
   end
 

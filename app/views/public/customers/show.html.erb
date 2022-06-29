@@ -72,6 +72,7 @@
         <div class="m-2">
           <%= link_to "#{@customer.user_name}さんのブログ一覧を見る", customer_blog_path(@customer), class: 'btn btn-outline-success' %>
         </div>
+        <% if customer_signed_in? %>
         <div class="d-flex justify-content-center m-2">
           <%= form_with model: @relationships, url: followers_path, method: :get do |f| %>
             <%= f.hidden_field :customer_id, :value => @customer.id %>
@@ -97,6 +98,7 @@
             <% end %>
           <% end %>
         </div>
+        <% end %>
         <% if @customer == current_customer %>
         <div class="col-12 d-flex justify-content-center mt-4 mb-2">
           <h4 class="col-lg-5 mr-auto col-sm-8 col-md-7 text-center">会員登録情報</h4>

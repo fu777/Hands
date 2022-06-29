@@ -7,7 +7,7 @@
       <div class="row d-flex justify-content-center">
       <% @item_ranks.each.with_index(1) do |item, i| %>
         <div class="col-lg-3 col-sm-6">
-          <div class="card shadow mx-auto">
+          <div class="card shadow my-3 mx-auto">
             <%= link_to item_path(item.id) do %>
               <%= image_tag item.get_item_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
             <% end %>
@@ -49,7 +49,7 @@
       <div class="row d-flex justify-content-center">
       <% @shop_ranks.each.with_index(1) do |shop, i| %>
         <div class="col-lg-3 col-sm-6">
-          <div class="card mx-auto shadow">
+          <div class="card mx-auto my-3 shadow">
             <%= link_to shop_path(shop) do %>
               <%= image_tag shop.get_shop_icon_image.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
             <% end %>
@@ -93,7 +93,7 @@
       <div class="row d-flex justify-content-center">
       <% @blog_ranks.each.with_index(1) do |blog, i| %>
         <div class="col-lg-3 col-sm-6">
-          <div class="card mx-auto shadow">
+          <div class="card mx-auto my-3 shadow">
             <%= link_to blog_path(blog.id) do %>
               <%= image_tag blog.get_blog_images.first.variant(gravity: :center, resize: "230x150^", crop: "230x150+0+0").processed, class: "card-img-top" %>
             <% end %>

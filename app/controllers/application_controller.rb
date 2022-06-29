@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
                                                   :get_category_children, 
                                                   :menu_search, 
                                                   :shop_search, 
-                                                  :blog_search]
+                                                  :blog_search,
+                                                  :customer_search]
   
   before_action :configure_permitted_parameters, if: :devise_controller?
   

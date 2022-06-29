@@ -81,19 +81,23 @@ class Public::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    @order.status = 2
-    @order.update(order_params)
-    if @order.update(order_params)
-      flash[:notice] = "取引完了しました"
-      @order.create_check_order!(current_customer)
-      checks = current_customer.passive_checks
-      checks.where(checked: false).each do |check|
-        check.update(checked: true)
-        if check.checked == true
-          check.destroy
+    unless current_customer == @order.customer
+      redirect_to root_path
+    else
+      @order.status = 2
+      @order.update(order_params)
+      if @order.update(order_params)
+        flash[:notice] = "取引完了しました"
+        @order.create_check_order!(current_customer)
+        checks = current_customer.passive_checks
+        checks.where(checked: false).each do |check|
+          check.update(checked: true)
+          if check.checked == true
+            check.destroy
+          end
         end
+        redirect_to order_path(@order)
       end
-      redirect_to order_path(@order)
     end
   end
 

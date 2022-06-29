@@ -52,8 +52,12 @@ class Public::BlogsController < ApplicationController
 
   def destroy
     @blog = Blog.find(params[:id])
-    @blog.destroy
-    redirect_to blogs_path
+    unless current_customer == @blog.customer
+      redirect_to root_path
+    else
+      @blog.destroy
+      redirect_to blogs_path
+    end
   end
 
   private

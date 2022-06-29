@@ -1,7 +1,5 @@
 class Public::CustomersController < ApplicationController
 
-  before_action :authenticate_customer!
-
   def index
     @customers = Customer.all
   end
@@ -11,8 +9,10 @@ class Public::CustomersController < ApplicationController
     unless @customer.shop.blank?
       @shop = @customer.shop
     end
-    @checks = current_customer.passive_checks.where(checked: false)
-    @notices = current_customer.passive_notices.where(checked: false)
+    if customer_signed_in?
+      @checks = current_customer.passive_checks.where(checked: false)
+      @notices = current_customer.passive_notices.where(checked: false)
+    end
   end
 
   def edit
@@ -24,11 +24,15 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = current_customer
-    if @customer.update(customer_params)
-      flash[:notice] = "会員情報の編集に成功しました。"
-      redirect_to my_page_path(@customer)
+    unless current_customer == @customer
+      redirect_to root_path
     else
-      render :edit
+      if @customer.update(customer_params)
+        flash[:notice] = "会員情報の編集に成功しました。"
+        redirect_to my_page_path(@customer)
+      else
+        render :edit
+      end
     end
   end
 
@@ -41,11 +45,15 @@ class Public::CustomersController < ApplicationController
 
   def profile_update
     @customer = current_customer
-    if @customer.update(customer_params)
-      flash[:notice] = "プロフィールの編集に成功しました。"
-      redirect_to my_page_path(@customer)
+    unless current_customer == @customer
+      redirect_to root_path
     else
-      render :profile_edit
+      if @customer.update(customer_params)
+        flash[:notice] = "プロフィールの編集に成功しました。"
+        redirect_to my_page_path(@customer)
+      else
+        render :profile_edit
+      end
     end
   end
 
@@ -83,15 +91,19 @@ class Public::CustomersController < ApplicationController
   def withdraw
     @customer = current_customer
     @shop = current_customer.shop
-    @customer.update(is_deleted: true)
-      if @shop.present?
-        @shop.update(is_active: false)
-          @shop.items.each do |item|
-            item.update(is_active: false)
-          end
-      end
-    reset_session
-    redirect_to root_path
+    unless current_customer == @customer
+      redirect_to root_path
+    else
+      @customer.update(is_deleted: true)
+        if @shop.present?
+          @shop.update(is_active: false)
+            @shop.items.each do |item|
+              item.update(is_active: false)
+            end
+        end
+      reset_session
+      redirect_to root_path
+    end
   end
 
   private
