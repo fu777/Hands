@@ -10,11 +10,15 @@ class Public::BlogsController < ApplicationController
     @blog = Blog.new(blog_params)
     @items = Item.all
     @blog.customer_id = current_customer.id
-    if @blog.save
-      flash[:notice] = "ブログを新規登録しました。"
-      redirect_to blog_path(@blog)
+    unless current_customer == @blog.customer
+      redirect_to root_path
     else
-      render :new
+      if @blog.save
+        flash[:notice] = "ブログを新規登録しました。"
+        redirect_to blog_path(@blog)
+      else
+        render :new
+      end
     end
   end
 
@@ -39,14 +43,18 @@ class Public::BlogsController < ApplicationController
   def update
     @blog = Blog.find(params[:id])
     @items = Item.all
-    if @blog.update(blog_params)
-      if params[:blog][:select_item] == "2"
-        @blog.update(item_id: nil)
-      end
-      flash[:notice] = "ブログを編集しました。"
-      redirect_to blog_path(@blog)
+    unless current_customer == @blog.customer
+      redirect_to root_path
     else
-      render :edit
+      if @blog.update(blog_params)
+        if params[:blog][:select_item] == "2"
+          @blog.update(item_id: nil)
+        end
+        flash[:notice] = "ブログを編集しました。"
+        redirect_to blog_path(@blog)
+      else
+        render :edit
+      end
     end
   end
 

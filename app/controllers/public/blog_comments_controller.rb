@@ -4,14 +4,23 @@ class Public::BlogCommentsController < ApplicationController
     blog = Blog.find(params[:blog_id])
     comment = current_customer.blog_comments.new(blog_comment_params)
     comment.blog_id = blog.id
-    comment.save
-    blog.create_notice_blog_comment!(current_customer, comment.id)
-    redirect_to blog_path(blog)
+    unless current_customer == comment.customer
+      redirect_to root_path
+    else
+      comment.save
+      blog.create_notice_blog_comment!(current_customer, comment.id)
+      redirect_to blog_path(blog)
+    end
   end
 
   def destroy
-    BlogComment.find(params[:id]).destroy
-    redirect_to blog_path(params[:blog_id])
+    @blog_comment = BlogComment.find(params[:id])
+    unless current_customer == @blog_comment.customer
+      redirect_to root_path
+    else
+      @blog_comment.destroy
+      redirect_to blog_path(params[:blog_id])
+    end
   end
 
   private
