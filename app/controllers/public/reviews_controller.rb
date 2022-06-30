@@ -7,16 +7,20 @@ class Public::ReviewsController < ApplicationController
     review_count = Review.where(item_id: params[:item_id]).where(customer_id: current_customer.id).count
     unless item.shop.customer == current_customer
       if review_count < 1
-        @review.save
-        redirect_to item_path(item)
-        flash[:notice] = "レビューしました。"
+        unless current_customer == @review.customer
+          redirect_to root_path
+        else
+          @review.save
+          redirect_to item_path(item)
+          flash[:notice] = "レビューしました。"
+        end
       else
-        redirect_to item_path(item)
-        flash[:notice] = "レビューの投稿は一度までです。"
+          redirect_to item_path(item)
+          flash[:error] = "レビューの投稿は一度までです。"
       end
     else
         redirect_to item_path(item)
-        flash[:notice] = "自分の作品にはレビューできません。"
+        flash[:error] = "自分の作品にはレビューできません。"
     end
   end
 
