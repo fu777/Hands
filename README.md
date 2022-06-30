@@ -37,7 +37,7 @@
 https://docs.google.com/spreadsheets/d/1aFbRIx2GIb1PR1RLwtHdZzD-26J7x8_FL0y_sACfqW4/edit?usp=sharing
 
 ER図
-https://drive.google.com/file/d/1Jus98ri-YivK8ZGs55YzuKaNYRGgfBH4/view?usp=sharing
+https://drive.google.com/file/d/1m80Q71jU2F9qTylT-QeH-__UFjfplLDH/view?usp=sharing
 
 詳細設計
 https://docs.google.com/spreadsheets/d/13gFgfuJvELWC66tmep_d7yP3SR6YzGGM/edit?usp=sharing&ouid=116963870675918973741&rtpof=true&sd=true
@@ -53,10 +53,6 @@ https://docs.google.com/spreadsheets/d/1QvNpi8LL92GnXhwRZsaEFKaM6BtZniM58kTSzIF0
 - JS ライブラリ：jQuery
 - IDE：Cloud9
 
-## 使用素材
-
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名と URL を明記してください。
-- 使用しない場合は、使用素材の項目を README から削除してください。
 
 ## 実装機能リスト
 
